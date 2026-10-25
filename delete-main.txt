@@ -1,0 +1,3 @@
+To https://github.com/mysticorechannel-max/rose-app-t2.git
+ ! [remote rejected] main (refusing to delete the current branch: refs/heads/main)
+error: failed to push some refs to 'https://github.com/mysticorechannel-max/rose-app-t2.git'

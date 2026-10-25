@@ -1,0 +1,27 @@
+[temp-empty 39ae1cd] chore: initial empty commit
+ 25 files changed, 3621 deletions(-)
+ delete mode 100644 .gitignore
+ delete mode 100644 .nvmrc
+ delete mode 100644 .prettierignore
+ delete mode 100644 .prettierrc.json
+ delete mode 100644 README.md
+ delete mode 100644 components.json
+ delete mode 100644 messages/ar.json
+ delete mode 100644 messages/en.json
+ delete mode 100644 next.config.ts
+ delete mode 100644 package-lock.json
+ delete mode 100644 package.json
+ delete mode 100644 postcss.config.mjs
+ delete mode 100644 src/app/[locale]/layout.tsx
+ delete mode 100644 src/app/[locale]/page.tsx
+ delete mode 100644 src/app/globals.css
+ delete mode 100644 src/components/locale-switcher.tsx
+ delete mode 100644 src/components/providers/theme-provider.tsx
+ delete mode 100644 src/components/theme-switcher.tsx
+ delete mode 100644 src/components/ui/button.tsx
+ delete mode 100644 src/i18n/navigation.ts
+ delete mode 100644 src/i18n/request.ts
+ delete mode 100644 src/i18n/routing.ts
+ delete mode 100644 src/lib/utils.ts
+ delete mode 100644 src/proxy.ts
+ delete mode 100644 tsconfig.json

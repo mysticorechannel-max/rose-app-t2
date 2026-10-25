@@ -1,0 +1,14 @@
+{
+  "common": {
+    "appName": "Rose App",
+    "welcome": "A thoughtful foundation for what comes next.",
+    "description": "Next.js, semantic design tokens, themes, and internationalization are ready for the team.",
+    "theme": {
+      "label": "Theme",
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "system": "System Mode"
+    },
+    "locale": { "label": "Language", "en": "English", "ar": "Arabic" }
+  }
+}
