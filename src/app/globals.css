@@ -115,6 +115,12 @@
 
   /* white */
   --white: #ffffff;
+
+  /* black */
+  --black: #000000;
+
+  /* silver */
+  --silver: #cccccc;
 }
 
 /* ============================================================
@@ -132,12 +138,12 @@
   --bg-subtle: var(--zinc-50);
   --bg-muted: var(--zinc-100);
   --bg-soft: var(--zinc-200);
-  --bg-default: var(--zinc-800);
-  --bg-inverse: var(--zinc-900);
-  --bg-elevated: var(--white);
+  --bg-default: var(--zinc-500);
+  --bg-inverse: var(--zinc-800);
+  --bg-elevated: var(--silver);
 
-  --bg-primary: var(--maroon-500);
-  --bg-primary-saturated: var(--maroon-600);
+  --bg-primary: var(--maroon-800);
+  --bg-primary-saturated: var(--maroon-700);
   --bg-primary-tint: var(--maroon-100);
   --bg-primary-fade: var(--maroon-50);
 
