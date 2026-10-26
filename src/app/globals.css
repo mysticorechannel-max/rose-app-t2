@@ -139,6 +139,7 @@
   --bg-default: var(--zinc-500);
   --bg-inverse: var(--zinc-800);
   --bg-elevated: var(--silver);
+  --bg-overlay: color-mix(in srgb, var(--black) 50%, transparent);
 
   --bg-primary: var(--maroon-800);
   --bg-primary-saturated: var(--maroon-700);
@@ -416,6 +417,7 @@
   --color-bg-default: var(--bg-default);
   --color-bg-inverse: var(--bg-inverse);
   --color-bg-elevated: var(--bg-elevated);
+  --color-bg-overlay: var(--bg-overlay);
   --color-bg-primary: var(--bg-primary);
   --color-bg-primary-saturated: var(--bg-primary-saturated);
   --color-bg-primary-tint: var(--bg-primary-tint);
