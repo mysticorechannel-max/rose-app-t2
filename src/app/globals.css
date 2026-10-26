@@ -67,9 +67,7 @@
   --blue-400: #50a2ff;
   --blue-500: #2b7fff;
   --blue-600: #155dfc;
-  /* TODO(lead-confirm): --blue-700 value #cc3a5b matches --soft-pink-700 exactly.
-     Conflicts visually with the blue scale. Needs Figma source confirmation. */
-  --blue-700: #cc3a5b;
+  --blue-700: #1d4ed8;
   --blue-800: #193cb8;
   --blue-900: #1c398e;
   --blue-950: #162456;
