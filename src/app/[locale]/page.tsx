@@ -1,10 +1,15 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
+
   setRequestLocale(locale);
+
   const t = await getTranslations("common");
+
   return (
     <main className="relative grid min-h-svh place-items-center overflow-hidden px-6 py-16">
       <div

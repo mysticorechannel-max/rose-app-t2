@@ -3,29 +3,43 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { Sarabun, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
+
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { routing } from "@/i18n/routing";
+
 import "../globals.css";
+
 const sarabun = Sarabun({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sarabun",
 });
+
 const tajawal = Tajawal({
-  subsets: ["arabic"],
+  subsets: ["arabic", "latin"],
   weight: ["400", "500", "700"],
   variable: "--font-tajawal",
 });
-export const metadata: Metadata = { title: "Rose App", description: "Rose App team foundation" };
+
+export const metadata: Metadata = {
+  title: "Rose App",
+  description: "Rose App team foundation",
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
 export default async function LocaleLayout({ children, params }: LayoutProps<"/[locale]">) {
   const { locale } = await params;
+
   if (!hasLocale(routing.locales, locale)) notFound();
+
   setRequestLocale(locale);
+
   const direction = locale === "ar" ? "rtl" : "ltr";
-  const localeFont = locale === "ar" ? "font-arabic" : "font-english";
+  const fontClass = locale === "ar" ? "font-arabic" : "font-english";
+
   return (
     <html
       className={`${sarabun.variable} ${tajawal.variable}`}
@@ -33,7 +47,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       lang={locale}
       suppressHydrationWarning
     >
-      <body className={localeFont}>
+      <body className={fontClass}>
         <NextIntlClientProvider>
           <ThemeProvider
             attribute="class"

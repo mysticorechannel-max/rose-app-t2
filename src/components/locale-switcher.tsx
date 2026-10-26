@@ -1,12 +1,17 @@
 "use client";
+
 import { useLocale, useTranslations } from "next-intl";
+
 import { usePathname, useRouter } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
+
 export function LocaleSwitcher() {
-  const locale = useLocale() as AppLocale;
   const t = useTranslations("common.locale");
+
+  const locale = useLocale() as AppLocale;
   const pathname = usePathname();
   const router = useRouter();
+
   return (
     <label className="flex items-center gap-2 text-sm text-muted-foreground">
       <span>{t("label")}</span>
