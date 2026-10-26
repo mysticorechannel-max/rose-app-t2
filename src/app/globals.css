@@ -112,6 +112,9 @@
   --zinc-800: #27272a;
   --zinc-900: #18181b;
   --zinc-950: #09090b;
+
+  /* white */
+  --white: #ffffff;
 }
 
 /* ============================================================
@@ -125,13 +128,13 @@
   --radius: 0.75rem;
 
   /* --- BACKGROUND --- */
-  --bg-plain: #ffffff;
+  --bg-plain: var(--white);
   --bg-subtle: var(--zinc-50);
   --bg-muted: var(--zinc-100);
   --bg-soft: var(--zinc-200);
   --bg-default: var(--zinc-800);
   --bg-inverse: var(--zinc-900);
-  --bg-elevated: #ffffff;
+  --bg-elevated: var(--white);
 
   --bg-primary: var(--maroon-500);
   --bg-primary-saturated: var(--maroon-600);
@@ -165,7 +168,7 @@
   --text-muted: var(--zinc-400);
   --text-soft: var(--zinc-300);
   --text-default: var(--zinc-800);
-  --text-inverse: #ffffff;
+  --text-inverse: var(--white);
 
   --text-primary: var(--maroon-800);
   --text-primary-tint: var(--maroon-300);
@@ -197,7 +200,7 @@
   --border-muted: var(--zinc-200);
   --border-soft: var(--zinc-300);
   --border-default: var(--zinc-400);
-  --border-inverse: #ffffff;
+  --border-inverse: var(--white);
 
   --border-primary: var(--maroon-500);
   --border-primary-tint: var(--maroon-200);
@@ -231,7 +234,7 @@
   --popover: var(--bg-elevated);
   --popover-foreground: var(--text-plain);
   --primary: var(--bg-primary);
-  --primary-foreground: #ffffff;
+  --primary-foreground: var(--white);
   --secondary: var(--bg-secondary);
   --secondary-foreground: var(--text-plain);
   --muted: var(--bg-muted);
