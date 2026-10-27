@@ -116,9 +116,6 @@
 
   /* black */
   --black: #000000;
-
-  /* silver */
-  --silver: #cccccc;
 }
 
 /* ============================================================
@@ -138,7 +135,7 @@
   --bg-soft: var(--zinc-200);
   --bg-default: var(--zinc-500);
   --bg-inverse: var(--zinc-800);
-  --bg-elevated: var(--silver);
+  --bg-elevated: #cccccc;
   --bg-overlay: color-mix(in srgb, var(--black) 50%, transparent);
 
   --bg-primary: var(--maroon-800);
