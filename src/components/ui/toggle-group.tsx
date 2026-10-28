@@ -73,7 +73,7 @@ function ToggleGroupItem({
 
 function ModeToggle({ className }: { className?: string }) {
   // Translation
-  const t = useTranslations("ModeToggle");
+  const t = useTranslations("common.theme");
   const locale = useLocale();
 
   // Context
