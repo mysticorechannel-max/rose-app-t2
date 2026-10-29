@@ -1,8 +1,9 @@
+
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { Input } from "@/components/ui/input";
+import { InputsSection } from "@/components/inputs-section";
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -37,7 +38,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           <ThemeSwitcher />
         </div>
       </section>
-      <Input type="otp" label="password" />
+
+      <InputsSection />
     </main>
   );
 }
