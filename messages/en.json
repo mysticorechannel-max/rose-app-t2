@@ -10,5 +10,21 @@
       "system": "System Mode"
     },
     "locale": { "label": "Language", "en": "English", "ar": "Arabic" }
-  }
+  },
+    "tabs": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "disabled": "Disabled"
+  },
+    "textarea": {
+    "label": "Label",
+    "placeholder": "Placeholder",
+    "inputText": "Input text",
+    "error": "This field is required"
+  },
+  "toast": {
+  "info": "Informative message",
+  "success": "Successful operation",
+  "error": "Unsuccessful operation"
+}
 }
