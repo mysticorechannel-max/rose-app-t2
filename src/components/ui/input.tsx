@@ -1,21 +1,17 @@
-"use client"
+"use client";
+
 import * as React from "react";
 import { Search, X, Eye, EyeOff, Upload, ChevronsUpDown } from "lucide-react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { cn } from "@/lib/utils";
+import { useLocale } from "next-intl";
 import PhoneInput, { getCountryCallingCode } from "react-phone-number-input";
+import type { Country, Value } from "react-phone-number-input";
 import enLabels from "react-phone-number-input/locale/en.json";
 import arLabels from "react-phone-number-input/locale/ar.json";
 import "react-phone-number-input/style.css";
 
+import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   InputOTP,
   InputOTPGroup,
@@ -26,19 +22,63 @@ import {
 /* Shared styles                                                       */
 /* ------------------------------------------------------------------ */
 
-// The "box" look used by every field (rounded-xl, soft border, focus ring)
 const boxClass =
-  "rounded-xl border border-input bg-background text-sm text-foreground shadow-xs transition-colors hover:border-ring/60 focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/30 data-[invalid=true]:border-destructive data-[invalid=true]:ring-destructive/20 data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50";
+  "rounded-xl border border-border-soft bg-bg-plain text-sm text-text-plain shadow-xs transition-colors hover:border-border-default focus-within:border-border-primary focus-within:ring-2 focus-within:ring-border-primary/30 data-[invalid=true]:border-border-danger data-[invalid=true]:ring-border-danger/20";
 
 const inputClass =
-  "flex h-11 w-full min-w-0 rounded-xl border border-input bg-background px-4 py-2 text-sm text-foreground shadow-xs transition-colors placeholder:text-muted-foreground hover:border-ring/60 focus-visible:border-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
+  "flex h-11 w-full min-w-0 rounded-xl border border-border-soft bg-bg-plain px-4 py-2 text-sm text-text-plain shadow-xs transition-colors placeholder:text-text-muted hover:border-border-default focus-visible:border-border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-primary/30 aria-invalid:border-border-danger aria-invalid:ring-2 aria-invalid:ring-border-danger/20 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
 
 const adornmentClass =
-  "absolute end-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50";
+  "absolute end-2 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-text-muted transition-colors hover:text-text-plain focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-primary/50 disabled:pointer-events-none disabled:opacity-50";
+
+/* ------------------------------------------------------------------ */
+/* Types                                                               */
+/* ------------------------------------------------------------------ */
+
+type NativeInputProps = Omit<React.ComponentProps<"input">, "type" | "ref">;
+
+type InputProps = NativeInputProps & {
+  type?: "text" | "password" | "search" | "number" | "file" | "phone" | "otp";
+  label?: string;
+  hint?: string;
+  error?: string;
+  /** File: show the "Review current image(s)" link */
+  previewProvided?: boolean;
+  onReview?: () => void;
+  /** OTP: number of digit boxes */
+  length?: number;
+  /** Phone / OTP: receives the full value (e.g. "+201234567890", "123456") */
+  onValueChange?: (value: string) => void;
+  /** Phone: default ISO country code (e.g. "EG", "SA") */
+  defaultCountry?: string;
+};
+
+/** Props wired by the wrapper into every control (id, disabled, a11y) */
+type SharedProps = {
+  id: string;
+  disabled?: boolean;
+  "aria-invalid"?: boolean | "false" | "true" | "grammar" | "spelling";
+  "aria-describedby"?: string;
+};
 
 /* ------------------------------------------------------------------ */
 /* Phone country select: [flag] EG(+20) [chevrons]                     */
 /* ------------------------------------------------------------------ */
+
+type CountryOption = { value?: Country; label: string; divider?: boolean };
+
+type PhoneCountrySelectProps = {
+  value?: Country;
+  onChange: (value?: Country) => void;
+  options: CountryOption[];
+  iconComponent: React.ComponentType<{
+    country: Country;
+    label: string;
+    aspectRatio?: number;
+  }>;
+  disabled?: boolean;
+  readOnly?: boolean;
+};
 
 function PhoneCountrySelect({
   value,
@@ -47,38 +87,38 @@ function PhoneCountrySelect({
   iconComponent: Icon,
   disabled,
   readOnly,
-}: any) {
-  const selected = options.find((o: any) => o.value === value);
+}: PhoneCountrySelectProps) {
+  const selected = options.find((o) => o.value === value);
   const code = value ? `${value}(+${getCountryCallingCode(value)})` : "+";
+  const inactive = disabled || readOnly;
 
   return (
     <div
       className={cn(
         "relative flex h-full shrink-0 items-center gap-2 ps-3 pe-2",
-        (disabled || readOnly) && "pointer-events-none"
+        inactive && "pointer-events-none"
       )}
     >
-      {/* Flag + code always side by side (LTR) in both Arabic and English */}
-      <div dir="ltr" className="flex items-center gap-2">
-        <span className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full [--PhoneInputCountryFlag-height:20px] [&_.PhoneInputCountryIcon]:!size-5 [&_.PhoneInputCountryIcon]:!shadow-none [&_.PhoneInputCountryIconImg]:size-full [&_.PhoneInputCountryIconImg]:object-cover">
+      <span className="flex size-5 shrink-0 items-center justify-center overflow-hidden rounded-full [--PhoneInputCountryFlag-height:20px] [&_.PhoneInputCountryIcon]:!size-5 [&_.PhoneInputCountryIcon]:!shadow-none [&_.PhoneInputCountryIconImg]:size-full [&_.PhoneInputCountryIconImg]:object-cover">
+        {value && (
           <Icon country={value} label={selected?.label ?? ""} aspectRatio={1} />
-        </span>
-        <bdi className="text-sm font-medium text-foreground">{code}</bdi>
-      </div>
+        )}
+      </span>
+      <bdi className="text-sm font-medium text-text-plain">{code}</bdi>
 
-      <ChevronsUpDown className="size-3.5 text-foreground" aria-hidden />
+      <ChevronsUpDown className="size-3.5 text-text-plain" aria-hidden />
 
-      {/* Real native select, transparent, layered on top of everything */}
+      {/* Native select layered on top: keeps keyboard + mobile behaviour */}
       <select
         value={value ?? ""}
-        disabled={disabled || readOnly}
-        onChange={(e) => onChange(e.target.value || undefined)}
+        disabled={inactive}
+        onChange={(e) => onChange((e.target.value as Country) || undefined)}
         aria-label="Country"
         className="absolute inset-0 size-full cursor-pointer opacity-0"
       >
-        {options.map((o: any, i: number) =>
+        {options.map((o, i) =>
           o.divider ? (
-            <option key={`d${i}`} disabled value="">
+            <option key={`divider-${i}`} disabled value="">
               ──────────
             </option>
           ) : (
@@ -95,38 +135,246 @@ function PhoneCountrySelect({
 }
 
 /* ------------------------------------------------------------------ */
-/* Input                                                               */
+/* Controls                                                            */
 /* ------------------------------------------------------------------ */
 
-type SelectOption = { value: string; label: string; disabled?: boolean };
+const TextControl = React.forwardRef<
+  HTMLInputElement,
+  NativeInputProps &
+    SharedProps & { type: "text" | "password" | "search" | "number" }
+>(({ type, className, onChange, ...props }, ref) => {
+  const localRef = React.useRef<HTMLInputElement>(null);
+  React.useImperativeHandle(ref, () => localRef.current as HTMLInputElement);
 
-type InputProps = Omit<React.ComponentProps<"input">, "type" | "ref"> & {
-  type?:
-    | "text"
-    | "password"
-    | "search"
-    | "number"
-    | "file"
-    | "phone"
-    | "otp"
-    | "select";
-  label?: string;
-  hint?: string;
-  error?: string;
-  /** File: show the "Review current image(s)" link */
-  previewProvided?: boolean;
-  onReview?: () => void;
-  /** OTP: number of digit boxes */
-  length?: number;
-  /** Select: the list of options */
-  options?: SelectOption[];
-  /** Phone / OTP / Select: receives the full value (e.g. "+201234567890", "123456", "eg") */
-  onValueChange?: (value: string) => void;
-  /** Phone: default ISO country code (e.g. "EG", "SA") */
-  defaultCountry?: string;
-  /** Phone: Arabic or English UI (sets direction, country names and placeholder) */
-  locale?: "en" | "ar";
-};
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [typed, setTyped] = React.useState(String(props.defaultValue ?? ""));
+
+  const isPassword = type === "password";
+  const isSearch = type === "search";
+  const filled =
+    (props.value !== undefined ? String(props.value) : typed).length > 0;
+
+  // Clears the field through a real input event so React and form libs see it
+  const clearSearch = () => {
+    const el = localRef.current;
+    if (!el) return;
+    Object.getOwnPropertyDescriptor(
+      HTMLInputElement.prototype,
+      "value"
+    )?.set?.call(el, "");
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+    el.focus();
+  };
+
+  return (
+    <div className="relative">
+      {isSearch && (
+        <Search className="pointer-events-none absolute start-4 top-1/2 size-4 -translate-y-1/2 text-text-muted" />
+      )}
+
+      <input
+        {...props}
+        ref={localRef}
+        type={isPassword && showPassword ? "text" : type}
+        onChange={(e) => {
+          setTyped(e.target.value);
+          onChange?.(e);
+        }}
+        className={cn(
+          inputClass,
+          isSearch &&
+            "ps-10 pe-12 [&::-webkit-search-cancel-button]:appearance-none",
+          isPassword && "pe-12",
+          className
+        )}
+      />
+
+      {isPassword && (
+        <button
+          type="button"
+          disabled={props.disabled}
+          aria-label={showPassword ? "Hide password" : "Show password"}
+          aria-pressed={showPassword}
+          onClick={() => setShowPassword((v) => !v)}
+          className={adornmentClass}
+        >
+          {showPassword ? (
+            <EyeOff className="size-4" />
+          ) : (
+            <Eye className="size-4" />
+          )}
+        </button>
+      )}
+
+      {isSearch && filled && !props.disabled && (
+        <button
+          type="button"
+          aria-label="Clear search"
+          onClick={clearSearch}
+          className={adornmentClass}
+        >
+          <X className="size-4" />
+        </button>
+      )}
+    </div>
+  );
+});
+TextControl.displayName = "TextControl";
+
+const FileControl = React.forwardRef<
+  HTMLInputElement,
+  NativeInputProps & SharedProps
+>(({ className, onChange, ...props }, ref) => {
+  const isAr = useLocale() === "ar";
+  const [fileLabel, setFileLabel] = React.useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    setFileLabel(
+      !files || files.length === 0
+        ? ""
+        : files.length === 1
+          ? files[0].name
+          : `${files.length} files selected`
+    );
+    onChange?.(e);
+  };
+
+  return (
+    <div className="relative">
+      <input
+        {...props}
+        ref={ref}
+        type="file"
+        onChange={handleChange}
+        className="peer sr-only"
+      />
+      <label
+        htmlFor={props.id}
+        data-invalid={props["aria-invalid"]}
+        className={cn(
+          boxClass,
+          "flex min-h-14 w-full cursor-pointer items-center justify-end gap-3 px-4 py-3",
+          "peer-focus-visible:border-border-primary peer-focus-visible:ring-2 peer-focus-visible:ring-border-primary/30",
+          "peer-disabled:pointer-events-none peer-disabled:opacity-50",
+          className
+        )}
+      >
+        {fileLabel && (
+          <span className="min-w-0 flex-1 truncate text-start text-text-muted">
+            {fileLabel}
+          </span>
+        )}
+        <span className="flex shrink-0 items-center gap-2 font-medium text-text-danger">
+          <Upload className="size-4" aria-hidden />
+          {fileLabel
+            ? isAr ? "تغيير الملف" : "Change file"
+            : isAr ? "رفع ملف" : "Upload file"}
+        </span>
+      </label>
+    </div>
+  );
+});
+FileControl.displayName = "FileControl";
+
+// react-phone-number-input forwards `ref` to the underlying <input>, but its
+// typings declare a class-component ref, so the input ref is cast here.
+type PhoneInputRef = React.ComponentProps<typeof PhoneInput>["ref"];
+
+type PhoneControlProps = NativeInputProps &
+  SharedProps & {
+    defaultCountry: string;
+    onValueChange?: (value: string) => void;
+  };
+
+const PhoneControl = React.forwardRef<
+  HTMLInputElement,
+  PhoneControlProps
+>(({ className, defaultCountry, onValueChange, ...props }, ref) => {
+  const locale = useLocale();
+  const [phoneValue, setPhoneValue] = React.useState<Value | undefined>(
+    props.defaultValue as Value | undefined
+  );
+
+  return (
+    <PhoneInput
+      id={props.id}
+      name={props.name}
+      ref={ref as unknown as PhoneInputRef}
+      disabled={props.disabled}
+      placeholder={props.placeholder}
+      aria-invalid={props["aria-invalid"]}
+      aria-describedby={props["aria-describedby"]}
+      defaultCountry={defaultCountry as Country}
+      labels={locale === "ar" ? arLabels : enLabels}
+      countrySelectComponent={PhoneCountrySelect}
+      countryCallingCodeEditable={false}
+      value={
+        props.value !== undefined ? (String(props.value) as Value) : phoneValue
+      }
+      onChange={(value) => {
+        setPhoneValue(value);
+        onValueChange?.(value ?? "");
+      }}
+      data-invalid={props["aria-invalid"]}
+      className={cn(boxClass, "flex h-11 items-center overflow-hidden", className)}
+      numberInputProps={{
+        className:
+          "h-full min-w-0 flex-1 border-0 bg-transparent px-2 text-sm shadow-none outline-none ring-0 placeholder:text-text-muted focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0",
+      }}
+    />
+  );
+});
+PhoneControl.displayName = "PhoneControl";
+
+function OtpControl({
+  length,
+  className,
+  onValueChange,
+  ...props
+}: NativeInputProps &
+  SharedProps & { length: number; onValueChange?: (value: string) => void }) {
+  const [typed, setTyped] = React.useState(String(props.defaultValue ?? ""));
+  const invalid = props["aria-invalid"];
+
+  return (
+    <InputOTP
+      id={props.id}
+      name={props.name}
+      disabled={props.disabled}
+      aria-invalid={invalid}
+      aria-describedby={props["aria-describedby"]}
+      maxLength={length}
+      value={props.value !== undefined ? String(props.value) : typed}
+      onChange={(value) => {
+        setTyped(value);
+        onValueChange?.(value);
+      }}
+      pattern={REGEXP_ONLY_DIGITS}
+      inputMode="numeric"
+      autoComplete="one-time-code"
+      containerClassName="w-full gap-2"
+    >
+      {Array.from({ length }, (_, i) => (
+        <InputOTPGroup key={i} className="min-w-0 flex-1">
+          <InputOTPSlot
+            index={i}
+            className={cn(
+              "h-12 w-full rounded-xl border border-border-soft bg-bg-plain text-base text-text-plain shadow-xs first:rounded-l-xl last:rounded-r-xl",
+              invalid && "border-border-danger",
+              props.disabled && "opacity-50",
+              className
+            )}
+          />
+        </InputOTPGroup>
+      ))}
+    </InputOTP>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Input                                                               */
+/* ------------------------------------------------------------------ */
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -136,277 +384,68 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       hint,
       error,
       id,
-      className,
       disabled,
       previewProvided,
       onReview,
       length = 6,
-      options = [],
       onValueChange,
-      onChange,
       defaultCountry = "EG",
-      locale = "en",
       ...props
     },
     ref
   ) => {
     const autoId = React.useId();
     const inputId = id ?? autoId;
-    const isRtl = locale === "ar";
-    const dir = isRtl ? "rtl" : "ltr";
     const messageId = error
       ? `${inputId}-error`
       : hint
         ? `${inputId}-hint`
         : undefined;
 
-    // Props shared by every control (label, error and disabled wiring)
-    const shared = {
+    const shared: SharedProps = {
       id: inputId,
       disabled,
       "aria-invalid": error ? true : undefined,
       "aria-describedby": messageId,
     };
 
-    const localRef = React.useRef<HTMLInputElement>(null);
-    React.useImperativeHandle(ref, () => localRef.current as HTMLInputElement);
-
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [typed, setTyped] = React.useState(String(props.defaultValue ?? ""));
-    const [fileLabel, setFileLabel] = React.useState("");
-    const [phoneValue, setPhoneValue] = React.useState<string | undefined>(
-      props.defaultValue as string | undefined
-    );
-
-    const filled =
-      (props.value !== undefined ? String(props.value) : typed).length > 0;
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTyped(e.target.value);
-      onChange?.(e);
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = e.target.files;
-      setFileLabel(
-        !files || files.length === 0
-          ? ""
-          : files.length === 1
-            ? files[0].name
-            : `${files.length} files selected`
-      );
-      onChange?.(e);
-    };
-
-    // Clears the field and notifies React (and form libraries) through a real input event
-    const clearSearch = () => {
-      const el = localRef.current;
-      if (!el) return;
-      Object.getOwnPropertyDescriptor(
-        HTMLInputElement.prototype,
-        "value"
-      )?.set?.call(el, "");
-      el.dispatchEvent(new Event("input", { bubbles: true }));
-      el.focus();
-    };
-
     let control: React.ReactNode;
 
-    if (type === "select") {
-      control = (
-        <Select
-          name={props.name}
-          required={props.required}
-          disabled={disabled}
-          value={props.value !== undefined ? String(props.value) : undefined}
-          defaultValue={
-            props.defaultValue !== undefined
-              ? String(props.defaultValue)
-              : undefined
-          }
-          onValueChange={(v: string) => onValueChange?.(v)}
-        >
-          <SelectTrigger
-            id={shared.id}
-            aria-invalid={shared["aria-invalid"]}
-            aria-describedby={shared["aria-describedby"]}
-            dir={dir}
-            className={cn(
-              "h-11 w-full rounded-xl border-input bg-background px-4 text-sm shadow-xs hover:border-ring/60 focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 aria-invalid:border-destructive aria-invalid:ring-destructive/20",
-              "data-[placeholder]:text-muted-foreground",
-              className
-            )}
-          >
-            <SelectValue placeholder={props.placeholder ?? (isRtl ? "اختر خياراً" : "Select an option")} />
-          </SelectTrigger>
-          <SelectContent className="rounded-xl">
-            {options.map((o) => (
-              <SelectItem key={o.value} value={o.value} disabled={o.disabled}>
-                {o.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      );
-    } else if (type === "otp") {
-      control = (
-        <InputOTP
-          {...shared}
-          name={props.name}
-          maxLength={length}
-          value={props.value !== undefined ? String(props.value) : typed}
-          onChange={(value) => {
-            setTyped(value);
-            onValueChange?.(value);
-          }}
-          pattern={REGEXP_ONLY_DIGITS}
-          inputMode="numeric"
-          autoComplete="one-time-code"
-          containerClassName="w-full gap-2"
-          dir={dir}
-        >
-          {Array.from({ length }, (_, i) => (
-            <InputOTPGroup key={i}>
-              <InputOTPSlot
-                index={i}
-                className={cn(
-                  "h-12 w-12 rounded-xl border border-input bg-background text-base text-foreground shadow-xs",
-                  error && "border-destructive",
-                  disabled && "opacity-50"
-                )}
-              />
-            </InputOTPGroup>
-          ))}
-        </InputOTP>
-      );
-    } else if (type === "phone") {
-      control = (
-        <PhoneInput
-          {...shared}
-          defaultCountry={defaultCountry as any}
-          labels={isRtl ? arLabels : enLabels}
-          countrySelectComponent={PhoneCountrySelect}
-          countryCallingCodeEditable={false}
-          value={props.value !== undefined ? String(props.value) : phoneValue}
-          onChange={(value) => {
-            setPhoneValue(value);
-            onValueChange?.(value ?? "");
-          }}
-          className={cn(
-            boxClass,
-            "flex h-11 items-center overflow-hidden",
-            error && "",
-            className
-          )}
-          inputProps={{
-            placeholder:
-              props.placeholder ?? (isRtl ? "رقم الهاتف" : "Phone number"),
-            dir: phoneValue ? "ltr" : dir,
-            style: { textAlign: isRtl ? "right" : "left" },
-            className:
-              "flex-1 h-full min-w-0 border-0 outline-none ring-0 focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 bg-transparent px-2 text-sm shadow-none placeholder:text-muted-foreground",
-          }}
-        />
-      );
-    } else if (type === "file") {
-      control = (
-        <div className="relative">
-          <input
+    switch (type) {
+      case "otp":
+        control = (
+          <OtpControl
             {...props}
             {...shared}
-            ref={localRef}
-            type="file"
-            onChange={handleFileChange}
-            className="peer sr-only"
+            length={length}
+            onValueChange={onValueChange}
           />
-          <label
-            htmlFor={inputId}
-            data-invalid={error ? true : undefined}
-            dir={dir}
-            className={cn(
-              boxClass,
-              "flex min-h-14 w-full cursor-pointer items-center justify-end gap-3 px-4 py-3",
-              "peer-focus-visible:border-ring peer-focus-visible:ring-2 peer-focus-visible:ring-ring/30",
-              "peer-disabled:pointer-events-none peer-disabled:opacity-50",
-              className
-            )}
-          >
-            {fileLabel && (
-              <span className="min-w-0 flex-1 truncate text-start text-muted-foreground">
-                {fileLabel}
-              </span>
-            )}
-            <span className="flex shrink-0 items-center gap-2 font-medium text-red-600 dark:text-red-500">
-              <Upload className="size-4" aria-hidden />
-              {fileLabel ? (isRtl ? "تغيير الملف" : "Change file") : (isRtl ? "رفع ملف" : "Upload file")}
-            </span>
-          </label>
-        </div>
-      );
-    } else {
-      // text, email, url, tel, password, search, number
-      const isPassword = type === "password";
-      const isSearch = type === "search";
-
-      control = (
-        <div className="relative">
-          {isSearch && (
-            <Search className="pointer-events-none absolute start-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-          )}
-
-          <input
+        );
+        break;
+      case "phone":
+        control = (
+          <PhoneControl
             {...props}
             {...shared}
-            ref={localRef}
-            type={isPassword && showPassword ? "text" : type}
-            onChange={handleChange}
-            dir={dir}
-            className={cn(
-              inputClass,
-              isSearch &&
-                "ps-10 pe-12 [&::-webkit-search-cancel-button]:appearance-none",
-              isPassword && "pe-12",
-              className
-            )}
+            ref={ref}
+            defaultCountry={defaultCountry}
+            onValueChange={onValueChange}
           />
-
-          {isPassword && (
-            <button
-              type="button"
-              disabled={disabled}
-              aria-label={showPassword ? "Hide password" : "Show password"}
-              aria-pressed={showPassword}
-              onClick={() => setShowPassword((v) => !v)}
-              className={adornmentClass}
-            >
-              {showPassword ? (
-                <EyeOff className="size-4" />
-              ) : (
-                <Eye className="size-4" />
-              )}
-            </button>
-          )}
-
-          {isSearch && filled && !disabled && (
-            <button
-              type="button"
-              aria-label="Clear search"
-              onClick={clearSearch}
-              className={adornmentClass}
-            >
-              <X className="size-4" />
-            </button>
-          )}
-        </div>
-      );
+        );
+        break;
+      case "file":
+        control = <FileControl {...props} {...shared} ref={ref} />;
+        break;
+      default:
+        control = <TextControl {...props} {...shared} ref={ref} type={type} />;
     }
 
     return (
-      <div dir={dir} className="flex w-full flex-col gap-2">
+      <div className="flex w-full flex-col gap-2">
         {label && (
           <Label
             htmlFor={inputId}
-            className={cn(error && "text-destructive", disabled && "opacity-50")}
+            className={cn(error && "text-text-danger", disabled && "opacity-50")}
           >
             {label}
           </Label>
@@ -419,18 +458,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type="button"
             disabled={disabled}
             onClick={onReview}
-            className="w-fit text-sm font-medium text-primary underline underline-offset-4 disabled:pointer-events-none disabled:opacity-50"
+            className="w-fit text-sm font-medium text-text-plain underline underline-offset-4 disabled:pointer-events-none disabled:opacity-50"
           >
             Review current image(s)
           </button>
         )}
 
         {error ? (
-          <p id={messageId} role="alert" className="text-sm text-destructive">
+          <p id={messageId} role="alert" className="text-sm text-text-danger">
             {error}
           </p>
         ) : hint ? (
-          <p id={messageId} className="text-xs text-muted-foreground">
+          <p id={messageId} className="text-xs text-text-muted">
             {hint}
           </p>
         ) : null}
@@ -442,4 +481,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 Input.displayName = "Input";
 
 export { Input };
-export type { InputProps, SelectOption };
+export type { InputProps };
