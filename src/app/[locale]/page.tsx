@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { Input } from "@/components/ui/input";
+
 
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
@@ -39,7 +41,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </div>
       </section>
 
-   
+
     </main>
   );
 }
