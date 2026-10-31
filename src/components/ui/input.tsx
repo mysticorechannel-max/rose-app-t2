@@ -62,6 +62,37 @@ type SharedProps = {
 };
 
 /* ------------------------------------------------------------------ */
+/* Built-in texts (labels the component renders by itself)             */
+/* ------------------------------------------------------------------ */
+
+const TEXT = {
+  en: {
+    upload: "Upload file",
+    change: "Change file",
+    filesSelected: (n: number) => `${n} files selected`,
+    review: "Review current image(s)",
+    showPassword: "Show password",
+    hidePassword: "Hide password",
+    clearSearch: "Clear search",
+    country: "Country",
+  },
+  ar: {
+    upload: "رفع ملف",
+    change: "تغيير الملف",
+    filesSelected: (n: number) => `تم اختيار ${n} ملفات`,
+    review: "مراجعة الصور الحالية",
+    showPassword: "إظهار كلمة المرور",
+    hidePassword: "إخفاء كلمة المرور",
+    clearSearch: "مسح البحث",
+    country: "الدولة",
+  },
+} as const;
+
+function useInputText() {
+  return useLocale() === "ar" ? TEXT.ar : TEXT.en;
+}
+
+/* ------------------------------------------------------------------ */
 /* Phone country select: [flag] EG(+20) [chevrons]                     */
 /* ------------------------------------------------------------------ */
 
@@ -88,6 +119,7 @@ function PhoneCountrySelect({
   disabled,
   readOnly,
 }: PhoneCountrySelectProps) {
+  const t = useInputText();
   const selected = options.find((o) => o.value === value);
   const code = value ? `${value}(+${getCountryCallingCode(value)})` : "+";
   const inactive = disabled || readOnly;
@@ -113,7 +145,7 @@ function PhoneCountrySelect({
         value={value ?? ""}
         disabled={inactive}
         onChange={(e) => onChange((e.target.value as Country) || undefined)}
-        aria-label="Country"
+        aria-label={t.country}
         className="absolute inset-0 size-full cursor-pointer opacity-0"
       >
         {options.map((o, i) =>
@@ -143,6 +175,7 @@ const TextControl = React.forwardRef<
   NativeInputProps &
     SharedProps & { type: "text" | "password" | "search" | "number" }
 >(({ type, className, onChange, ...props }, ref) => {
+  const t = useInputText();
   const localRef = React.useRef<HTMLInputElement>(null);
   React.useImperativeHandle(ref, () => localRef.current as HTMLInputElement);
 
@@ -193,7 +226,7 @@ const TextControl = React.forwardRef<
         <button
           type="button"
           disabled={props.disabled}
-          aria-label={showPassword ? "Hide password" : "Show password"}
+          aria-label={showPassword ? t.hidePassword : t.showPassword}
           aria-pressed={showPassword}
           onClick={() => setShowPassword((v) => !v)}
           className={adornmentClass}
@@ -209,7 +242,7 @@ const TextControl = React.forwardRef<
       {isSearch && filled && !props.disabled && (
         <button
           type="button"
-          aria-label="Clear search"
+          aria-label={t.clearSearch}
           onClick={clearSearch}
           className={adornmentClass}
         >
@@ -225,7 +258,7 @@ const FileControl = React.forwardRef<
   HTMLInputElement,
   NativeInputProps & SharedProps
 >(({ className, onChange, ...props }, ref) => {
-  const isAr = useLocale() === "ar";
+  const t = useInputText();
   const [fileLabel, setFileLabel] = React.useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -235,7 +268,7 @@ const FileControl = React.forwardRef<
         ? ""
         : files.length === 1
           ? files[0].name
-          : `${files.length} files selected`
+          : t.filesSelected(files.length)
     );
     onChange?.(e);
   };
@@ -265,11 +298,9 @@ const FileControl = React.forwardRef<
             {fileLabel}
           </span>
         )}
-        <span className="flex shrink-0 items-center gap-2 font-medium text-text-danger">
+        <span className="flex shrink-0 items-center gap-2 font-medium text-text-plain">
           <Upload className="size-4" aria-hidden />
-          {fileLabel
-            ? isAr ? "تغيير الملف" : "Change file"
-            : isAr ? "رفع ملف" : "Upload file"}
+          {fileLabel ? t.change : t.upload}
         </span>
       </label>
     </div>
@@ -394,6 +425,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
+    const t = useInputText();
     const autoId = React.useId();
     const inputId = id ?? autoId;
     const messageId = error
@@ -460,7 +492,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onClick={onReview}
             className="w-fit text-sm font-medium text-text-plain underline underline-offset-4 disabled:pointer-events-none disabled:opacity-50"
           >
-            Review current image(s)
+            {t.review}
           </button>
         )}
 
