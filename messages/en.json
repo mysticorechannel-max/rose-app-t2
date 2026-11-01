@@ -9,6 +9,16 @@
       "dark": "Dark Mode",
       "system": "System Mode"
     },
+    "locale": { "label": "Language", "en": "English", "ar": "Arabic" },
+    "buttonLabels": {
+      "discover": "Discover",
+      "login": "Login",
+      "subscribe": "Subscribe →",
+      "imBuying": "I'm buying",
+      "shopNow": "Shop now →",
+      "next": "Next →",
+      "continue": "Continue",
+      "verifyCode": "Verify code"
     "locale": { "label": "Language", "en": "English", "ar": "Arabic" }
   },
   "input": {

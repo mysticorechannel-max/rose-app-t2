@@ -2,7 +2,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
-import { ThemeSwitcher } from "@/components/theme-switcher";
+import { ModeToggle } from "@/components/ui/toggle-group";
 
 
 
@@ -36,7 +36,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           </p>
         </div>
         <div className="mt-12">
-          <ThemeSwitcher />
+          <ModeToggle />
         </div>
       </section>
 
