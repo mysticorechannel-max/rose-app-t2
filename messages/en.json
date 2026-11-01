@@ -19,5 +19,40 @@
     "info": "Informative message",
     "success": "Successful operation",
     "error": "Unsuccessful operation"
+  },
+  "input": {
+    "search": {
+      "placeholder": "Search...",
+      "clear": "Clear search"
+    },
+    "number": {
+      "increase": "Increase value",
+      "decrease": "Decrease value"
+    },
+    "file": {
+      "upload": "Upload file",
+      "noFile": "No file chosen",
+      "reviewImages": "Review current image(s)"
+    },
+    "phone": {
+      "placeholder": "Phone number",
+      "countryLabel": "Country dial code",
+      "selectCountry": "Select country",
+      "countries": {
+        "EG": "Egypt",
+        "SA": "Saudi Arabia",
+        "AE": "United Arab Emirates",
+        "US": "United States",
+        "GB": "United Kingdom"
+      }
+    },
+    "otp": {
+      "label": "One-time password",
+      "digitLabel": "Digit {current} of {total}"
+    },
+    "password": {
+      "show": "Show password",
+      "hide": "Hide password"
+    }
   }
 }
