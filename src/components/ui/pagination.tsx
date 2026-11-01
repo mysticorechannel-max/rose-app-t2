@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -23,19 +24,18 @@ const itemBase = [
   "text-[13px] font-semibold leading-none transition-colors",
   "focus-visible:relative focus-visible:z-10 focus-visible:outline-none",
   "focus-visible:ring-4 focus-visible:ring-bg-primary-saturated/25",
-  "dark:focus-visible:ring-3 dark:focus-visible:ring-[var(--soft-pink-400)]/25",
   "aria-disabled:pointer-events-none aria-disabled:opacity-50",
   "disabled:pointer-events-none disabled:opacity-50",
 ].join(" ")
 
 const itemDefault = [
-  "border-border-subtle bg-bg-plain text-text-plain hover:bg-bg-subtle",
-  "dark:border-transparent dark:bg-bg-soft dark:hover:bg-bg-default",
+  "border-border-muted bg-bg-plain text-text-plain",
+  "hover:bg-bg-primary-saturated",
 ].join(" ")
 
 const itemCurrent = [
-  "border-transparent bg-[var(--maroon-600)] text-text-inverse hover:bg-bg-primary-saturated",
-  "dark:bg-bg-primary dark:text-text-inverse dark:hover:bg-[var(--soft-pink-400)]",
+  "border-transparent bg-bg-primary text-text-inverse",
+  "hover:bg-bg-primary-saturated",
 ].join(" ")
 
 // Flips the arrows in RTL so "previous" always points backward
@@ -148,7 +148,7 @@ function toPositiveInt(value: string | null, fallback: number) {
 }
 
 function clamp(value: number, min: number, max: number) {
-  return Math.min(Math.max(min, value), max)
+  return Math.min(Math.max(value, min), max)
 }
 
 function getPageItems(

@@ -7,59 +7,55 @@ import { Check, Info, X } from "lucide-react";
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 
-// Informative colors are shared by the default and info variants
-const informative =
-  "!border-border-default !bg-bg-muted !text-text-plain dark:!border-transparent dark:!bg-[var(--zinc-300)] dark:!text-text-inverse";
+const TOAST_DURATION_MS = 4000;
+const MAX_VISIBLE_TOASTS = 4;
 
+const defaultToast =
+  "!border-[#D4D4D8] !bg-[#F4F4F5] !text-black dark:!border-[#27272A] dark:!bg-[#18181B] dark:!text-white";
+
+const successToast =
+  "!border-[#D4D4D8] !bg-[#ECFDF5] !text-black dark:!border-[#27272A] dark:!bg-[#073627] dark:!text-white";
+
+const errorToast =
+  "!border-[#D4D4D8] !bg-[#FEF2F2] !text-black dark:!border-[#27272A] dark:!bg-[#431819] dark:!text-white";
 const Toaster = ({ ...props }: ToasterProps) => {
+  // Variables
   const { theme = "system" } = useTheme();
 
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
-      // Close (x) button on every toast
       closeButton
-      // Auto-dismiss duration in ms (override per toast with { duration })
-      duration={4000}
-      // Max toasts visible at once, the rest are queued
-      visibleToasts={4}
+      duration={TOAST_DURATION_MS}
+      visibleToasts={MAX_VISIBLE_TOASTS}
       icons={{
         info: <Info className="size-5" aria-hidden="true" />,
         success: <Check className="size-5" aria-hidden="true" />,
         error: <X className="size-5" aria-hidden="true" />,
       }}
-      // Sonner reads these variables to place the close button:
-      // pinned to the end corner (flips in RTL), no offset transform
-      style={
-        {
-          "--toast-close-button-start": "unset",
-          "--toast-close-button-end": "12px",
-          "--toast-close-button-transform": "none",
-        } as React.CSSProperties
-      }
       toastOptions={{
         classNames: {
-          // Shared layout, typography and shadow (no colors here)
           toast: [
-            "!flex !items-center !gap-2.5 !rounded-[10px] !border !py-4 !ps-4 !pe-12",
+            "!flex !items-center !gap-2.5 !rounded-lg !border !py-4 !ps-4 !pe-12",
             "!text-sm !font-semibold !leading-[150%]",
-            "!shadow-[0_15px_30px_-3px_#0000001A] dark:!shadow-[0_15px_30px_-3px_#0000004D]",
+            "!shadow-[0_4px_10px_0_rgb(0_0_0/0.07)]",
           ].join(" "),
-          // Colors live on the variants only, so they never override each other
-          default: informative,
-          info: informative,
-          success:
-            "!border-[var(--emerald-700)] !bg-bg-success-fade !text-text-plain dark:!border-transparent dark:!bg-[var(--emerald-300)] dark:!text-text-inverse [&_[data-icon]]:text-[var(--emerald-700)] dark:[&_[data-icon]]:text-text-inverse",
-          error:
-            "!border-[#B91C1C] !bg-bg-danger-fade !text-text-plain dark:!border-transparent dark:!bg-[var(--red-300)] dark:!text-text-inverse [&_[data-icon]]:text-[#B91C1C] dark:[&_[data-icon]]:text-text-inverse",
-          // Close button: plain x in the top corner, no circle, no border
+
+          default: defaultToast,
+          info: defaultToast,
+
+          success: [successToast, "[&_[data-icon]]:!text-text-success"].join(" "),
+
+          error: [errorToast, "[&_[data-icon]]:!text-text-danger"].join(" "),
 
           closeButton: [
-            "!top-3 !m-0 !size-5 !rounded-none !border-0 !bg-transparent",
-            "rtl:!left-3 rtl:!right-auto",
-            "ltr:!right-3 ltr:!left-auto",
-            "!text-text-muted hover:!bg-transparent hover:!text-text-plain",
+            "!top-6 !m-0 !size-5",
+            "!rounded-none !border-0 !bg-transparent",
+            "ltr:!right-3 ltr:!left-auto rtl:!left-3 rtl:!right-auto",
+            "!text-[#71717A] dark:!text-white",
+            "[&_svg]:!w-[15px] [&_svg]:!h-[15px]",
+            "hover:!bg-transparent hover:!text-text-plain",
           ].join(" "),
         },
       }}
