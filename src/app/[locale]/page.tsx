@@ -1,7 +1,10 @@
+
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ModeToggle } from "@/components/ui/toggle-group";
+
+
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
@@ -36,6 +39,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           <ModeToggle />
         </div>
       </section>
+
+
     </main>
   );
 }
