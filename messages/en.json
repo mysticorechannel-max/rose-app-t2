@@ -18,7 +18,17 @@
   "toast": {
     "info": "Informative message",
     "success": "Successful operation",
-    "error": "Unsuccessful operation"
+    "error": "Unsuccessful operation",
+    "buttonLabels": {
+      "discover": "Discover",
+      "login": "Login",
+      "subscribe": "Subscribe →",
+      "imBuying": "I'm buying",
+      "shopNow": "Shop now →",
+      "next": "Next →",
+      "continue": "Continue",
+      "verifyCode": "Verify code"
+    }
   },
   "input": {
     "search": {

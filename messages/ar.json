@@ -18,8 +18,17 @@
   "toast": {
     "info": "رسالة إعلامية",
     "success": "تمت العملية بنجاح",
-    "error": "فشلت العملية"
-    
+    "error": "فشلت العملية",
+    "buttonLabels": {
+      "discover": "اكتشف",
+      "login": "تسجيل الدخول",
+      "subscribe": "اشترك ←",
+      "imBuying": "أنا أشتري",
+      "shopNow": "تسوق الآن ←",
+      "next": "التالي ←",
+      "continue": "استمر",
+      "verifyCode": "تحقق من الرمز"
+    }
   },
   "input": {
     "search": {
