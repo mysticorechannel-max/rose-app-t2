@@ -19,7 +19,7 @@
       "next": "Next →",
       "continue": "Continue",
       "verifyCode": "Verify code"
-    "locale": { "label": "Language", "en": "English", "ar": "Arabic" }
+    }
   },
   "input": {
     "search": {
