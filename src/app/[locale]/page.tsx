@@ -39,6 +39,21 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         </div>
         
       </section>
+      <div className="w-[280px] space-y-2">
+          <label htmlFor="country-select" className="text-sm font-medium">
+            Select
+          </label>
+          <Select name="country" required>
+            <SelectTrigger id="country-select">
+              <SelectValue placeholder="Select an option" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="1">Option</SelectItem>
+              <SelectItem value="2">Option</SelectItem>
+              <SelectItem value="3">Option</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
     </main>
   );
 }
