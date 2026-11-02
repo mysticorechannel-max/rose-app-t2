@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

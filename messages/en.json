@@ -9,7 +9,16 @@
       "dark": "Dark Mode",
       "system": "System Mode"
     },
-    "locale": { "label": "Language", "en": "English", "ar": "Arabic" },
+    "locale": {
+      "label": "Language",
+      "en": "English",
+      "ar": "Arabic"
+    }
+  },
+  "toast": {
+    "info": "Informative message",
+    "success": "Successful operation",
+    "error": "Unsuccessful operation",
     "buttonLabels": {
       "discover": "Discover",
       "login": "Login",
