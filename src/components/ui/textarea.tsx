@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from "react";
@@ -52,7 +53,6 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             htmlFor={textareaId}
             className={cn(
               "text-sm font-medium",
-              // Label color follows the field state: disabled > error > default
               disabled ? "text-text-muted" : hasError ? "text-text-danger" : "text-text-plain"
             )}
           >
@@ -64,12 +64,9 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={textareaId}
           disabled={disabled}
-          // Native maxLength blocks both typing and pasting
           maxLength={maxLength}
-          // Controlled (value) or uncontrolled (defaultValue), never both
           {...(value !== undefined ? { value } : { defaultValue })}
           onChange={handleChange}
-          // Expose error state to assistive tech and link the error message
           aria-invalid={hasError || undefined}
           aria-describedby={
             [hasError ? errorId : null, describedBy].filter(Boolean).join(" ") || undefined
@@ -77,7 +74,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           className={cn(
             // Base
             "flex min-h-[150px] w-full rounded-lg border",
-            "border-border-primary bg-bg-plain",
+            "border-border-soft bg-bg-plain",
             "p-4 text-sm font-normal text-text-plain placeholder:text-text-muted",
 
             // Layout
@@ -87,10 +84,10 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             "hover:border-border-default",
 
             // Focus
-            "focus-visible:border-border-primary focus-visible:outline-none",
+            "focus-visible:border-border-primary focus-visible:ring-3 focus-visible:ring-ring-default focus-visible:outline-none",
 
             // Error
-            "aria-[invalid=true]:border-border-danger",
+            "aria-[invalid=true]:border-border-danger aria-[invalid=true]:ring-3 aria-[invalid=true]:ring-ring-danger",
 
             // Disabled
             "disabled:cursor-not-allowed disabled:resize-none",
@@ -122,6 +119,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
   }
 );
+
 Textarea.displayName = "Textarea";
 
 export { Textarea };

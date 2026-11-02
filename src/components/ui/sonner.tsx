@@ -10,14 +10,11 @@ type ToasterProps = React.ComponentProps<typeof Sonner>;
 const TOAST_DURATION_MS = 4000;
 const MAX_VISIBLE_TOASTS = 4;
 
-const defaultToast =
-  "!border-[#D4D4D8] !bg-[#F4F4F5] !text-black dark:!border-[#27272A] dark:!bg-[#18181B] dark:!text-white";
+const defaultToast = "!border-border-soft !bg-bg-muted !text-text-plain";
 
-const successToast =
-  "!border-[#D4D4D8] !bg-[#ECFDF5] !text-black dark:!border-[#27272A] dark:!bg-[#073627] dark:!text-white";
+const successToast = "!border-border-soft !bg-bg-success-fade !text-text-plain";
 
-const errorToast =
-  "!border-[#D4D4D8] !bg-[#FEF2F2] !text-black dark:!border-[#27272A] dark:!bg-[#431819] dark:!text-white";
+const errorToast = "!border-border-soft !bg-bg-danger-fade !text-text-plain";
 const Toaster = ({ ...props }: ToasterProps) => {
   // Variables
   const { theme = "system" } = useTheme();
@@ -53,7 +50,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
             "!top-6 !m-0 !size-5",
             "!rounded-none !border-0 !bg-transparent",
             "ltr:!right-3 ltr:!left-auto rtl:!left-3 rtl:!right-auto",
-            "!text-[#71717A] dark:!text-white",
+            "!text-text-muted",
             "[&_svg]:!w-[15px] [&_svg]:!h-[15px]",
             "hover:!bg-transparent hover:!text-text-plain",
           ].join(" "),
