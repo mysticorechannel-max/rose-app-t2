@@ -180,7 +180,7 @@
   --text-info-faint: var(--blue-100);
   --text-info-fade: var(--blue-50);
 
-  --text-secondary: var(--soft-pink-400);
+  --text-secondary: var(--soft-pink-300);
   --text-secondary-faint: var(--soft-pink-100);
   --text-secondary-fade: var(--soft-pink-50);
 
@@ -376,10 +376,10 @@
    LAYER 3 — TAILWIND @theme inline
    ============================================================ */
 @theme inline {
-  /* fonts — preserved */
-  --font-sans: var(--font-sarabun);
-  --font-english: var(--font-sarabun);
-  --font-arabic: var(--font-tajawal);
+  /* fonts — updated to Poppins & Cairo with fallback support */
+  --font-sans: var(--font-poppins), var(--font-cairo), sans-serif;
+  --font-english: var(--font-poppins), var(--font-cairo), sans-serif;
+  --font-arabic: var(--font-cairo), var(--font-poppins), sans-serif;
 
   /* radius — preserved */
   --radius-sm: calc(var(--radius) - 4px);
@@ -508,5 +508,18 @@
 
   body {
     @apply min-h-svh bg-background text-foreground antialiased;
+  }
+}
+
+/* ============================================================
+   CUSTOM UTILITIES — FONT FAMILIES
+   ============================================================ */
+@layer utilities {
+  .font-english {
+    font-family: var(--font-poppins), var(--font-cairo), sans-serif;
+  }
+
+  .font-arabic {
+    font-family: var(--font-cairo), var(--font-poppins), sans-serif;
   }
 }
