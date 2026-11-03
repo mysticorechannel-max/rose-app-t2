@@ -25,7 +25,6 @@ export function LocaleSwitcher() {
   return (
     <Button
       variant="ghost"
-      size="sm"
       onClick={toggleLocale}
       aria-label={t("label")}
       className="gap-2 hover:bg-transparent"

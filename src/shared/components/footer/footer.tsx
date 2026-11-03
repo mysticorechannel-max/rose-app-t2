@@ -17,7 +17,7 @@ export function Footer() {
           <FooterLinks />
 
           {/* Right Section - Newsletter */}
-          <div className="space-y-5">
+          <div className="space-y-5 min-w-[375px]">
             <div>
               <h3 className="text-lg font-semibold text-text-secondary">
                 {t("newsletter.title")

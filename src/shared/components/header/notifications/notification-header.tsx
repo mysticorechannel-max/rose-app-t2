@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCheck, Trash2 } from "lucide-react";
+import { BrushCleaning, CheckCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/shared/ui/button";
@@ -27,25 +27,27 @@ export function NotificationHeader({
       </h3>
 
       {hasNotifications && (
-        <div className="flex items-center justify-between gap-2 px-4 pb-3">
+        <div className="flex items-center justify-between gap-2 p-2  bg-bg-plain border-b">
           <Button
             variant="ghost"
-            size="sm"
             onClick={onClearAll}
-            className="text-text-inverse hover:text-text-inverse hover:bg-white/10 gap-2 h-8"
+            className="text-text-plain hover:bg-white/10 gap-2 h-8 cursor-pointer"
           >
-            <Trash2 className="h-4 w-4" />
-            <span className="text-xs">{t("clearAll")}</span>
+            <span className="text-xs">
+              <BrushCleaning className="h-4 w-4" />
+              {t("clearAll")}
+            </span>
           </Button>
 
           <Button
             variant="ghost"
-            size="sm"
             onClick={onMarkAllAsRead}
-            className="text-text-inverse hover:text-text-inverse hover:bg-white/10 gap-2 h-8"
+            className="text-text-plain hover:bg-white/10 gap-2 h-8 cursor-pointer"
           >
-            <CheckCheck className="h-4 w-4" />
-            <span className="text-xs">{t("markAllAsRead")}</span>
+            <span className="text-xs">
+              <CheckCheck className="h-4 w-4" />
+              {t("markAllAsRead")}
+            </span>
           </Button>
         </div>
       )}

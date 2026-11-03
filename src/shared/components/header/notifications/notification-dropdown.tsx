@@ -52,17 +52,20 @@ export function NotificationDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <span
-          className="relative h-10 w-6 flex items-center justify-center group cursor-pointer"
+        <button
+          type="button"
+          className="relative flex h-10 w-6 items-center justify-center
+      group cursor-pointer border-0 bg-transparent outline-none"
           aria-label={t("title")}
         >
           <Bell className="h-6 w-6 group-hover:text-primary" />
+
           {unreadCount > 0 && (
             <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive text-[10px] font-bold text-destructive-foreground">
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
           )}
-        </span>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-[380px] p-0 border-0 bg-bg-plain shadow-lg">

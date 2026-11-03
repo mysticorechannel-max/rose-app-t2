@@ -44,8 +44,10 @@ export function NotificationItemMenu({
             onClick={() => onMarkAsRead(notificationId)}
             className="gap-2 cursor-pointer text-text-plain hover:bg-bg-muted"
           >
-            <Check className="h-4 w-4" />
-            <span>{t("markAsRead")}</span>
+            <span>
+              <Check className="h-4 w-4" />
+              {t("markAsRead")}
+            </span>
           </DropdownMenuItem>
         )}
 
@@ -53,8 +55,10 @@ export function NotificationItemMenu({
           onClick={() => onDelete(notificationId)}
           className="gap-2 cursor-pointer text-text-danger hover:bg-bg-danger-fade focus:text-text-danger"
         >
-          <Trash2 className="h-4 w-4" />
-          <span>{t("delete")}</span>
+          <span>
+            <Trash2 className="h-4 w-4" />
+            {t("delete")}
+          </span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
