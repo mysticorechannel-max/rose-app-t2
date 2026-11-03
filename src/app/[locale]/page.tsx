@@ -2,7 +2,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LocaleSwitcher } from "@/shared/components/switchers/locale-switcher";
-import { ThemeSwitcher } from "@/shared/components/switchers/theme-switcher";
+import { ModeToggle } from "@/shared/ui/toggle-group";
+
 
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
