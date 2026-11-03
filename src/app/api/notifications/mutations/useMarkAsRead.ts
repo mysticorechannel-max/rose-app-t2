@@ -1,14 +1,11 @@
-import { MarkAsReadPayload } from "@/lib/types/notification";
+"use client";
+
+import { MarkAsReadPayload } from "@/shared/lib/types/notification";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import { markNotificationsAsRead } from "../notification.api";
 import { notificationKeys } from "../notifications.keys";
-import { toast } from "sonner";
-
-
-
-
-
 
 /**
  * Mutation hook to mark notifications as read

@@ -1,17 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useTranslations } from "next-intl"
-import { deleteNotification } from "../notification.api"
-import { notificationKeys } from "../notifications.keys"
-import { toast } from "sonner"
+"use client";
 
-
-
-
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { toast } from "sonner";
+import { deleteNotification } from "../notification.api";
+import { notificationKeys } from "../notifications.keys";
 
 /**
  * Mutation hook to delete a notification
-*/
+ */
 export function useDeleteNotificationMutation() {
     const queryClient = useQueryClient();
     const t = useTranslations("notifications");
