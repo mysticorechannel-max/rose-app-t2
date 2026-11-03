@@ -1,12 +1,18 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { type DialogProps } from "@radix-ui/react-dialog"
-import { Command as CommandPrimitive } from "cmdk"
-import { Search } from "lucide-react"
+import * as React from "react";
+import { type DialogProps } from "@radix-ui/react-dialog";
+import { Command as CommandPrimitive } from "cmdk";
+import { ChevronDown, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
-import { cn } from "@/lib/utils"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { cn } from "@/lib/utils";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
@@ -15,13 +21,13 @@ const Command = React.forwardRef<
   <CommandPrimitive
     ref={ref}
     className={cn(
-      "flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground",
+      "flex h-full w-full flex-col overflow-hidden rounded-lg bg-bg-plain text-foreground",
       className
     )}
     {...props}
   />
-))
-Command.displayName = CommandPrimitive.displayName
+));
+Command.displayName = CommandPrimitive.displayName;
 
 const CommandDialog = ({ children, ...props }: DialogProps) => {
   return (
@@ -32,27 +38,29 @@ const CommandDialog = ({ children, ...props }: DialogProps) => {
         </Command>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
 const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
-  <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-    <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+  <div
+    className="flex items-center border-b border-border-soft px-4"
+    cmdk-input-wrapper=""
+  >
+    <Search className="me-2 size-4 shrink-0 opacity-50" />
     <CommandPrimitive.Input
       ref={ref}
       className={cn(
-        "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+        "flex h-12 w-full bg-transparent py-3 text-sm outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
     />
   </div>
-))
-
-CommandInput.displayName = CommandPrimitive.Input.displayName
+));
+CommandInput.displayName = CommandPrimitive.Input.displayName;
 
 const CommandList = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.List>,
@@ -60,25 +68,26 @@ const CommandList = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className)}
+    className={cn("max-h-[300px] overflow-x-hidden overflow-y-auto", className)}
     {...props}
   />
-))
-
-CommandList.displayName = CommandPrimitive.List.displayName
+));
+CommandList.displayName = CommandPrimitive.List.displayName;
 
 const CommandEmpty = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Empty>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
->((props, ref) => (
+>(({ className, ...props }, ref) => (
   <CommandPrimitive.Empty
     ref={ref}
-    className="py-6 text-center text-sm"
+    className={cn(
+      "py-6 text-center text-sm text-muted-foreground",
+      className
+    )}
     {...props}
   />
-))
-
-CommandEmpty.displayName = CommandPrimitive.Empty.displayName
+));
+CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
 const CommandGroup = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Group>,
@@ -92,9 +101,8 @@ const CommandGroup = React.forwardRef<
     )}
     {...props}
   />
-))
-
-CommandGroup.displayName = CommandPrimitive.Group.displayName
+));
+CommandGroup.displayName = CommandPrimitive.Group.displayName;
 
 const CommandSeparator = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Separator>,
@@ -102,11 +110,11 @@ const CommandSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.Separator
     ref={ref}
-    className={cn("-mx-1 h-px bg-border", className)}
+    className={cn("h-px bg-border-soft", className)}
     {...props}
   />
-))
-CommandSeparator.displayName = CommandPrimitive.Separator.displayName
+));
+CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
 const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
@@ -115,14 +123,16 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+      "relative flex min-h-12 cursor-default items-center gap-2 rounded-none px-4 text-sm outline-hidden select-none",
+      "data-[selected=true]:bg-bg-muted data-[selected=true]:text-text-primary",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+      "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
       className
     )}
     {...props}
   />
-))
-
-CommandItem.displayName = CommandPrimitive.Item.displayName
+));
+CommandItem.displayName = CommandPrimitive.Item.displayName;
 
 const CommandShortcut = ({
   className,
@@ -131,14 +141,191 @@ const CommandShortcut = ({
   return (
     <span
       className={cn(
-        "ml-auto text-xs tracking-widest text-muted-foreground",
+        "ms-auto text-xs tracking-widest text-muted-foreground",
         className
       )}
       {...props}
     />
-  )
+  );
+};
+CommandShortcut.displayName = "CommandShortcut";
+
+/* ------------------------------------------------------------------ */
+/* Combobox: Popover + Command                                         */
+/* ------------------------------------------------------------------ */
+
+type ComboboxOption = { value: string; label: string; disabled?: boolean };
+
+type ComboboxProps = {
+  options?: ComboboxOption[];
+  loadOptions?: (
+    query: string,
+    signal: AbortSignal
+  ) => Promise<ComboboxOption[]>;
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  placeholder?: string;
+  searchPlaceholder?: string;
+  id?: string;
+  disabled?: boolean;
+  className?: string;
+  "aria-invalid"?: boolean;
+};
+
+function Combobox({
+  options = [],
+  loadOptions,
+  value,
+  defaultValue = "",
+  onValueChange,
+  placeholder,
+  searchPlaceholder,
+  id,
+  disabled,
+  className,
+  "aria-invalid": ariaInvalid,
+}: ComboboxProps) {
+  const t = useTranslations("select");
+  const [open, setOpen] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+  const [internalValue, setInternalValue] = React.useState(defaultValue);
+  const [asyncOptions, setAsyncOptions] = React.useState<ComboboxOption[]>([]);
+  const [status, setStatus] = React.useState<"idle" | "loading" | "error">(
+    "idle"
+  );
+  const [selectedOption, setSelectedOption] =
+    React.useState<ComboboxOption>();
+
+  const currentValue = value ?? internalValue;
+  const items = loadOptions ? asyncOptions : options;
+  const selected =
+    items.find((o) => o.value === currentValue) ??
+    (selectedOption?.value === currentValue ? selectedOption : undefined);
+
+  // Async search: abort the previous request so a slow response
+  // can never overwrite newer results.
+  React.useEffect(() => {
+    if (!loadOptions || !open) return;
+    const controller = new AbortController();
+    setStatus("loading");
+    loadOptions(search, controller.signal)
+      .then((result) => {
+        if (controller.signal.aborted) return;
+        setAsyncOptions(result);
+        setStatus("idle");
+      })
+      .catch(() => {
+        if (controller.signal.aborted) return;
+        setStatus("error");
+      });
+    return () => controller.abort();
+  }, [loadOptions, open, search]);
+
+  function handleOpenChange(next: boolean) {
+    setOpen(next);
+    if (!next) setSearch(""); // Escape / outside click / select: reset search
+  }
+
+  function handleSelect(option: ComboboxOption) {
+    if (value === undefined) setInternalValue(option.value);
+    setSelectedOption(option);
+    onValueChange?.(option.value);
+    handleOpenChange(false);
+  }
+
+  return (
+    <Popover open={open} onOpenChange={handleOpenChange}>
+      <PopoverTrigger asChild>
+        <button
+          id={id}
+          type="button"
+          role="combobox"
+          aria-expanded={open}
+          aria-invalid={ariaInvalid}
+          disabled={disabled}
+          className={cn(
+            "flex h-[49px] w-full items-center justify-between gap-2 rounded-lg border border-border-soft bg-bg-plain px-4 text-sm text-foreground outline-hidden focus-visible:ring-1 focus-visible:ring-ring aria-invalid:border-border-danger disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          )}
+        >
+          <span
+            className={cn(
+              "min-w-0 truncate text-start",
+              !selected && "text-muted-foreground"
+            )}
+          >
+            {selected ? selected.label : (placeholder ?? t("placeholder"))}
+          </span>
+          <ChevronDown
+            className={cn(
+              "size-4 shrink-0 opacity-50 transition-transform",
+              open && "rotate-180"
+            )}
+          />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent
+        align="start"
+        className="w-(--radix-popover-trigger-width) overflow-hidden p-0"
+      >
+        <Command
+          shouldFilter={!loadOptions}
+          filter={(itemValue, query) =>
+            itemValue.toLowerCase().includes(query.trim().toLowerCase())
+              ? 1
+              : 0
+          }
+        >
+          <CommandInput
+            value={search}
+            onValueChange={setSearch}
+            placeholder={searchPlaceholder ?? t("search")}
+          />
+          <CommandList>
+            {status === "loading" && (
+              <div
+                role="status"
+                className="px-4 py-3 text-sm text-muted-foreground"
+              >
+                {t("loading")}
+              </div>
+            )}
+            {status === "error" && (
+              <div
+                role="alert"
+                className="px-4 py-3 text-sm text-muted-foreground"
+              >
+                {t("error")}
+              </div>
+            )}
+            {status === "idle" && (
+              <>
+                <CommandEmpty>{t("noOptions")}</CommandEmpty>
+                <CommandGroup className="p-0">
+                  {items.map((option) => (
+                    <CommandItem
+                      key={option.value}
+                      value={option.label}
+                      disabled={option.disabled}
+                      onSelect={() => handleSelect(option)}
+                      className={cn(
+                        currentValue === option.value &&
+                          "bg-bg-muted text-text-primary"
+                      )}
+                    >
+                      <span className="min-w-0 truncate">{option.label}</span>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </>
+            )}
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
+  );
 }
-CommandShortcut.displayName = "CommandShortcut"
 
 export {
   Command,
@@ -150,4 +337,6 @@ export {
   CommandItem,
   CommandShortcut,
   CommandSeparator,
-}
+  Combobox,
+};
+export type { ComboboxOption };

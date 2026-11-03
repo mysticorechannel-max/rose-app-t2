@@ -9,6 +9,14 @@
       "dark": "Dark Mode",
       "system": "System Mode"
     },
-    "locale": { "label": "Language", "en": "English", "ar": "Arabic" }
+    "locale": { "label": "Language", "en": "English", "ar": "Arabic" 
+  },
+  "select": {
+    "placeholder": "Select an option",
+    "search": "Search...",
+    "noOptions": "No options found",
+    "loading": "Loading options...",
+    "error": "Failed to load options"
+  }
   }
 }
