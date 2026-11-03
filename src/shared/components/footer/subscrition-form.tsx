@@ -1,41 +1,80 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
-export default function SubscritionForm() {
+import { useSubscribeMutation } from "@/app/api/subscriptions/mutations/useSubscribe";
+import {
+  subscriptionSchema,
+  type SubscriptionFields,
+} from "@/shared/lib/schemes/subscription.schema";
+
+export function SubscritionForm() {
   // Translation
-  const t = useTranslations("footer");
+  const t = useTranslations("footer.newsletter");
+
+  // Mutation
+  const { mutate: subscribe, isPending } = useSubscribeMutation();
+
+  // Form & validation
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<SubscriptionFields>({
+    resolver: zodResolver(subscriptionSchema),
+    mode: "onSubmit",
+  });
+
+  // Functions
+  const onSubmit = (data: SubscriptionFields) => {
+    subscribe(data, {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  };
+
+  // Effects
+  useEffect(() => {
+    if (errors.email) {
+      const errorMessage =
+        errors.email.type === "too_small"
+          ? t("emailRequired")
+          : errors.email.type === "invalid_string"
+            ? t("invalidEmail")
+            : t("invalidEmail");
+
+      toast.error(errorMessage);
+    }
+  }, [errors.email, t]);
 
   return (
-    <div className="space-y-5">
-      <div>
-        <h3 className="text-lg font-semibold text-text-secondary">
-          {t("newsletter.title")
-            .split("20%")
-            .map((part, index) => (
-              <span key={index}>
-                {part}
-                {index === 0 && <span className="text-text-inverse">20%</span>}
-              </span>
-            ))}
-        </h3>
-        <p className="text-xs text-zinc-400">{t("newsletter.subtitle")}</p>
-      </div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex h-10 w-full items-center rounded-full bg-bg-default"
+    >
+      <input
+        type="email"
+        {...register("email")}
+        placeholder={t("placeholder")}
+        disabled={isPending}
+        className="h-full min-w-0 flex-1 bg-transparent px-3 text-sm text-white outline-none placeholder:text-text-muted disabled:cursor-not-allowed disabled:opacity-50"
+      />
 
-      <form className="flex h-10 w-full items-center rounded-full bg-bg-default">
-        <input
-          type="email"
-          placeholder="Enter Your Email"
-          className="h-full min-w-0 flex-1 bg-transparent px-3 text-sm text-white outline-none placeholder:text-text-muted"
-        />
-
-        <button
-          type="submit"
-          className="flex h-full shrink-0 items-center gap-3 rounded-full bg-bg-primary-fade px-5 text-sm font-medium text-text-primary transition-colors hover:bg-[#F8DADA]"
-        >
-          Subscribe
-          <ArrowRight className="h-4 w-4" />
-        </button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        disabled={isPending}
+        className="flex h-full shrink-0 items-center gap-3 rounded-full bg-bg-primary-fade px-5 text-sm font-medium text-text-primary transition-colors hover:bg-[#F8DADA] disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        {isPending ? t("subscription") + "..." : t("subscription")}
+        <ArrowRight className="h-4 w-4" />
+      </button>
+    </form>
   );
 }
