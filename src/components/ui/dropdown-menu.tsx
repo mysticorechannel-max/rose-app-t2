@@ -21,7 +21,7 @@ const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
 const itemBase =
   "relative flex min-h-12 cursor-default items-center gap-2 rounded-none px-4 text-sm outline-hidden select-none " +
   "focus:bg-bg-muted focus:text-text-primary " +
-  "data-[disabled]:pointer-events-none data-[disabled]:opacity-50 " +
+  "data-[disabled]:pointer-events-none data-[disabled]:text-text-muted " +
   "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0";
 
 const DropdownMenuSubTrigger = React.forwardRef<

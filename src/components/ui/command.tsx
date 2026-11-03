@@ -125,7 +125,7 @@ const CommandItem = React.forwardRef<
     className={cn(
       "relative flex min-h-12 cursor-default items-center gap-2 rounded-none px-4 text-sm outline-hidden select-none",
       "data-[selected=true]:bg-bg-muted data-[selected=true]:text-text-primary",
-      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:text-text-muted",
       "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
       className
     )}

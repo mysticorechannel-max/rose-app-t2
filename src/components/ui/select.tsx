@@ -127,7 +127,7 @@ const SelectItem = React.forwardRef<
       "relative flex min-h-12 w-full cursor-default items-center rounded-none ps-4 pe-4 text-sm outline-hidden select-none",
       "focus:bg-bg-muted focus:text-text-primary",
       "data-[state=checked]:bg-bg-muted data-[state=checked]:text-text-primary",
-      "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "data-[disabled]:pointer-events-none data-[disabled]:text-text-muted",
       className
     )}
     {...props}
