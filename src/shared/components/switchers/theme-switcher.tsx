@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 
 const modes = [
   { value: "light", icon: Sun },
