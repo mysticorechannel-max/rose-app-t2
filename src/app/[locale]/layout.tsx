@@ -11,6 +11,7 @@ import { AppProviders } from "../../shared/providers/app-providers";
 
 import { Footer, Header } from "@/shared/components";
 import "../globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
