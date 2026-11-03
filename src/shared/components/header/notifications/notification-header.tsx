@@ -33,10 +33,8 @@ export function NotificationHeader({
             onClick={onClearAll}
             className="text-text-plain hover:bg-white/10 gap-2 h-8 cursor-pointer"
           >
-            <span className="text-xs">
-              <BrushCleaning className="h-4 w-4" />
-              {t("clearAll")}
-            </span>
+            <BrushCleaning className="h-4 w-4" />
+            <span className="text-xs">{t("clearAll")}</span>
           </Button>
 
           <Button
@@ -44,10 +42,8 @@ export function NotificationHeader({
             onClick={onMarkAllAsRead}
             className="text-text-plain hover:bg-white/10 gap-2 h-8 cursor-pointer"
           >
-            <span className="text-xs">
-              <CheckCheck className="h-4 w-4" />
-              {t("markAllAsRead")}
-            </span>
+            <CheckCheck className="h-4 w-4" />
+            <span className="text-xs">{t("markAllAsRead")}</span>
           </Button>
         </div>
       )}

@@ -1,7 +1,7 @@
 "use client";
 
 import { Bell } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/shared/ui/dropdown-menu";
 import { ScrollArea } from "@/shared/ui/scroll-area";
@@ -14,7 +14,10 @@ import { NotificationHeader } from "./notification-header";
 import { NotificationItem } from "./notification-item";
 
 export function NotificationDropdown() {
+  // Translation
   const t = useTranslations("notifications");
+  // Locale
+  const locale = useLocale()
 
   // Queries
   const { data, isLoading } = useNotificationsQuery();
@@ -50,7 +53,7 @@ export function NotificationDropdown() {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu dir={locale === "ar" ? "rtl" : "ltr"}>
       <DropdownMenuTrigger asChild>
         <button
           type="button"
