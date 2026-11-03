@@ -3,8 +3,9 @@
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "lucide-react";
 import { useId, type ComponentProps, type ReactNode } from "react";
+import { cn } from "../lib/utils/tailwindcn.utils";
 
-import { cn } from "@/lib/utils";
+
 
 type CheckboxProps = ComponentProps<typeof CheckboxPrimitive.Root> & {
   label?: ReactNode;

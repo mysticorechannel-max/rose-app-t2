@@ -1,7 +1,8 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "../lib/utils/tailwindcn.utils"
 
-import { cn } from "@/lib/utils"
+
 
 const badgeVariants = cva(
   "inline-flex items-center rounded-full  px-2 py-0.5 text-xs font-medium transition-colors",
@@ -13,8 +14,8 @@ const badgeVariants = cva(
         secondary:
           "border-transparent bg-bg-secondary-faint text-text-primary hover:bg-bg-secondary-fade",
         subtle:
-          "border-transparent bg-bg-soft text-text-plain hover:bg-bg-muted", 
-        
+          "border-transparent bg-bg-soft text-text-plain hover:bg-bg-muted",
+
       },
     },
     defaultVariants: {

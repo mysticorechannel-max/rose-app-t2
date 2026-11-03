@@ -9,8 +9,9 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react"
+import { cn } from "../lib/utils/tailwindcn.utils"
 
-import { cn } from "@/lib/utils"
+
 
 const DEFAULT_LIMIT = 10
 const FIRST_PAGE = 1

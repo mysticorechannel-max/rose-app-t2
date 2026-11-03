@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { cn } from "../lib/utils/tailwindcn.utils";
 
-import { cn } from "@/lib/utils";
+
 
 // TODO: replace the primitives below with bg-bg-primary once globals.css
 const activeColors = [

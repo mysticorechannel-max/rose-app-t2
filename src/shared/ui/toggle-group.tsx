@@ -5,8 +5,9 @@ import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore, type ComponentProps } from "react";
+import { cn } from "../lib/utils/tailwindcn.utils";
 
-import { cn } from "@/lib/utils";
+
 
 const MODE_OPTIONS = [
   { value: "light", icon: SunIcon, labelKey: "light" },
