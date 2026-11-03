@@ -1,0 +1,69 @@
+{
+  "common": {
+    "appName": "Rose App",
+    "welcome": "A thoughtful foundation for what comes next.",
+    "description": "Next.js, semantic design tokens, themes, and internationalization are ready for the team.",
+    "theme": {
+      "label": "Theme",
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "system": "System Mode"
+    },
+    "locale": {
+      "label": "Language",
+      "en": "English",
+      "ar": "Arabic"
+    }
+  },
+  "header": {
+    "logoAlt": "Rose App Logo",
+    "searchPlaceholder": "What awesome gift are you looking for?",
+    "login": "Login",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "notifications": "Notifications",
+    "nav": {
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About"
+    }
+  },
+  "footer": {
+    "logoAlt": "Rose App Logo",
+    "appName": "Rose E-Commerce App",
+    "discover": {
+      "title": "Discover our website",
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "faqs": "FAQs"
+    },
+    "newsletter": {
+      "title": "Get 20% Off Discount Coupon",
+      "subtitle": "by subscribing to our newsletter",
+      "placeholder": "Enter Your Email"
+    },
+    "copyright": "All rights reserved | {year}"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "emptyState": "No notifications to display.",
+    "loading": "Loading notifications...",
+    "clearAll": "Clear all notifications",
+    "markAllAsRead": "Mark all as read",
+    "markAsRead": "Mark as read",
+    "delete": "Delete notification",
+    "markAsReadSuccess": "Notification marked as read",
+    "markAsReadError": "Failed to mark notification as read",
+    "deleteSuccess": "Notification deleted",
+    "deleteError": "Failed to delete notification"
+  }
+}
