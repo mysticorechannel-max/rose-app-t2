@@ -47,7 +47,7 @@
       "faqs": "FAQs"
     },
     "newsletter": {
-      "title": "Get 20% Off Discount Coupon",
+      "title": "Get <highlight>20%</highlight> Off Discount Coupon",
       "subtitle": "by subscribing to our newsletter",
       "placeholder": "Enter Your Email",
       "subscription": "Subscribe",

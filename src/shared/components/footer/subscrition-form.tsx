@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useSubscribeMutation } from "@/app/api/subscriptions/mutations/useSubscribe";
+import { useSubscribeMutation } from "@/shared/lib/apis/subscriptions/mutations/use-subscribe";
 import {
   subscriptionSchema,
   type SubscriptionFields,

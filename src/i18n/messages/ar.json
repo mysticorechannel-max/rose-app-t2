@@ -47,7 +47,7 @@
       "faqs": "الأسئلة الشائعة"
     },
     "newsletter": {
-      "title": "احصل على خصم ",
+      "title": " احصل على خصم <highlight>20%</highlight>",
       "subtitle": "عن طريق الاشتراك في نشرتنا الإخبارية",
       "placeholder": "أدخل بريدك الإلكتروني",
       "subscription": "اشتراك",
