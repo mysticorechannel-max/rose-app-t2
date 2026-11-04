@@ -6,9 +6,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/shared/ui/dropdown-menu";
 import { ScrollArea } from "@/shared/ui/scroll-area";
 
-import { useDeleteNotificationMutation } from "@/app/api/notifications/mutations/useDeleteNotification";
-import { useMarkAsReadMutation } from "@/app/api/notifications/mutations/useMarkAsRead";
-import { useNotificationsQuery } from "@/app/api/notifications/queries/useGetNotifications";
+import { useDeleteNotificationMutation } from "@/shared/lib/apis/notifications/mutations/use-delete-notification";
+import { useMarkAsReadMutation } from "@/shared/lib/apis/notifications/mutations/use-mark-asRead";
+import { useNotificationsQuery } from "@/shared/lib/apis/notifications/queries/use-get-notifications";
 import { NotificationEmptyState } from "./notification-empty-state";
 import { NotificationHeader } from "./notification-header";
 import { NotificationItem } from "./notification-item";

@@ -1,3 +1,3 @@
 export const SUBSCRIPTION_ENDPOINTS = {
-  SUBSCRIBE: "/subscriptions",
+  SUBSCRIBE: "/api/subscriptions",
 } as const;
