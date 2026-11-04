@@ -20,15 +20,11 @@ export function Footer() {
           <div className="space-y-5 min-w-[375px]">
             <div>
               <h3 className="text-lg font-semibold text-text-secondary">
-                {t("newsletter.title")
-                  .split("20%")
-                  .map((part, index) => (
-                    <span key={index}>
-                      {part}
-                      {index === 0 && <span className="text-text-inverse">20%</span>}
-                    </span>
-                  ))}
+                {t.rich("newsletter.title", {
+                  highlight: (chunks) => <span className="text-text-inverse">{chunks}</span>,
+                })}
               </h3>
+
               <p className="text-xs text-zinc-400">{t("newsletter.subtitle")}</p>
             </div>
             <SubscritionForm />
