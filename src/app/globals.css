@@ -509,4 +509,7 @@
   body {
     @apply min-h-svh bg-background text-foreground antialiased;
   }
+  .font-script {
+  font-family: var(--font-pinyon-script);
+}
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Sarabun, Tajawal } from "next/font/google";
+import { Pinyon_Script, Sarabun, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -20,6 +20,11 @@ const tajawal = Tajawal({
   subsets: ["arabic", "latin"],
   weight: ["400", "500", "700"],
   variable: "--font-tajawal",
+});
+const pinyonScript = Pinyon_Script({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-pinyon-script",
 });
 
 export const metadata: Metadata = {
@@ -43,7 +48,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
 
   return (
     <html
-      className={`${sarabun.variable} ${tajawal.variable}`}
+      className={`${sarabun.variable} ${tajawal.variable} ${pinyonScript.variable}`}
       dir={direction}
       lang={locale}
       suppressHydrationWarning
