@@ -1,4 +1,0 @@
-39ae1cd chore: initial empty commit
-b037cfc chore: initial empty commit
-4bfeff8 chore: initial empty main branch
-702870b chore: initialize Rose App foundation

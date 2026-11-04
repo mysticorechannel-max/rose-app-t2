@@ -173,6 +173,10 @@ type ComboboxProps = {
   "aria-invalid"?: boolean;
 };
 
+type AsyncState =
+  | { query: string; status: "success"; options: ComboboxOption[] }
+  | { query: string; status: "error" };
+
 function Combobox({
   options = [],
   loadOptions,
@@ -187,16 +191,26 @@ function Combobox({
   "aria-invalid": ariaInvalid,
 }: ComboboxProps) {
   const t = useTranslations("select");
+  const panelId = React.useId();
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState("");
   const [internalValue, setInternalValue] = React.useState(defaultValue);
-  const [asyncOptions, setAsyncOptions] = React.useState<ComboboxOption[]>([]);
-  const [status, setStatus] = React.useState<"idle" | "loading" | "error">(
-    "idle"
-  );
+  const [asyncState, setAsyncState] = React.useState<AsyncState>();
   const [selectedOption, setSelectedOption] =
     React.useState<ComboboxOption>();
 
+  // Loading is derived: it is "loading" until a response for the
+  // current search query has arrived. No setState inside the effect body.
+  const status: "idle" | "loading" | "error" = !loadOptions
+    ? "idle"
+    : asyncState === undefined || asyncState.query !== search
+      ? "loading"
+      : asyncState.status === "error"
+        ? "error"
+        : "idle";
+
+  const asyncOptions =
+    asyncState?.status === "success" ? asyncState.options : [];
   const currentValue = value ?? internalValue;
   const items = loadOptions ? asyncOptions : options;
   const selected =
@@ -208,23 +222,24 @@ function Combobox({
   React.useEffect(() => {
     if (!loadOptions || !open) return;
     const controller = new AbortController();
-    setStatus("loading");
     loadOptions(search, controller.signal)
       .then((result) => {
         if (controller.signal.aborted) return;
-        setAsyncOptions(result);
-        setStatus("idle");
+        setAsyncState({ query: search, status: "success", options: result });
       })
       .catch(() => {
         if (controller.signal.aborted) return;
-        setStatus("error");
+        setAsyncState({ query: search, status: "error" });
       });
     return () => controller.abort();
   }, [loadOptions, open, search]);
 
   function handleOpenChange(next: boolean) {
     setOpen(next);
-    if (!next) setSearch(""); // Escape / outside click / select: reset search
+    if (!next) {
+      setSearch(""); // Escape / outside click / select: reset search
+      setAsyncState(undefined); // reopening starts with a fresh load
+    }
   }
 
   function handleSelect(option: ComboboxOption) {
@@ -241,7 +256,9 @@ function Combobox({
           id={id}
           type="button"
           role="combobox"
+          aria-haspopup="listbox"
           aria-expanded={open}
+          aria-controls={panelId}
           aria-invalid={ariaInvalid}
           disabled={disabled}
           className={cn(
@@ -266,6 +283,7 @@ function Combobox({
         </button>
       </PopoverTrigger>
       <PopoverContent
+        id={panelId}
         align="start"
         className="w-(--radix-popover-trigger-width) overflow-hidden p-0"
       >

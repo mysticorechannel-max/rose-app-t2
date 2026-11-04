@@ -1,2 +1,0 @@
-To https://github.com/mysticorechannel-max/rose-app-t2.git
- + 4bfeff8...b43de2a main -> main (forced update)

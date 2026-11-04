@@ -1,2 +1,0 @@
-4bfeff8 chore: initial empty main branch
-702870b chore: initialize Rose App foundation
