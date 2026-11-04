@@ -23,7 +23,7 @@ export function LocaleSwitcher() {
       <span>{t("label")}</span>
       <select
         aria-label={t("label")}
-        className="h-10 rounded-md border border-border bg-card px-3 text-card-foreground outline-none focus:ring-2 focus:ring-ring"
+        className="h-10 rounded-md border border-border bg-bg-soft px-3 text-text-plain outline-none focus:ring-2 focus:ring-ring"
         onChange={handleLocaleChange}
         value={locale}
       >
