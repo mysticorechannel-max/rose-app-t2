@@ -180,7 +180,7 @@
   --text-info-faint: var(--blue-100);
   --text-info-fade: var(--blue-50);
 
-  --text-secondary: var(--soft-pink-300);
+  --text-secondary: var(--soft-pink-400);
   --text-secondary-faint: var(--soft-pink-100);
   --text-secondary-fade: var(--soft-pink-50);
 
@@ -376,10 +376,10 @@
    LAYER 3 — TAILWIND @theme inline
    ============================================================ */
 @theme inline {
-  /* fonts — updated to Poppins & Cairo with fallback support */
-  --font-sans: var(--font-poppins), var(--font-cairo), sans-serif;
-  --font-english: var(--font-poppins), var(--font-cairo), sans-serif;
-  --font-arabic: var(--font-cairo), var(--font-poppins), sans-serif;
+   /* fonts — preserved */
+  --font-sans: var(--font-sarabun);
+  --font-english: var(--font-sarabun);
+  --font-arabic: var(--font-tajawal);
 
   /* radius — preserved */
   --radius-sm: calc(var(--radius) - 4px);
