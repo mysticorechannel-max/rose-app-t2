@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Cairo, Poppins } from "next/font/google";
+import { Sarabun, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { FAVICON } from "@/../public/assets";
@@ -12,16 +12,16 @@ import { AppProviders } from "../../shared/providers/app-providers";
 import { Footer, Header } from "@/shared/components";
 import "../globals.css";
 
-const poppins = Poppins({
+const sarabun = Sarabun({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
+  variable: "--font-sarabun",
 });
 
-const cairo = Cairo({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-cairo",
+const tajawal = Tajawal({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-tajawal",
 });
 
 // Font stack configuration:
@@ -51,7 +51,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
 
   return (
     <html
-      className={`${poppins.variable} ${cairo.variable}`}
+      className={`${sarabun.variable} ${tajawal.variable}`}
       dir={direction}
       lang={locale}
       suppressHydrationWarning
