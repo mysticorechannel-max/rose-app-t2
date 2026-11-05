@@ -510,17 +510,3 @@
     @apply min-h-svh bg-background text-foreground antialiased;
   }
 }
-
-
-/* ============================================================
-   CUSTOM UTILITIES — FONT FAMILIES
-   ============================================================ */
-@layer utilities {
-  .font-english {
-    font-family: var(--font-poppins), var(--font-cairo), sans-serif;
-  }
-
-  .font-arabic {
-    font-family: var(--font-cairo), var(--font-poppins), sans-serif;
-  }
-}
