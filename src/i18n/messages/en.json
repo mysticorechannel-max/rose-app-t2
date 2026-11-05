@@ -15,6 +15,13 @@
       "ar": "Arabic"
     }
   },
+  "select": {
+    "placeholder": "Select an option",
+    "search": "Search...",
+    "noOptions": "No options found",
+    "loading": "Loading options...",
+    "error": "Failed to load options"
+  },
   "header": {
     "logoAlt": "Rose App Logo",
     "searchPlaceholder": "What awesome gift are you looking for?",
