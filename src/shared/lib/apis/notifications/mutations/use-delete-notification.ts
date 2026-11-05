@@ -3,18 +3,24 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { deleteNotification } from "../notification.api";
+import { deleteNotificationAction } from "@/shared/lib/actions/notifications.action";
 import { notificationKeys } from "../notifications.keys";
 
 /**
- * Mutation hook to delete a notification
+ * Mutation hook to delete a notification (using Server Action)
  */
 export function useDeleteNotificationMutation() {
     const queryClient = useQueryClient();
     const t = useTranslations("notifications");
 
     return useMutation({
-        mutationFn: (id: string) => deleteNotification(id),
+        mutationFn: async (id: string) => {
+            const result = await deleteNotificationAction(id);
+            if (!result.success) {
+                throw new Error(result.error);
+            }
+            return result.data;
+        },
 
         onSuccess: () => {
             queryClient.invalidateQueries({

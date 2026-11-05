@@ -63,12 +63,36 @@
     "emptyState": "لا توجد إشعارات للعرض.",
     "loading": "جاري تحميل الإشعارات...",
     "clearAll": "مسح جميع الإشعارات",
+    "clearAllSuccess": "تم مسح جميع الإشعارات بنجاح",
+    "clearAllError": "فشل مسح جميع الإشعارات",
     "markAllAsRead": "تعليم الكل كمقروء",
+    "markAllAsReadSuccess": "تم تعليم جميع الإشعارات كمقروءة",
     "markAsRead": "تعليم كمقروء",
     "delete": "حذف الإشعار",
     "markAsReadSuccess": "تم تعليم الإشعار كمقروء",
     "markAsReadError": "فشل تعليم الإشعار كمقروء",
     "deleteSuccess": "تم حذف الإشعار",
-    "deleteError": "فشل حذف الإشعار"
+    "deleteError": "فشل حذف الإشعار",
+    "push": {
+      "title": "الإشعارات الفورية",
+      "enable": "تفعيل",
+      "disable": "تعطيل",
+      "enabled": "مفعّلة",
+      "disabled": "غير مفعّلة",
+      "loading": "جاري التحميل...",
+      "subscribeSuccess": "تم تفعيل الإشعارات الفورية بنجاح",
+      "subscribeError": "فشل تفعيل الإشعارات الفورية",
+      "unsubscribeSuccess": "تم تعطيل الإشعارات الفورية بنجاح",
+      "unsubscribeError": "فشل تعطيل الإشعارات الفورية",
+      "permissionDenied": "تم رفض إذن الإشعارات",
+      "permissionDeniedMessage": "يجب تغيير إعدادات المتصفح للسماح بالإشعارات",
+      "permissionRequired": "يجب منح الإذن للإشعارات",
+      "unsupported": "المتصفح لا يدعم الإشعارات الفورية",
+      "unsupportedMessage": "متصفحك لا يدعم الإشعارات الفورية",
+      "notConfigured": "الإشعارات الفورية غير مفعّلة على الخادم",
+      "errorMessage": "حدث خطأ. حاول مرة أخرى",
+      "testPushSuccess": "تم إرسال إشعار تجريبي بنجاح",
+      "testPushError": "فشل إرسال إشعار تجريبي"
+    }
   }
 }

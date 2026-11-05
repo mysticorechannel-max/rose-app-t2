@@ -12,6 +12,7 @@ import { useNotificationsQuery } from "@/shared/lib/apis/notifications/queries/u
 import { NotificationEmptyState } from "./notification-empty-state";
 import { NotificationHeader } from "./notification-header";
 import { NotificationItem } from "./notification-item";
+import { PushNotificationToggle } from "./push-notification-toggle";
 
 export function NotificationDropdown() {
   // Translation
@@ -95,6 +96,9 @@ export function NotificationDropdown() {
             ))}
           </ScrollArea>
         )}
+
+        {/* Push Notification Toggle */}
+        <PushNotificationToggle />
       </DropdownMenuContent>
     </DropdownMenu>
   );

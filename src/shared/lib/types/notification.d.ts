@@ -28,6 +28,14 @@ export interface NotificationResponse {
   payload: NotificationPayload;
 }
 
+export interface UnreadCountResponse {
+  status: boolean;
+  code: number;
+  data: {
+    unreadCount: number;
+  };
+}
+
 export interface MarkAsReadPayload {
   notificationIds: string[];
 }

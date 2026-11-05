@@ -3,6 +3,7 @@ import {
   MarkAsReadPayload,
   MarkAsReadResponse,
   NotificationResponse,
+  UnreadCountResponse,
 } from "@/shared/lib/types/notification";
 import { getAuthToken } from "@/shared/lib/utils/token.util";
 import { NOTIFICATION_ENDPOINTS } from "./notifications.endpoint";
@@ -43,6 +44,27 @@ export async function getNotifications(): Promise<NotificationResponse> {
 }
 
 /**
+ * Get unread notifications count
+ */
+export async function getUnreadCount(): Promise<UnreadCountResponse> {
+  if (!BASE_URL) {
+    throw new Error("API URL is not configured");
+  }
+
+  const response = await fetch(`${BASE_URL}${NOTIFICATION_ENDPOINTS.UNREAD_COUNT}`, {
+    method: "GET",
+    headers: getAuthHeaders(),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch unread count");
+  }
+
+  return response.json();
+}
+
+/**
  * Mark notifications as read
  */
 export async function markNotificationsAsRead(
@@ -66,6 +88,26 @@ export async function markNotificationsAsRead(
 }
 
 /**
+ * Mark all notifications as read
+ */
+export async function markAllNotificationsAsRead(): Promise<MarkAsReadResponse> {
+  if (!BASE_URL) {
+    throw new Error("API URL is not configured");
+  }
+
+  const response = await fetch(`${BASE_URL}${NOTIFICATION_ENDPOINTS.MARK_ALL_READ}`, {
+    method: "PATCH",
+    headers: getAuthHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to mark all notifications as read");
+  }
+
+  return response.json();
+}
+
+/**
  * Delete a notification
  */
 export async function deleteNotification(id: string): Promise<DeleteNotificationResponse> {
@@ -80,6 +122,26 @@ export async function deleteNotification(id: string): Promise<DeleteNotification
 
   if (!response.ok) {
     throw new Error("Failed to delete notification");
+  }
+
+  return response.json();
+}
+
+/**
+ * Clear all notifications
+ */
+export async function clearAllNotifications(): Promise<DeleteNotificationResponse> {
+  if (!BASE_URL) {
+    throw new Error("API URL is not configured");
+  }
+
+  const response = await fetch(`${BASE_URL}${NOTIFICATION_ENDPOINTS.CLEAR_ALL}`, {
+    method: "DELETE",
+    headers: getAuthHeaders(),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to clear all notifications");
   }
 
   return response.json();

@@ -3,3 +3,4 @@ export { NotificationItem } from "./notification-item";
 export { NotificationItemMenu } from "./notification-item-menu";
 export { NotificationHeader } from "./notification-header";
 export { NotificationEmptyState } from "./notification-empty-state";
+export { PushNotificationToggle } from "./push-notification-toggle";

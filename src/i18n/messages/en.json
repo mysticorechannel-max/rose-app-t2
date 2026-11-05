@@ -63,12 +63,36 @@
     "emptyState": "No notifications to display.",
     "loading": "Loading notifications...",
     "clearAll": "Clear all notifications",
+    "clearAllSuccess": "All notifications cleared successfully",
+    "clearAllError": "Failed to clear all notifications",
     "markAllAsRead": "Mark all as read",
+    "markAllAsReadSuccess": "All notifications marked as read",
     "markAsRead": "Mark as read",
     "delete": "Delete notification",
     "markAsReadSuccess": "Notification marked as read",
     "markAsReadError": "Failed to mark notification as read",
     "deleteSuccess": "Notification deleted",
-    "deleteError": "Failed to delete notification"
+    "deleteError": "Failed to delete notification",
+    "push": {
+      "title": "Push Notifications",
+      "enable": "Enable",
+      "disable": "Disable",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "loading": "Loading...",
+      "subscribeSuccess": "Push notifications enabled successfully",
+      "subscribeError": "Failed to enable push notifications",
+      "unsubscribeSuccess": "Push notifications disabled successfully",
+      "unsubscribeError": "Failed to disable push notifications",
+      "permissionDenied": "Notification permission denied",
+      "permissionDeniedMessage": "You must change browser settings to allow notifications",
+      "permissionRequired": "Permission is required for notifications",
+      "unsupported": "Push notifications are not supported in this browser",
+      "unsupportedMessage": "Your browser doesn't support push notifications",
+      "notConfigured": "Push notifications are not configured on the server",
+      "errorMessage": "An error occurred. Please try again",
+      "testPushSuccess": "Test notification sent successfully",
+      "testPushError": "Failed to send test notification"
+    }
   }
 }
