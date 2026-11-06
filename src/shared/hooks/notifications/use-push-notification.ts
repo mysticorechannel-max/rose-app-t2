@@ -152,7 +152,7 @@ export function usePushNotification() {
     isSubscribed: status === "subscribed",
     canEnable: status === "not-enabled" || status === "error",
     canDisable: status === "subscribed",
-    showButton: status !== "not-configured" && status !== "unsupported",
+    showButton: status !== "unsupported", // Show button except when unsupported
     enablePushNotifications,
     disablePushNotifications,
     checkPushStatus,

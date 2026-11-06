@@ -60,7 +60,7 @@ export function SubscritionForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex h-10 w-full items-center rounded-full bg-bg-default"
+      className="flex h-10 w-full items-center rounded-full bg-bg-default dark:bg-bg-subtle"
     >
       <input
         type="email"
@@ -73,7 +73,7 @@ export function SubscritionForm() {
       <Button
         type="submit"
         disabled={isPending}
-        className="flex h-full shrink-0 items-center gap-3 rounded-full bg-bg-primary-fade px-5 text-sm font-medium text-text-primary transition-colors hover:bg-bg-danger-faint disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex h-full shrink-0 items-center gap-3 rounded-full bg-bg-primary-fade dark:bg-bg-primary px-5 text-sm font-medium text-text-primary dark:text-zinc-900 transition-colors hover:bg-bg-danger-faint disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isPending ? t("subscription") + "..." : t("subscription")}
         {locale === "en" ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}

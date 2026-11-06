@@ -19,7 +19,7 @@ export function NavMenu() {
               href={href}
               className={`relative flex items-center gap-2 text-sm transition-colors hover:text-primary-foreground/80
                   after:absolute after:-bottom-3.5 after:left-0 after:h-0.5 after:w-full after:bg-bg-secondary after:transition-transform
-                  ${isActive ? "after:scale-x-100 text-pink-200" : "after:scale-x-0"}
+                  ${isActive ? "after:scale-x-100 text-pink-200 dark:text-red-950" : "after:scale-x-0"}
                 `}
             >
               <Icon className="h-5 w-5" />

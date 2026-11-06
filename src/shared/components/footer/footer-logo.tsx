@@ -20,8 +20,10 @@ export function FooterLogo() {
       </Link>
 
       <div className=" text-center">
-        <p className="text-lg font-semibold text-text-secondary">{t("appName")}</p>
-        <p className="text-sm text-zinc-100">
+        <p className="text-lg font-semibold text-text-secondary dark:text-text-primary">
+          {t("appName")}
+        </p>
+        <p className="text-sm text-text-muted">
           {t("copyright", { year: new Date().getFullYear() })}
         </p>
       </div>

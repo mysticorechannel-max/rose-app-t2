@@ -30,8 +30,8 @@ export function NotificationItem({
   return (
     <div
       className={cn(
-        "flex items-start gap-3 px-4 py-3 border-b border-border-subtle last:border-b-0 transition-colors hover:bg-bg-subtle",
-        !notification.isRead ? "bg-bg-plain" : "bg-bg-subtle"
+        "flex items-start gap-3 px-4 py-3 border-b border-border last:border-b-0 transition-colors hover:bg-bg-subtle",
+        !notification.isRead ? "bg-background" : "bg-bg-subtle"
       )}
     >
       {/* Content */}
@@ -39,7 +39,7 @@ export function NotificationItem({
         <p
           className={cn(
             "text-sm font-semibold leading-relaxed break-words mb-1",
-            notification.isRead ? "text-text-muted" : "text-text-plain"
+            notification.isRead ? "text-muted-foreground" : "text-foreground"
           )}
         >
           {notification.title}
@@ -47,12 +47,12 @@ export function NotificationItem({
         <p
           className={cn(
             "text-xs leading-relaxed break-words mb-1",
-            notification.isRead ? "text-text-muted" : "text-text-soft"
+            notification.isRead ? "text-muted-foreground" : "text-muted-foreground"
           )}
         >
           {notification.message}
         </p>
-        <p className="text-xs text-text-muted">{timeAgo}</p>
+        <p className="text-xs text-muted-foreground">{timeAgo}</p>
       </div>
 
       {/* Actions menu */}

@@ -36,7 +36,7 @@ export function Header() {
           <SearchBar />
 
           {/* Actions */}
-          <div className="flex items-center divide-x divide-gray-300">
+          <div className="flex items-center divide-x divide-border">
             <div className="py-1.5">
               <LoginButton />
             </div>

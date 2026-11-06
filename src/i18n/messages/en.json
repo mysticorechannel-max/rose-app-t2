@@ -97,6 +97,7 @@
       "unsupported": "Push notifications are not supported in this browser",
       "unsupportedMessage": "Your browser doesn't support push notifications",
       "notConfigured": "Push notifications are not configured on the server",
+      "notConfiguredMessage": "Server configuration pending",
       "errorMessage": "An error occurred. Please try again",
       "testPushSuccess": "Test notification sent successfully",
       "testPushError": "Failed to send test notification"

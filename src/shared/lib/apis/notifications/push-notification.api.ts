@@ -33,7 +33,7 @@ export async function getVapidPublicKey(): Promise<VapidKeyResponse> {
 
   const response = await fetch(`${BASE_URL}${NOTIFICATION_ENDPOINTS.VAPID_PUBLIC_KEY}`, {
     method: "GET",
-    headers: getAuthHeaders(),
+    
     cache: "no-store",
   });
 
@@ -47,7 +47,7 @@ export async function getVapidPublicKey(): Promise<VapidKeyResponse> {
 
     throw new Error(errorData.message || "Failed to fetch VAPID public key");
   }
-
+  console.log(response.json())
   return response.json();
 }
 

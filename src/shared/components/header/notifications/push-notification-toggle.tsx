@@ -43,6 +43,8 @@ export function PushNotificationToggle() {
         return t("permissionDeniedMessage");
       case "unsupported":
         return t("unsupportedMessage");
+      case "not-configured":
+        return t("notConfiguredMessage");
       case "error":
         return t("errorMessage");
       case "not-enabled":
@@ -69,7 +71,7 @@ export function PushNotificationToggle() {
         variant={isSubscribed ? "destructive" : "default"}
         size="sm"
         onClick={handleToggle}
-        disabled={isLoading || status === "permission-denied"}
+        disabled={isLoading || status === "permission-denied" || status === "not-configured"}
         className="shrink-0"
       >
         {isLoading ? (

@@ -97,6 +97,7 @@
       "unsupported": "المتصفح لا يدعم الإشعارات الفورية",
       "unsupportedMessage": "متصفحك لا يدعم الإشعارات الفورية",
       "notConfigured": "الإشعارات الفورية غير مفعّلة على الخادم",
+      "notConfiguredMessage": "في انتظار إعداد الخادم",
       "errorMessage": "حدث خطأ. حاول مرة أخرى",
       "testPushSuccess": "تم إرسال إشعار تجريبي بنجاح",
       "testPushError": "فشل إرسال إشعار تجريبي"
