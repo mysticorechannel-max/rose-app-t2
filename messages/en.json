@@ -9,7 +9,11 @@
       "dark": "Dark Mode",
       "system": "System Mode"
     },
-    "locale": { "label": "Language", "en": "English", "ar": "Arabic" 
+    "locale": {
+      "label": "Language",
+      "en": "English",
+      "ar": "Arabic"
+    }
   },
   "select": {
     "placeholder": "Select an option",
@@ -18,10 +22,13 @@
     "loading": "Loading options...",
     "error": "Failed to load options"
   },
-    "locale": {
-      "label": "Language",
-      "en": "English",
-      "ar": "Arabic"
+  "account": {
+    "title": "Account Settings",
+    "sidebar": {
+      "label": "Account navigation",
+      "profile": "Profile",
+      "changePassword": "Change Password",
+      "logout": "Logout"
     }
   },
   "toast": {
