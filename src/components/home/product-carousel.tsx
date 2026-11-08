@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef } from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 import type { Product } from "@/types/product";
 
 import { ProductCard } from "./product-card";

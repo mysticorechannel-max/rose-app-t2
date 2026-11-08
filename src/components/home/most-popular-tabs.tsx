@@ -4,7 +4,7 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { useState, useTransition } from "react";
 
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 import type { Occasion, Product } from "@/types/product";
 
 import { getMostPopularByOccasion } from "./most-popular-actions";

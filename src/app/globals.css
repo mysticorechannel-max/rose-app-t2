@@ -405,7 +405,7 @@
    LAYER 3 — TAILWIND @theme inline
    ============================================================ */
 @theme inline {
-  /* fonts — preserved */
+   /* fonts — preserved */
   --font-sans: var(--font-sarabun);
   --font-english: var(--font-sarabun);
   --font-arabic: var(--font-tajawal);

@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
-import { fetchMostPopularProducts, fetchOccasions } from "@/lib/api";
+import { fetchMostPopularProducts, fetchOccasions } from "@/shared/lib/utils/api";
 
 import { MostPopularTabs } from "./most-popular-tabs";
 

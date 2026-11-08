@@ -1,8 +1,8 @@
 import { ShoppingCart } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-import { getProductPricing, isOutOfStock } from "@/lib/product";
-import { cn } from "@/lib/utils";
+import { getProductPricing, isOutOfStock } from "@/shared/lib/utils/product";
+import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 import type { Product } from "@/types/product";
 
 import { RatingStars } from "./rating-stars";

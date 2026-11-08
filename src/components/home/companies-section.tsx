@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import { fetchCompanies } from "@/lib/api";
+import { fetchCompanies } from "@/shared/lib/utils/api";
 import type { Company } from "@/types/product";
 
 import { CompaniesStrip } from "./companies-strip";

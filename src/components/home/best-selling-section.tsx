@@ -3,8 +3,8 @@ import { getTranslations } from "next-intl/server";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { fetchBestSellingProducts } from "@/lib/api";
-import { cn } from "@/lib/utils";
+import { fetchBestSellingProducts } from "@/shared/lib/utils/api";
+import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 
 import { ProductCarousel } from "./product-carousel";
 
