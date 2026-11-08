@@ -1,6 +1,5 @@
 import type {
     ApiResponse,
-    Company,
     Occasion,
     PaginatedPayload,
     Product,
@@ -63,47 +62,9 @@ export async function fetchMostPopularProducts(
     return payload.data;
 }
 
-// The Most Popular tabs always show these four, in this order (per Figma),
-// even when the backend has no matching occasion. Matched tabs use the real
-// occasion id; the rest keep a slug placeholder.
-const MOST_POPULAR_OCCASIONS = ["Wedding", "Anniversary", "Birthday", "Engagement"];
-
 export async function fetchOccasions(limit = 50): Promise<Occasion[]> {
     const url = buildUrl("/occasions", { limit });
     const payload = await fetchJson<PaginatedPayload<Occasion>>(url);
 
-    return MOST_POPULAR_OCCASIONS.map((title) => {
-        const match = payload.data.find(
-            (occasion) => occasion.title.toLowerCase() === title.toLowerCase()
-        );
-
-        if (match) return { ...match, title };
-
-        // No backend occasion for this title — keep the tab but leave `id` empty
-        // so the API call omits `occasionId` (buildUrl skips "") instead of
-        // sending an unknown id that the backend rejects with 400.
-        return {
-            id: "",
-            title,
-            description: null,
-            image: null,
-            createdAt: "",
-            updatedAt: "",
-        } satisfies Occasion;
-    });
-}
-
-// Partner companies for the "Trusted by" strip. The backend has no companies
-// endpoint yet, so this returns null on any failure (404, network, etc.) and
-// the caller falls back to the static logos. When the endpoint ships, this
-// starts returning real data with no change to the component.
-export async function fetchCompanies(limit = 12): Promise<Company[] | null> {
-    try {
-        const url = buildUrl("/companies", { limit });
-        const payload = await fetchJson<PaginatedPayload<Company>>(url);
-
-        return payload.data;
-    } catch {
-        return null;
-    }
+    return payload.data;
 }

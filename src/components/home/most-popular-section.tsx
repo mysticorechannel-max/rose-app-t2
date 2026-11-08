@@ -1,7 +1,5 @@
-import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
-import { Link } from "@/i18n/navigation";
 import { fetchMostPopularProducts, fetchOccasions } from "@/shared/lib/utils/api";
 
 import { MostPopularTabs } from "./most-popular-tabs";
@@ -12,8 +10,10 @@ export async function MostPopularSection() {
     // Translation
     const t = await getTranslations("home.mostPopular");
 
-    // Query — occasions drive the tabs; first tab's 12 products render on load.
-    const occasions = await fetchOccasions();
+    // Fetch all occasions from the API — tabs are built from real data only.
+    // Occasions with no ID are filtered out so every tab returns filtered products.
+    const allOccasions = await fetchOccasions();
+    const occasions = allOccasions.filter((o) => o.id !== "");
 
     if (occasions.length === 0) return null;
 
@@ -26,6 +26,8 @@ export async function MostPopularSection() {
                 initialProducts={initialProducts}
                 title={t("title")}
                 viewMoreLabel={t("viewMore")}
+                emptyLabel={t("empty")}
+                limit={MOST_POPULAR_LIMIT}
             />
         </section>
     );
