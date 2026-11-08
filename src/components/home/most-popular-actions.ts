@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchMostPopularProducts } from "@/lib/api";
+import { fetchMostPopularProducts } from "@/shared/lib/utils/api";
 import type { Product } from "@/types/product";
 
 const MOST_POPULAR_LIMIT = 12;
