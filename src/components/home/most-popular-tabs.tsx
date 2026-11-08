@@ -4,9 +4,10 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useState, useTransition } from "react";
 
+import { SectionHeading } from "@/components/shared/SectionHeading";
 import { Link } from "@/i18n/navigation";
 import { fetchMostPopularProducts } from "@/shared/lib/utils/api";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import type { Occasion, Product } from "@/types/product";
 
 import { ProductGrid } from "./product-grid";
@@ -59,19 +60,7 @@ export function MostPopularTabs({
         <div>
             {/* Header: title left, tabs right — per Figma */}
             <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-                <h2 className="text-4xl font-bold leading-none text-text-primary-strong">
-                    <span className="relative isolate inline-block">
-                        <span
-                            aria-hidden="true"
-                            className="absolute -bottom-3 left-0 z-[-1] h-[62%] w-[72%] rounded-r-[40px] bg-bg-heading-band"
-                        />
-                        <span
-                            aria-hidden="true"
-                            className="absolute -bottom-3 left-0 z-[-1] h-1 w-[55%] bg-bg-heading-underline"
-                        />
-                        {title}
-                    </span>
-                </h2>
+                <SectionHeading title={title} />
 
                 {/* DS Tabs component — accessible keyboard nav, RTL-aware */}
                 <Tabs

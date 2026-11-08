@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
+import { SectionHeading } from "@/components/shared/SectionHeading";
+
 // Fully static — images are team-provided under /public/images/gallery.
 // Bento layout: three columns, each with a short tile and a tall tile (per Figma).
 const tiles = [
@@ -18,24 +20,12 @@ export async function GallerySection() {
 
     return (
         <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-            <div className="mb-8 text-center">
-                <p className="text-base font-bold uppercase leading-none tracking-[0.25em] text-text-secondary-strong">
-                    {t("eyebrow")}
-                </p>
-                <h2 className="mt-2 inline-block text-4xl font-bold leading-none text-text-primary-strong">
-                    <span className="relative isolate inline-block">
-                        <span
-                            aria-hidden="true"
-                            className="absolute -bottom-3 left-0 z-[-1] h-[62%] w-[72%] rounded-r-[40px] bg-bg-heading-band"
-                        />
-                        <span
-                            aria-hidden="true"
-                            className="absolute -bottom-3 left-0 z-[-1] h-1 w-[55%] bg-bg-heading-underline"
-                        />
-                        {t("title")}
-                    </span>
-                </h2>
-            </div>
+            <SectionHeading
+                eyebrow={t("eyebrow")}
+                title={t("title")}
+                center
+                className="mb-8"
+            />
 
             {/* Bento grid — three columns */}
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

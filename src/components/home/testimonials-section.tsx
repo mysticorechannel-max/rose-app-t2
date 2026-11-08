@@ -1,6 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
+import { SectionHeading } from "@/components/shared/SectionHeading";
+
 import { RatingStars } from "./rating-stars";
 
 // Static testimonials — images are team-provided under /public/images/testimonials.
@@ -25,22 +27,11 @@ export async function TestimonialsSection() {
     return (
         <section className="w-full py-12">
             <div className="mx-auto mb-8 w-full max-w-7xl px-4 text-center sm:px-6">
-                <p className="text-base font-bold uppercase leading-none tracking-[0.25em] text-text-secondary-strong">
-                    {t("eyebrow")}
-                </p>
-                <h2 className="mt-2 inline-block text-4xl font-bold leading-none text-text-primary-strong">
-                    <span className="relative isolate inline-block">
-                        <span
-                            aria-hidden="true"
-                            className="absolute -bottom-3 left-0 z-[-1] h-[62%] w-[72%] rounded-r-[40px] bg-bg-heading-band"
-                        />
-                        <span
-                            aria-hidden="true"
-                            className="absolute -bottom-3 left-0 z-[-1] h-1 w-[55%] bg-bg-heading-underline"
-                        />
-                        {t("title")}
-                    </span>
-                </h2>
+                <SectionHeading
+                    eyebrow={t("eyebrow")}
+                    title={t("title")}
+                    center
+                />
             </div>
 
             {/* Full-width band — static 3-column grid, no carousel */}
