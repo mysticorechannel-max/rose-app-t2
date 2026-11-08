@@ -5,9 +5,9 @@ import { RatingStars } from "./rating-stars";
 
 // Static testimonials — images are team-provided under /public/images/testimonials.
 const TESTIMONIALS = [
-    { id: "one", image: "/images/testimonials/customer-1.svg" },
-    { id: "two", image: "/images/testimonials/customer-2.svg" },
-    { id: "three", image: "/images/testimonials/customer-3.svg" },
+    { id: "one", image: "/images/testimonials/customer-1.webp" },
+    { id: "two", image: "/images/testimonials/customer-2.webp" },
+    { id: "three", image: "/images/testimonials/customer-3.webp" },
 ] as const;
 
 export async function TestimonialsSection() {

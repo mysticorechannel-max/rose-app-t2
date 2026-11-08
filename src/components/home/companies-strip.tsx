@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+// Local type — no /companies API endpoint exists; this component is static-data only.
 interface Company {
     id: string;
     name: string;

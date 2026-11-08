@@ -4,12 +4,12 @@ import Image from "next/image";
 // Fully static — images are team-provided under /public/images/gallery.
 // Bento layout: three columns, each with a short tile and a tall tile (per Figma).
 const tiles = [
-    { src: "wedding-boxes", span: "tall" },
-    { src: "roses-chocolate", span: "short" },
-    { src: "red-gift-rings", span: "short" },
-    { src: "ring-roses", span: "tall" },
-    { src: "ring-daisy", span: "short" },
-    { src: "engagement-card", span: "tall" },
+    { src: "wedding-boxes.webp", span: "tall" },
+    { src: "roses-chocolate.webp", span: "short" },
+    { src: "red-gift-rings.webp", span: "short" },
+    { src: "ring-roses.webp", span: "tall" },
+    { src: "ring-daisy.webp", span: "short" },
+    { src: "engagement-card.webp", span: "tall" },
 ] as const;
 
 export async function GallerySection() {
@@ -61,13 +61,14 @@ function GalleryTile({ tile, alt }: { tile: (typeof tiles)[number]; alt: string 
     const heightClass = tile.span === "tall" ? "aspect-[3/4]" : "aspect-[4/3]";
 
     return (
-        <div className={`relative overflow-hidden rounded-lg bg-bg-muted ${heightClass}`}>
+        <div className={`relative overflow-hidden rounded-2xl bg-bg-muted ${heightClass}`}>
             <Image
-                src={`/images/gallery/${tile.src}.svg`}
+                src={`/images/gallery/${tile.src}`}
                 alt={alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover"
+                style={{ borderRadius: "inherit" }}
             />
         </div>
     );

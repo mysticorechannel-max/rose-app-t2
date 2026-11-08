@@ -17,15 +17,6 @@ export interface Occasion {
     updatedAt: string;
 }
 
-// Partner company shown in the "Trusted by" strip (Hero + Companies section).
-// The backend endpoint is not available yet; the shape below is the expected
-// contract so the fetch can be wired up without touching the component.
-export interface Company {
-    id: string;
-    name: string;
-    logo: string;
-}
-
 export interface ProductCounts {
     reviews: number;
     cartItems: number;
