@@ -103,13 +103,34 @@
       "testPushError": "Failed to send test notification"
     }
   },
-    "account": {
+  "account": {
     "title": "Account Settings",
     "sidebar": {
       "label": "Account navigation",
       "profile": "Profile",
       "changePassword": "Change Password",
       "logout": "Logout"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Enter a valid email address",
+      "invalidPhone": "Enter a valid phone number"
+    },
+    "profile": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "uploadPhoto": "Upload Photo",
+"uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+              "save": "Save Changes",
+        "delete": "Delete My Account",
+      "genders": {
+        "male": "Male",
+        "female": "Female"
+
+      }
     }
   }
 }

@@ -110,6 +110,27 @@
       "profile": "الملف الشخصي",
       "changePassword": "تغيير كلمة المرور",
       "logout": "تسجيل الخروج"
-    }
+    },
+    "validation": {
+  "required": "هذا الحقل مطلوب",
+  "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
+  "invalidPhone": "أدخل رقم هاتف صحيحاً"
+},
+"profile": {
+  "firstName": "الاسم الأول",
+  "lastName": "اسم العائلة",
+  "email": "البريد الإلكتروني",
+  "phone": "الهاتف",
+  "gender": "النوع",
+    "save": "حفظ التغييرات",
+"delete": "حذف حسابي",
+"uploadPhoto": "رفع صورة",
+"uploadHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحد أقصى 5 ميجابايت.",
+  "genders": {
+  "male": "ذكر",
+  "female": "أنثى"
+
+}
+}
   }
 }
