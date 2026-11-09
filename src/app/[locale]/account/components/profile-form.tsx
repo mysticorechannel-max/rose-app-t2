@@ -6,20 +6,22 @@ import { Controller, useForm } from "react-hook-form";
 
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
 
-import {
-  profileSchema,
-  type ProfileFields,
-} from "../lib/schemes/profile.schema";
+import { profileSchema, type ProfileFields } from "../lib/schemes/profile.schema";
 import { AvatarUpload } from "./avatar-upload";
 import { Button } from "@/shared/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@radix-ui/react-dialog";
+import { DialogFooter, DialogHeader } from "@/shared/ui/dialog";
+import { Trash2 } from "lucide-react";
+import { DeleteAccountDialog } from "./delete-account-dialog";
 
 export function ProfileForm() {
   // Translation
@@ -51,10 +53,13 @@ export function ProfileForm() {
   function onSubmit(values: ProfileFields): void {
     console.log(values);
   }
-
+  function handleDeleteAccount(): void {
+    // ضع هنا منطق حذف الحساب
+    console.log("Account deleted");
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
-        <AvatarUpload />
+      <AvatarUpload />
       <div className="grid gap-4 sm:grid-cols-2">
         <Input
           label={t("profile.firstName")}
@@ -110,9 +115,7 @@ export function ProfileForm() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="male">{t("profile.genders.male")}</SelectItem>
-                <SelectItem value="female">
-                  {t("profile.genders.female")}
-                </SelectItem>
+                <SelectItem value="female">{t("profile.genders.female")}</SelectItem>
               </SelectContent>
             </Select>
           )}
@@ -125,13 +128,13 @@ export function ProfileForm() {
       </div>
 
       <div className="flex items-center justify-between pt-6">
-  <Button type="button" variant="ghost" className="text-text-danger">
-    {t("profile.delete")}
-  </Button>
-  <Button type="submit" className="min-w-52">
-    {t("profile.save")}
-  </Button>
-</div>
+        <div className="flex items-center justify-between pt-6">
+          <DeleteAccountDialog onConfirm={handleDeleteAccount} />
+        </div>
+        <Button type="submit" className="min-w-52">
+          {t("profile.save")}
+        </Button>
+      </div>
     </form>
   );
 }

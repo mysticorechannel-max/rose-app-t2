@@ -103,7 +103,7 @@
       "testPushError": "فشل إرسال إشعار تجريبي"
     }
   },
-    "account": {
+  "account": {
     "title": "إعدادات الحساب",
     "sidebar": {
       "label": "التنقل في الحساب",
@@ -112,25 +112,31 @@
       "logout": "تسجيل الخروج"
     },
     "validation": {
-  "required": "هذا الحقل مطلوب",
-  "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
-  "invalidPhone": "أدخل رقم هاتف صحيحاً"
-},
-"profile": {
-  "firstName": "الاسم الأول",
-  "lastName": "اسم العائلة",
-  "email": "البريد الإلكتروني",
-  "phone": "الهاتف",
-  "gender": "النوع",
-    "save": "حفظ التغييرات",
-"delete": "حذف حسابي",
-"uploadPhoto": "رفع صورة",
-"uploadHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحد أقصى 5 ميجابايت.",
-  "genders": {
-  "male": "ذكر",
-  "female": "أنثى"
-
-}
+      "required": "هذا الحقل مطلوب",
+      "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
+      "invalidPhone": "أدخل رقم هاتف صحيحاً"
+    },
+    "profile": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "gender": "النوع",
+      "save": "حفظ التغييرات",
+      "delete": "حذف حسابي",
+      "uploadPhoto": "رفع صورة",
+      "uploadHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحد أقصى 5 ميجابايت.",
+      "genders": {
+        "male": "ذكر",
+        "female": "أنثى"
+      }
+    },
+    "deleteDialog": {
+  "title": "هل أنت متأكد أنك تريد حذف حسابك؟",
+  "description": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+  "cancel": "لا، لن أفعل",
+  "confirm": "نعم، احذف",
+  "close": "إغلاق"
 }
   }
 }

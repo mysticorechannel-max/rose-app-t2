@@ -123,14 +123,20 @@
       "phone": "Phone",
       "gender": "Gender",
       "uploadPhoto": "Upload Photo",
-"uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
-              "save": "Save Changes",
-        "delete": "Delete My Account",
+      "uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "save": "Save Changes",
+      "delete": "Delete My Account",
       "genders": {
         "male": "Male",
         "female": "Female"
-
       }
-    }
+    },
+    "deleteDialog": {
+    "title": "Are you sure you want to delete your account?",
+    "description": "This action is permanent and cannot be undone.",
+    "cancel": "Nope, not doing it",
+    "confirm": "Yes, delete",
+    "close": "Close"
+  }
   }
 }
