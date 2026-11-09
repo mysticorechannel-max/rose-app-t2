@@ -2,11 +2,11 @@
 
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 
-import { SectionHeading } from "@/components/shared/SectionHeading";
+import { SectionHeading } from "@/shared/components/section-heading";
+import { useMostPopularProducts } from "@/shared/hooks/products/use-most-popular-products";
 import { Link } from "@/i18n/navigation";
-import { fetchMostPopularProducts } from "@/shared/lib/utils/api";
 import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import type { Occasion, Product } from "@/types/product";
 
@@ -34,27 +34,13 @@ export function MostPopularTabs({
 
     // State
     const [activeId, setActiveId] = useState(occasions[0]?.id ?? "");
-    const [productsByTab, setProductsByTab] = useState<Record<string, Product[]>>({
-        [occasions[0]?.id ?? ""]: initialProducts,
+
+    // Query — initialData seeds the first tab fetched on the server.
+    const { data: products = [], isFetching } = useMostPopularProducts({
+        occasionId: activeId,
+        limit,
+        initialData: activeId === occasions[0]?.id ? initialProducts : undefined,
     });
-    const [isPending, startTransition] = useTransition();
-
-    // Functions
-    const handleTabChange = (occasionId: string) => {
-        if (occasionId === activeId) return;
-        setActiveId(occasionId);
-
-        // Use cached result if already fetched
-        if (productsByTab[occasionId]) return;
-
-        startTransition(async () => {
-            // Direct fetch — not a Server Action (reads don't need mutations pattern)
-            const products = await fetchMostPopularProducts(occasionId, limit);
-            setProductsByTab((prev) => ({ ...prev, [occasionId]: products }));
-        });
-    };
-
-    const currentProducts = productsByTab[activeId] ?? [];
 
     return (
         <div>
@@ -65,7 +51,7 @@ export function MostPopularTabs({
                 {/* DS Tabs component — accessible keyboard nav, RTL-aware */}
                 <Tabs
                     value={activeId}
-                    onValueChange={handleTabChange}
+                    onValueChange={setActiveId}
                     dir={locale === "ar" ? "rtl" : "ltr"}
                 >
                     <TabsList>
@@ -78,18 +64,28 @@ export function MostPopularTabs({
                 </Tabs>
             </div>
 
-            {/* Grid dims + spinner overlay while fetching */}
+            {/* Grid with spinner overlay while fetching */}
             <div className="relative">
-                <div className={isPending ? "pointer-events-none opacity-50 transition-opacity duration-200" : undefined}>
-                    {currentProducts.length > 0 ? (
-                        <ProductGrid products={currentProducts} />
+                <div
+                    className={
+                        isFetching
+                            ? "pointer-events-none opacity-50 transition-opacity duration-200"
+                            : undefined
+                    }
+                >
+                    {products.length > 0 ? (
+                        <ProductGrid products={products} />
                     ) : (
                         <p className="py-12 text-center text-text-muted">{emptyLabel}</p>
                     )}
                 </div>
-                {isPending && (
+
+                {isFetching && (
                     <div className="pointer-events-none absolute inset-0 flex items-start justify-center pt-20">
-                        <Loader2 className="size-8 animate-spin text-text-primary-strong" aria-hidden="true" />
+                        <Loader2
+                            className="size-8 animate-spin text-text-primary-strong"
+                            aria-hidden="true"
+                        />
                     </div>
                 )}
             </div>

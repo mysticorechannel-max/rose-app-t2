@@ -10,26 +10,18 @@ import { RatingStars } from "./rating-stars";
 
 interface ProductCardProps {
     product: Product;
-    newWithinDays?: number;
+    isNew?: boolean;
 }
 
-const NEW_WITHIN_DAYS = 14;
 const HOT_ORDER_THRESHOLD = 20;
 
-function isNewProduct(createdAt: string, withinDays: number): boolean {
-    const created = new Date(createdAt).getTime();
-    const ageDays = (Date.now() - created) / (1000 * 60 * 60 * 24);
-    return ageDays <= withinDays;
-}
-
-export function ProductCard({ product, newWithinDays = NEW_WITHIN_DAYS }: ProductCardProps) {
+export function ProductCard({ product, isNew = false }: ProductCardProps) {
     // Translation
     const t = useTranslations("home.product");
 
     // Variables
     const pricing = getProductPricing(product);
     const outOfStock = isOutOfStock(product);
-    const isNew = isNewProduct(product.createdAt, newWithinDays);
     const isHot = product._count.orderItems >= HOT_ORDER_THRESHOLD;
 
     return (

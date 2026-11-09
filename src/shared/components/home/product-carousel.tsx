@@ -49,7 +49,7 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                         key={product.id}
                         className="w-[82%] shrink-0 snap-start sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)]"
                     >
-                        <ProductCard product={product} />
+                        <ProductCard product={product} isNew={product.isNew} />
                     </div>
                 ))}
             </div>

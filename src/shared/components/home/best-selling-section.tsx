@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/shared/ui/button";
 import { Link } from "@/i18n/navigation";
 import { fetchBestSellingProducts } from "@/shared/lib/utils/api";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";

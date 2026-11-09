@@ -35,12 +35,12 @@ export function SectionHeading({
                     {/* Decorative band behind the title */}
                     <span
                         aria-hidden="true"
-                        className="absolute -bottom-3 left-0 z-[-1] h-[62%] w-[72%] rounded-r-[40px] bg-bg-heading-band"
+                        className="absolute -bottom-3 start-0 z-[-1] h-[62%] w-[72%] rounded-e-[40px] bg-bg-heading-band"
                     />
                     {/* Decorative underline */}
                     <span
                         aria-hidden="true"
-                        className="absolute -bottom-3 left-0 z-[-1] h-1 w-[55%] bg-bg-heading-underline"
+                        className="absolute -bottom-3 start-0 z-[-1] h-1 w-[55%] bg-bg-heading-underline"
                     />
                     {title}
                 </span>

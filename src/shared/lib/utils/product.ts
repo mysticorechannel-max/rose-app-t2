@@ -27,6 +27,16 @@ export function isOutOfStock(product: Product): boolean {
     return product.stock <= 0;
 }
 
+const NEW_WITHIN_DAYS = 14;
+const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+// Pass `nowMs` from the server (Date.now()) so the flag is computed once
+// server-side and never recomputed during client render (avoids hydration mismatch).
+export function isNewProduct(createdAt: string, nowMs: number, withinDays = NEW_WITHIN_DAYS): boolean {
+    const ageDays = (nowMs - new Date(createdAt).getTime()) / MS_PER_DAY;
+    return ageDays <= withinDays;
+}
+
 // `gallery` is stored as a JSON-encoded string of image URLs.
 export function parseGallery(gallery: string): string[] {
     try {

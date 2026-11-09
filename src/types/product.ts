@@ -45,6 +45,8 @@ export interface Product {
     subCategory: ProductCategory | null;
     occasions: { occasion: Occasion }[];
     _count: ProductCounts;
+    // Derived server-side at fetch time (avoids Date.now() during render).
+    isNew?: boolean;
 }
 
 export interface PaginationMetadata {

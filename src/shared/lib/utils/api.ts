@@ -1,3 +1,6 @@
+import "server-only";
+
+import { isNewProduct } from "@/shared/lib/utils/product";
 import type {
     ApiResponse,
     Occasion,
@@ -5,13 +8,16 @@ import type {
     Product,
 } from "@/types/product";
 
-// Falls back to the public API host when no env override is provided.
-const API_BASE_URL =
-    process.env.NEXT_PUBLIC_API_URL ?? "https://rose-app.elevate-bootcamp.cloud/api";
+// Server-only API host. Never exposed to the browser.
+const API_BASE_URL = process.env.API_URL;
 
 type QueryValue = string | number | undefined;
 
 function buildUrl(path: string, query: Record<string, QueryValue> = {}) {
+    if (!API_BASE_URL) {
+        throw new Error("API_URL environment variable is not set");
+    }
+
     const url = new URL(`${API_BASE_URL}${path}`);
 
     for (const [key, value] of Object.entries(query)) {
@@ -36,6 +42,16 @@ async function fetchJson<T>(url: string): Promise<T> {
     return body.payload;
 }
 
+// Tags each product with a server-computed "isNew" flag so components never
+// call Date.now() during render (which breaks purity and hydration).
+function withNewFlag(products: Product[]): Product[] {
+    const nowMs = Date.now();
+    return products.map((product) => ({
+        ...product,
+        isNew: isNewProduct(product.createdAt, nowMs),
+    }));
+}
+
 export async function fetchBestSellingProducts(limit = 10): Promise<Product[]> {
     const url = buildUrl("/products", {
         sortBy: "bestSelling",
@@ -44,7 +60,7 @@ export async function fetchBestSellingProducts(limit = 10): Promise<Product[]> {
     });
     const payload = await fetchJson<PaginatedPayload<Product>>(url);
 
-    return payload.data;
+    return withNewFlag(payload.data);
 }
 
 export async function fetchMostPopularProducts(
@@ -59,10 +75,10 @@ export async function fetchMostPopularProducts(
     });
     const payload = await fetchJson<PaginatedPayload<Product>>(url);
 
-    return payload.data;
+    return withNewFlag(payload.data);
 }
 
-export async function fetchOccasions(limit = 50): Promise<Occasion[]> {
+export async function fetchOccasions(limit = 4): Promise<Occasion[]> {
     const url = buildUrl("/occasions", { limit });
     const payload = await fetchJson<PaginatedPayload<Occasion>>(url);
 

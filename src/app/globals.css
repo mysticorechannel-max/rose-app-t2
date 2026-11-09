@@ -135,9 +135,10 @@
   --bg-soft: var(--zinc-200);
   --bg-default: var(--zinc-500);
   --bg-inverse: var(--zinc-800);
-  --bg-elevated: var(--white);
+  --bg-elevated: #cccccc;
 
   --bg-testimonials-band: var(--maroon-50);
+  --bg-testimonials-card: var(--white);
   --bg-companies-card: var(--maroon-50);
   --bg-heading-band: var(--maroon-50);
   --bg-overlay: color-mix(in srgb, var(--black) 50%, transparent);
@@ -273,15 +274,16 @@
 /* ---------- DARK MODE ---------- */
 .dark {
   /* --- BACKGROUND --- */
-  --bg-plain: var(--zinc-800);
+  --bg-plain: var(--zinc-700);
   --bg-subtle: var(--zinc-800);
   --bg-muted: var(--zinc-900);
   --bg-soft: var(--zinc-700);
   --bg-default: var(--zinc-600);
   --bg-inverse: var(--zinc-50);
-  --bg-elevated: var(--white);
+  --bg-elevated: color-mix(in srgb, var(--black) 20%, transparent);
 
   --bg-testimonials-band: var(--zinc-700);
+  --bg-testimonials-card: var(--white);
   --bg-companies-card: var(--zinc-700);
   --bg-heading-band: var(--zinc-700);
   --bg-overlay: color-mix(in srgb, var(--black) 50%, transparent);
@@ -405,7 +407,7 @@
    LAYER 3 — TAILWIND @theme inline
    ============================================================ */
 @theme inline {
-   /* fonts — preserved */
+  /* fonts — preserved */
   --font-sans: var(--font-sarabun);
   --font-english: var(--font-sarabun);
   --font-arabic: var(--font-tajawal);
@@ -445,6 +447,7 @@
   --color-bg-inverse: var(--bg-inverse);
   --color-bg-elevated: var(--bg-elevated);
   --color-bg-testimonials-band: var(--bg-testimonials-band);
+  --color-bg-testimonials-card: var(--bg-testimonials-card);
   --color-bg-companies-card: var(--bg-companies-card);
   --color-bg-heading-band: var(--bg-heading-band);
   --color-bg-overlay: var(--bg-overlay);
@@ -586,6 +589,18 @@
 
 [dir="rtl"] .animate-marquee {
   animation-name: marquee-rtl;
+}
+
+/* Pause the loop while the viewer is reading a card. */
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Respect users who prefer reduced motion — stop the scroll entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
 
 /* ============================================================

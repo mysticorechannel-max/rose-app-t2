@@ -10,10 +10,8 @@ export async function MostPopularSection() {
     // Translation
     const t = await getTranslations("home.mostPopular");
 
-    // Fetch all occasions from the API — tabs are built from real data only.
-    // Occasions with no ID are filtered out so every tab returns filtered products.
-    const allOccasions = await fetchOccasions();
-    const occasions = allOccasions.filter((o) => o.id !== "");
+    // Tabs are built from the first few occasions returned by the API.
+    const occasions = await fetchOccasions();
 
     if (occasions.length === 0) return null;
 

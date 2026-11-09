@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-import { SectionHeading } from "@/components/shared/SectionHeading";
+import { SectionHeading } from "@/shared/components/section-heading";
+import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 
 // Fully static — images are team-provided under /public/images/gallery.
 // Bento layout: three columns, each with a short tile and a tall tile (per Figma).
@@ -51,14 +52,13 @@ function GalleryTile({ tile, alt }: { tile: (typeof tiles)[number]; alt: string 
     const heightClass = tile.span === "tall" ? "aspect-[3/4]" : "aspect-[4/3]";
 
     return (
-        <div className={`relative overflow-hidden rounded-2xl bg-bg-muted ${heightClass}`}>
+        <div className={cn("relative overflow-hidden rounded-2xl bg-bg-muted", heightClass)}>
             <Image
                 src={`/images/gallery/${tile.src}`}
                 alt={alt}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover"
-                style={{ borderRadius: "inherit" }}
             />
         </div>
     );
