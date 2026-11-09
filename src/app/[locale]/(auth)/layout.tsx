@@ -1,7 +1,9 @@
+import QueryProvider from "@/components/providers/query-provider";
 import Image from "next/image";
 import type { ReactNode } from "react";
-import QueryProvider from "../providers/query-provider";
-import AuthFlourish from "./auth-flourish";
+import AuthFlourish from "./_components/auth-flourish";
+import { LocaleSwitcher } from "@/components/locale-switcher";
+import AuthLocaleSwitcher from "./_components/auth-locale-switcher";
 
 interface AuthLayoutProps {
   children: ReactNode;
@@ -13,6 +15,9 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
         {/* Form Section */}
         <section className="relative flex min-h-screen flex-col justify-center px-6 py-8">
+          <div className="flex justify-end">
+            <AuthLocaleSwitcher />
+          </div>
           {/* Top Decoration */}
           <div className="flex justify-center">
             <AuthFlourish position="top" />

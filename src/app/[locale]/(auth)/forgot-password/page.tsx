@@ -1,10 +1,10 @@
-import ForgotPasswordForm from "@/features/auth/components/forgot-password-form";
-import AuthLayout from "@/features/auth/shared/auth-layout";
+import { Suspense } from "react";
+import ForgotPasswordFlow from "./_components/forgot-password-flow";
 
 export default function ForgotPasswordPage() {
   return (
-    <AuthLayout>
-      <ForgotPasswordForm/>
-    </AuthLayout>
+    <Suspense fallback={null}>
+      <ForgotPasswordFlow />
+    </Suspense>
   );
 }

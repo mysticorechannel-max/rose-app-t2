@@ -1,18 +1,13 @@
-import type {
-  LoginRequest,
-  LoginResponse,
-} from "../types/login";
+import type { LoginRequest, LoginResponse } from "../types/login";
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function loginApi(
-  credentials: LoginRequest,
-): Promise<LoginResponse> {
+export async function loginApi(credentials: LoginRequest): Promise<LoginResponse> {
   if (!API_URL) {
     throw new Error("API_URL is not configured");
   }
 
-  const response = await fetch(`${API_URL}/api/auth/login`, {
+  const response = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -24,7 +19,7 @@ export async function loginApi(
 
   const data = await response.json();
 
-  if (!response.ok) {
+  if (!response.ok || !data.status) {
     throw new Error(data.message || "Something went wrong");
   }
 

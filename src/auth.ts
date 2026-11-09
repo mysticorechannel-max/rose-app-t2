@@ -2,7 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import authConfig from "./auth.config";
-import { loginApi } from "./features/auth/apis/login.api";
+import { loginApi } from "./lib/auth/apis/login.api";
 
 export const authOptions: NextAuthOptions = {
   ...authConfig,

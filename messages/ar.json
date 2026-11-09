@@ -65,11 +65,55 @@
       "hide": "إخفاء كلمة المرور"
     }
   },
-    "ForgotPassword": {
+
+  "Login": {
+    "title": "مرحبًا بعودتك",
+    "description": "من فضلك أدخل بيانات تسجيل الدخول.",
+    "username": "اسم المستخدم",
+    "usernamePlaceholder": "أدخل اسم المستخدم",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "submit": "تسجيل الدخول",
+    "loading": "جاري تسجيل الدخول...",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة.",
+    "createAccount": "ليس لديك حساب؟",
+    "createOneNow": "أنشئي حسابًا الآن",
+    "DontHaveAccount": "ألا تملك حساباً بعد؟"
+  },
+  "ForgotPassword": {
     "title": "نسيت كلمة المرور؟",
-    "description": "لا تقلق! أدخل بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+    "description": "أدخلي بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
     "email": "البريد الإلكتروني",
-    "emailPlaceholder": "أدخل بريدك الإلكتروني",
-    "next": "التالي"
+    "emailPlaceholder": "أدخلي بريدك الإلكتروني",
+    "loading": "جارٍ الإرسال...",
+    "next": "التالي",
+    "back": "رجوع",
+    "checkEmailTitle": "تحققي من بريدك الإلكتروني",
+    "checkEmailDescription": "لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى:",
+    "checkEmailInstructions": "يرجى التحقق من صندوق الوارد والضغط على الرابط لإعادة تعيين كلمة المرور.",
+    "checkEmailReminder": "إذا لم تجدي الرسالة، تحققي من مجلد الرسائل غير المرغوب فيها.",
+    "needHelp": "هل تحتاجين إلى مساعدة؟",
+    "contactUs": "تواصلي معنا",
+    "resetTitle": "إنشاء كلمة مرور جديدة",
+    "resetDis": "عيّن كلمة مرور قوية لتأمين حسابك.",
+    "newPassword": "كلمة المرور الجديدة",
+    "newPasswordPlaceholder": "أدخلي كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعيدي إدخال كلمة المرور الجديدة",
+    "resetButton": "إعادة تعيين كلمة المرور",
+    "resetLoading": "جارٍ إعادة التعيين...",
+    "resetSuccess": "تم تغيير كلمة المرور بنجاح.",
+    "passwordRequired": "كلمة المرور مطلوبة.",
+    "passwordMinLength": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل.",
+    "confirmPasswordRequired": "يرجى تأكيد كلمة المرور.",
+    "passwordsMismatch": "كلمتا المرور غير متطابقتين.",
+    "emailRequired": "البريد الإلكتروني مطلوب.",
+    "invalidEmail": "يرجى إدخال بريد إلكتروني صحيح.",
+    "createAccount": "ليس لديك حساب؟",
+    "createOneNow": "أنشئي حسابًا الآن",
+    "DontHaveAccount": "ألا تملك حساباً بعد؟"
   }
 }

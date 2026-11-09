@@ -3,7 +3,7 @@ import type {
   ForgotPasswordResponse,
 } from "../types/forgot-password";
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function forgotPasswordApi(
   values: ForgotPasswordRequest,
@@ -12,7 +12,7 @@ export async function forgotPasswordApi(
     throw new Error("API_URL is not configured");
   }
 
-  const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
+  const response = await fetch(`${API_URL}/auth/forgot-password`, {
     method: "POST",
     headers: {
       Accept: "application/json",
