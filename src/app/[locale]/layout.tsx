@@ -11,6 +11,7 @@ import { AppProviders } from "../../shared/providers/app-providers";
 
 import { Footer, Header } from "@/shared/components";
 import "../globals.css";
+import { QueryProvider } from "@/shared/providers/query-client.provider";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       suppressHydrationWarning
     >
       <body className={fontClass}>
+        <QueryProvider>
         <NextIntlClientProvider>
           <AppProviders>
             <Header />
@@ -64,6 +66,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             <Footer />
           </AppProviders>
         </NextIntlClientProvider>
+        </QueryProvider>
       </body>
     </html>
   );
