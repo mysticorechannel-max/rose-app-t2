@@ -50,3 +50,5 @@ export interface ChangePasswordBody {
   newPassword: string;
   confirmPassword: string;
 }
+
+export type ActionResult = { ok: true } | { ok: false; message: string };

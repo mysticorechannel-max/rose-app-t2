@@ -109,15 +109,19 @@
       "label": "Account navigation",
       "profile": "Profile",
       "changePassword": "Change Password",
-      "logout": "Logout"
+      "logout": "Logout",
+      "changePasswordForm":{
+        "success": "Password changed successfully",
+        "error": "Could not change the password"
+      }
     },
     "validation": {
       "required": "This field is required",
       "invalidEmail": "Enter a valid email address",
       "invalidPhone": "Enter a valid phone number",
       "passwordNeedsUppercase": "Password must include at least one uppercase letter",
-"passwordNeedsNumber": "Password must include at least one number",
-"passwordNeedsSpecial": "Password must include at least one special character"
+      "passwordNeedsNumber": "Password must include at least one number",
+      "passwordNeedsSpecial": "Password must include at least one special character"
     },
     "profile": {
       "firstName": "First name",
@@ -135,17 +139,17 @@
       }
     },
     "deleteDialog": {
-    "title": "Are you sure you want to delete your account?",
-    "description": "This action is permanent and cannot be undone.",
-    "cancel": "Nope, not doing it",
-    "confirm": "Yes, delete",
-    "close": "Close"
-  },
-  "changePassword": {
-  "oldPassword": "Old Password",
-  "newPassword": "New Password",
-  "confirmPassword": "Confirm New Password",
-  "submit": "Change Password"
-}
+      "title": "Are you sure you want to delete your account?",
+      "description": "This action is permanent and cannot be undone.",
+      "cancel": "Nope, not doing it",
+      "confirm": "Yes, delete",
+      "close": "Close"
+    },
+    "changePassword": {
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "submit": "Change Password"
+    }
   }
 }

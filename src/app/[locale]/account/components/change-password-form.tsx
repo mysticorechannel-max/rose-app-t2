@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
-
+import { useChangePasswordMutation } from "../lib/apis/mutations/use-change-password";
 import {
   passwordSchema,
   type PasswordFields,
@@ -15,6 +15,9 @@ import {
 export function ChangePasswordForm() {
   // Translation
   const t = useTranslations("account");
+
+  // Mutation
+const { mutate, isPending } = useChangePasswordMutation();
 
   // Form & validation
   const {
@@ -31,11 +34,9 @@ defaultValues: { currentPassword: "", newPassword: "", confirmPassword: "" },  }
     return message ? t(`validation.${message}`) : undefined;
   }
 
-  function onSubmit(): void {
-    // TODO: call the change-password endpoint, then refresh the NextAuth
-    // session once auth is merged. Never log the password values.
-    reset();
-  }
+ function onSubmit(values: PasswordFields): void {
+  mutate(values, { onSuccess: () => reset() });
+}
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>

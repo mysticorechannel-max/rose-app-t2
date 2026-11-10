@@ -109,15 +109,19 @@
       "label": "التنقل في الحساب",
       "profile": "الملف الشخصي",
       "changePassword": "تغيير كلمة المرور",
-      "logout": "تسجيل الخروج"
+      "logout": "تسجيل الخروج",
+      "changePasswordForm": {
+        "success": "تم تغيير كلمة المرور بنجاح",
+        "error": "تعذّر تغيير كلمة المرور"
+      }
     },
     "validation": {
       "required": "هذا الحقل مطلوب",
       "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
       "invalidPhone": "أدخل رقم هاتف صحيحاً",
       "passwordNeedsUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
-"passwordNeedsNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
-"passwordNeedsSpecial": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
+      "passwordNeedsNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+      "passwordNeedsSpecial": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
     },
     "profile": {
       "firstName": "الاسم الأول",
@@ -142,10 +146,10 @@
       "close": "إغلاق"
     },
     "changePassword": {
-  "oldPassword": "كلمة المرور القديمة",
-  "newPassword": "كلمة المرور الجديدة",
-  "confirmPassword": "تأكيد كلمة المرور الجديدة",
-  "submit": "تغيير كلمة المرور"
-}
+      "oldPassword": "كلمة المرور القديمة",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "submit": "تغيير كلمة المرور"
+    }
   }
 }
