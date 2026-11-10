@@ -137,6 +137,12 @@
     "cancel": "Nope, not doing it",
     "confirm": "Yes, delete",
     "close": "Close"
-  }
+  },
+  "changePassword": {
+  "oldPassword": "Old Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm New Password",
+  "submit": "Change Password"
+}
   }
 }

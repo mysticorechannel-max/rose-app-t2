@@ -4,23 +4,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { Controller, useForm } from "react-hook-form";
 
+import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
-
-import { profileSchema, type ProfileFields } from "../lib/schemes/profile.schema";
-import { AvatarUpload } from "./avatar-upload";
-import { Button } from "@/shared/ui/button";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@radix-ui/react-dialog";
-import { DialogFooter, DialogHeader } from "@/shared/ui/dialog";
-import { Trash2 } from "lucide-react";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/ui/select";
+
+import {
+  profileSchema,
+  type ProfileFields,
+} from "../lib/schemes/profile.schema";
+import { AvatarUpload } from "./avatar-upload";
 import { DeleteAccountDialog } from "./delete-account-dialog";
 
 export function ProfileForm() {
@@ -39,9 +38,7 @@ export function ProfileForm() {
     defaultValues: {
       firstName: "",
       lastName: "",
-      email: "",
       phone: "",
-      gender: undefined,
     },
   });
 
@@ -51,15 +48,19 @@ export function ProfileForm() {
   }
 
   function onSubmit(values: ProfileFields): void {
+    // TODO: PATCH /api/users/profile once auth is available
     console.log(values);
   }
+
   function handleDeleteAccount(): void {
-    // ضع هنا منطق حذف الحساب
+    // TODO: DELETE /api/users/account once auth is available
     console.log("Account deleted");
   }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
       <AvatarUpload />
+
       <div className="grid gap-4 sm:grid-cols-2">
         <Input
           label={t("profile.firstName")}
@@ -73,13 +74,8 @@ export function ProfileForm() {
         />
       </div>
 
-      <Input
-        label={t("profile.email")}
-        inputMode="email"
-        autoComplete="email"
-        error={errorText(errors.email?.message)}
-        {...register("email")}
-      />
+      {/* Read-only: the PATCH endpoint does not accept email */}
+      <Input label={t("profile.email")} defaultValue="" disabled />
 
       <Controller
         name="phone"
@@ -98,39 +94,22 @@ export function ProfileForm() {
         )}
       />
 
+      {/* Read-only: the PATCH endpoint does not accept gender */}
       <div className="space-y-2">
         <Label htmlFor="gender">{t("profile.gender")}</Label>
-        <Controller
-          name="gender"
-          control={control}
-          render={({ field }) => (
-            <Select value={field.value ?? ""} onValueChange={field.onChange}>
-              <SelectTrigger
-                id="gender"
-                ref={field.ref}
-                onBlur={field.onBlur}
-                aria-invalid={Boolean(errors.gender)}
-              >
-                <SelectValue placeholder={tSelect("placeholder")} />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="male">{t("profile.genders.male")}</SelectItem>
-                <SelectItem value="female">{t("profile.genders.female")}</SelectItem>
-              </SelectContent>
-            </Select>
-          )}
-        />
-        {errors.gender && (
-          <p role="alert" className="text-sm text-text-danger">
-            {errorText(errors.gender.message)}
-          </p>
-        )}
+        <Select value="" disabled>
+          <SelectTrigger id="gender">
+            <SelectValue placeholder={tSelect("placeholder")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="MALE">{t("profile.genders.male")}</SelectItem>
+            <SelectItem value="FEMALE">{t("profile.genders.female")}</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="flex items-center justify-between pt-6">
-        <div className="flex items-center justify-between pt-6">
-          <DeleteAccountDialog onConfirm={handleDeleteAccount} />
-        </div>
+        <DeleteAccountDialog onConfirm={handleDeleteAccount} />
         <Button type="submit" className="min-w-52">
           {t("profile.save")}
         </Button>
