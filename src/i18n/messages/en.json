@@ -22,6 +22,19 @@
     "loading": "Loading options...",
     "error": "Failed to load options"
   },
+  "search": {
+    "suggestionsTitle": "Products you may like:",
+    "searchResults": "Search Results",
+    "loading": "Searching...",
+    "noResults": "No products found",
+    "noSuggestions": "No suggestions available",
+    "product": {
+      "noImage": "No Image",
+      "currency": "EGP",
+      "rating": "Rating",
+      "ratings": "ratings"
+    }
+  },
   "header": {
     "logoAlt": "Rose App Logo",
     "searchPlaceholder": "What awesome gift are you looking for?",
@@ -64,6 +77,142 @@
       "emailRequired": "Email is required"
     },
     "copyright": "All rights reserved | {year}"
+  },
+  "home": {
+    "hero": {
+      "promo": {
+        "badge": "Starting from 10.99 EGP",
+        "title": "Special Gifts For The People You Love",
+        "cta": "Shop Now"
+      },
+      "categories": {
+        "0": {
+          "badge": "Wedding",
+          "title": "Celebrate Her Forever with a Gift She'll Always Remember"
+        },
+        "1": {
+          "badge": "Engagement",
+          "title": "Honor the Beginning of a Beautiful Journey Together"
+        },
+        "2": {
+          "badge": "Anniversary",
+          "title": "Mark Every Year of Love with a Meaningful Surprise"
+        }
+      },
+      "slides": {
+        "0": {
+          "title": "Say It with Flowers",
+          "subtitle": "Elegant gifts for every special moment.",
+          "cta": "I'm buying!"
+        },
+        "1": {
+          "title": "Sweet Moments, Wrapped",
+          "subtitle": "Chocolates and treats they will love.",
+          "cta": "Shop Sweets"
+        },
+        "2": {
+          "title": "Gifts for Every Occasion",
+          "subtitle": "Birthdays, weddings and everything between.",
+          "cta": "Explore"
+        },
+        "3": {
+          "title": "Surprise Someone Today",
+          "subtitle": "Free delivery on orders above 120 EGP.",
+          "cta": "Order Now"
+        }
+      },
+      "features": {
+        "0": {
+          "title": "Free Delivery",
+          "text": "For orders above 120 EGP"
+        },
+        "1": {
+          "title": "Get Refund",
+          "text": "Refunds within 30 days"
+        },
+        "2": {
+          "title": "Safe Payment",
+          "text": "100% Secure Payment"
+        },
+        "3": {
+          "title": "24/7 Support",
+          "text": "Contact us at any time"
+        }
+      },
+      "slide1": {
+        "badge": "Starting from 10.99 EGP",
+        "title": "Special Gifts For The People You Love",
+        "description": "Elegant gifts for every special moment.",
+        "cta": "Shop Now"
+      },
+      "slide2": {
+        "badge": "New Collection",
+        "title": "Say It with Flowers",
+        "description": "Elegant gifts for every special moment.",
+        "cta": "I'm buying!"
+      },
+      "slide3": {
+        "badge": "Wedding",
+        "title": "Celebrate Her Forever with a Gift She'll Always Remember",
+        "cta": "Shop Now"
+      },
+      "slide4": {
+        "badge": "Engagement",
+        "title": "Honor the Beginning of a Beautiful Journey Together",
+        "cta": "Shop Now"
+      },
+      "slide5": {
+        "badge": "Anniversary",
+        "title": "Mark Every Year of Love with a Meaningful Surprise",
+        "cta": "Shop Now"
+      }
+    },
+    "occasions": {
+      "wedding": {
+        "badge": "Wedding",
+        "title": "Celebrate Her Forever with a Gift She'll Always Remember"
+      },
+      "engagement": {
+        "badge": "Engagement",
+        "title": "Honor the Beginning of a Beautiful Journey Together"
+      },
+      "anniversary": {
+        "badge": "Anniversary",
+        "title": "Mark Every Year of Love with a Meaningful Surprise"
+      },
+      "shopNow": "Shop Now"
+    },
+    "about": {
+      "badge": "ABOUT",
+      "title": {
+        "part1": "Delivering the",
+        "highlight1": "Finest",
+        "part2": "Gift Boxes for Your",
+        "highlight2": "Special Moments"
+      },
+      "description": "Make every moment memorable with our premium gift boxes. Carefully curated and beautifully packaged, each box is filled with handpicked items designed to impress. Whether it's for a birthday, wedding, or a simple \"thank you,\" our gift boxes are crafted to leave a lasting impression — because thoughtful gifting starts here.",
+      "cta": "Discover",
+      "images": {
+        "0": {
+          "alt": "Purple gift box"
+        },
+        "1": {
+          "alt": "Elegant gift box"
+        },
+        "2": {
+          "alt": "Colorful gift balloons"
+        }
+      },
+      "benefits": {
+        "0": "Competitive Prices & Easy Shopping",
+        "1": "Premium Quality & Elegant Packaging",
+        "2": "Perfect for Every Occasion",
+        "3": "Fast & Reliable Delivery"
+      }
+    },
+    "companiesStrip": {
+      "title": "Our Partners"
+    }
   },
   "notifications": {
     "title": "Notifications",
