@@ -9,8 +9,9 @@ import { CartButton } from "./cart-button";
 import { LoginButton } from "./login-button";
 import { Navbar } from "./nav";
 import { NotificationDropdown as NotificationButton } from "./notifications";
-import { SearchBar } from "./search-bar";
+import { SearchBar } from "./search/search-bar";
 import { WishlistButton } from "./wishlist-button";
+import { ThemeSwitcher } from "../switchers/theme-switcher";
 
 export function Header() {
   const t = useTranslations("header");
@@ -48,8 +49,9 @@ export function Header() {
             </div>
 
             {/* Locale Switcher */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:block flex">
               <LocaleSwitcher />
+              {/* <ThemeSwitcher /> */}
             </div>
           </div>
         </div>
