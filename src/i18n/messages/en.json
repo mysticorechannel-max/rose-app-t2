@@ -114,7 +114,10 @@
     "validation": {
       "required": "This field is required",
       "invalidEmail": "Enter a valid email address",
-      "invalidPhone": "Enter a valid phone number"
+      "invalidPhone": "Enter a valid phone number",
+      "passwordNeedsUppercase": "Password must include at least one uppercase letter",
+"passwordNeedsNumber": "Password must include at least one number",
+"passwordNeedsSpecial": "Password must include at least one special character"
     },
     "profile": {
       "firstName": "First name",

@@ -114,7 +114,10 @@
     "validation": {
       "required": "هذا الحقل مطلوب",
       "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
-      "invalidPhone": "أدخل رقم هاتف صحيحاً"
+      "invalidPhone": "أدخل رقم هاتف صحيحاً",
+      "passwordNeedsUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+"passwordNeedsNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+"passwordNeedsSpecial": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
     },
     "profile": {
       "firstName": "الاسم الأول",
