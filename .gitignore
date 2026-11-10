@@ -5,6 +5,7 @@
 !.env.example
 *.tsbuildinfo
 next-env.d.ts
+mcp.json
 
 # Terminal-output files committed accidentally during project setup (17 files)
 all-log.txt
