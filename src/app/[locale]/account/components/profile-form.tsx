@@ -21,11 +21,15 @@ import {
 } from "../lib/schemes/profile.schema";
 import { AvatarUpload } from "./avatar-upload";
 import { DeleteAccountDialog } from "./delete-account-dialog";
+import { useGetProfileQuery } from "../lib/apis/mutations/use-get-profile";
 
 export function ProfileForm() {
   // Translation
   const t = useTranslations("account");
   const tSelect = useTranslations("select");
+
+  // Queries
+  const { data: user, isPending, error } = useGetProfileQuery();
 
   // Form & validation
   const {
@@ -40,6 +44,14 @@ export function ProfileForm() {
       lastName: "",
       phone: "",
     },
+    values: user
+      ? {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          phone: user.phone ?? "",
+        }
+      : undefined,
+    resetOptions: { keepDirtyValues: true },
   });
 
   // Functions
@@ -48,13 +60,29 @@ export function ProfileForm() {
   }
 
   function onSubmit(values: ProfileFields): void {
-    // TODO: PATCH /api/users/profile once auth is available
+    // TODO: PATCH /api/users/profile
     console.log(values);
   }
 
   function handleDeleteAccount(): void {
-    // TODO: DELETE /api/users/account once auth is available
+    // TODO: DELETE /api/users/account
     console.log("Account deleted");
+  }
+
+  if (isPending) {
+    return (
+      <p role="status" className="text-sm text-text-soft">
+        {t("loading")}
+      </p>
+    );
+  }
+
+  if (error) {
+    return (
+      <p role="alert" className="text-sm text-text-danger">
+        {error.message}
+      </p>
+    );
   }
 
   return (
@@ -75,7 +103,7 @@ export function ProfileForm() {
       </div>
 
       {/* Read-only: the PATCH endpoint does not accept email */}
-      <Input label={t("profile.email")} defaultValue="" disabled />
+      <Input label={t("profile.email")} value={user.email} readOnly disabled />
 
       <Controller
         name="phone"
@@ -97,7 +125,7 @@ export function ProfileForm() {
       {/* Read-only: the PATCH endpoint does not accept gender */}
       <div className="space-y-2">
         <Label htmlFor="gender">{t("profile.gender")}</Label>
-        <Select value="" disabled>
+        <Select value={user.gender} disabled>
           <SelectTrigger id="gender">
             <SelectValue placeholder={tSelect("placeholder")} />
           </SelectTrigger>
