@@ -6,10 +6,11 @@ import { notFound } from "next/navigation";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AppProviders } from "@/shared/providers/app-providers";
+import { FAVICON } from "@/../public/assets";
 import { routing } from "@/i18n/routing";
-
+import { Footer, Header } from "@/shared/components";
 import "../globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/shared/ui/sonner";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -28,9 +29,15 @@ const pinyonScript = Pinyon_Script({
   variable: "--font-pinyon-script",
 });
 
+// Font stack configuration:
+// - English pages: Poppins (primary) → Cairo (fallback for Arabic text)
+// - Arabic pages: Cairo (primary) → Poppins (fallback for Latin text)
+// This ensures proper rendering of mixed-language content
+
 export const metadata: Metadata = {
-  title: "Rose App",
-  description: "Rose App team foundation",
+  icons: {
+    icon: FAVICON,
+  },
 };
 
 export function generateStaticParams() {
@@ -67,6 +74,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
               <Toaster />
             </AppProviders>
           </ThemeProvider>
+          <AppProviders>
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </AppProviders>
         </NextIntlClientProvider>
       </body>
     </html>
