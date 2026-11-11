@@ -1,7 +1,8 @@
 "use client";
 
 
-import { getCategories } from "@/shared/lib/apis/product-filter/categories.service";
+
+import { getCategories } from "@/shared/lib/apis/product-filter/categories/categories.service";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 

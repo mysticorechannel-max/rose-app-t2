@@ -1,0 +1,22 @@
+import { NextRequest } from "next/server";
+import { getCategories } from "@/shared/lib/apis/product-filter/categories/categories.service";
+
+export async function GET(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    
+    const result = await getCategories({
+      page: Number(searchParams.get("page")) || 1,
+      limit: Number(searchParams.get("limit")) || 20,
+      search: searchParams.get("search") || undefined,
+    });
+
+    return Response.json(result);
+  } catch (error) {
+    console.error("Error in categories API route:", error);
+    return Response.json(
+      { status: false, code: 500, message: "Failed to fetch categories" },
+      { status: 500 }
+    );
+  }
+}

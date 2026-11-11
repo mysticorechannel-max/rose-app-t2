@@ -8,6 +8,7 @@ type PriceFilterProps = {
   maxPrice: number;
   onMinPriceChange: (value: number) => void;
   onMaxPriceChange: (value: number) => void;
+  onPriceReset: () => void;
 };
 
 const DEFAULT_MIN_PRICE = 0;
@@ -18,18 +19,16 @@ export function PriceFilter({
   maxPrice,
   onMinPriceChange,
   onMaxPriceChange,
+  onPriceReset,
 }: PriceFilterProps) {
   const t = useTranslations("filters.price");
+
   const isMinChanged = minPrice !== DEFAULT_MIN_PRICE;
   const isMaxChanged = maxPrice !== DEFAULT_MAX_PRICE;
   const isPriceChanged = isMinChanged || isMaxChanged;
 
-  const isInvalid = minPrice < 0 || maxPrice < 0 || minPrice >= maxPrice;
-
-  function handleReset() {
-    onMinPriceChange(DEFAULT_MIN_PRICE);
-    onMaxPriceChange(DEFAULT_MAX_PRICE);
-  }
+  const isInvalid =
+    minPrice < 0 || maxPrice < 0 || minPrice >= maxPrice;
 
   const inputClass =
     "h-12 w-full rounded-xl border border-border-soft bg-bg-soft px-4 text-base outline-none transition-colors focus:border-border-primary";
@@ -37,12 +36,14 @@ export function PriceFilter({
   return (
     <section className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-text-plain">{t("title")}</h3>
+        <h3 className="text-lg font-semibold text-text-plain">
+          {t("title")}
+        </h3>
 
         {isPriceChanged && (
           <button
             type="button"
-            onClick={handleReset}
+            onClick={onPriceReset}
             className="flex items-center gap-1.5 text-base text-text-danger transition-opacity hover:opacity-80"
           >
             <X size={18} />
@@ -53,7 +54,10 @@ export function PriceFilter({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label htmlFor="min-price" className="block text-base text-text-plain">
+          <label
+            htmlFor="min-price"
+            className="block text-base text-text-plain"
+          >
             {t("from")}
           </label>
 
@@ -62,7 +66,9 @@ export function PriceFilter({
             type="number"
             min="0"
             value={minPrice}
-            onChange={(event) => onMinPriceChange(Number(event.target.value))}
+            onChange={(event) =>
+              onMinPriceChange(Number(event.target.value))
+            }
             className={`${inputClass} ${
               isMinChanged ? "text-text-plain" : "text-text-muted"
             }`}
@@ -70,7 +76,10 @@ export function PriceFilter({
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="max-price" className="block text-base text-text-plain">
+          <label
+            htmlFor="max-price"
+            className="block text-base text-text-plain"
+          >
             {t("to")}
           </label>
 
@@ -79,7 +88,9 @@ export function PriceFilter({
             type="number"
             min="0"
             value={maxPrice}
-            onChange={(event) => onMaxPriceChange(Number(event.target.value))}
+            onChange={(event) =>
+              onMaxPriceChange(Number(event.target.value))
+            }
             className={`${inputClass} ${
               isMaxChanged ? "text-text-plain" : "text-text-muted"
             }`}

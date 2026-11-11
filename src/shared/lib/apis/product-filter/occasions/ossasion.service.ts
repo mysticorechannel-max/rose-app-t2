@@ -1,6 +1,4 @@
-import { OccasionsResponse } from "../../types/product-filter/ossasion";
-
-
+import { OccasionsResponse } from "@/shared/lib/types/product-filter/ossasion";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

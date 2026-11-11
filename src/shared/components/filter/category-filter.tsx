@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useEffect, useMemo, useRef } from "react";
 import { Tag, X } from "lucide-react";
 import { Button } from "@/shared/ui/button";
@@ -94,7 +93,7 @@ export function CategoryFilter({ value, onChange }: CategoryFilterProps) {
               className={cn(
                 "h-7 w-full justify-start gap-0 overflow-hidden rounded-md p-0 font-normal",
                 isSelected
-                  ? "bg-[var(--soft-pink-100)] text-text-inverse hover:bg-[var(--soft-pink-100)]"
+                  ? "bg-bg-primary-faint text-text-inverse hover:bg-bg-primary-faint"
                   : "bg-bg-soft text-text-plain hover:bg-bg-default"
               )}
             >

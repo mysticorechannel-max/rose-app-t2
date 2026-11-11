@@ -1,7 +1,8 @@
 "use client";
 
 
-import { getOccasions } from "@/shared/lib/apis/product-filter/ossasion.service";
+
+import { getOccasions } from "@/shared/lib/apis/product-filter/occasions/ossasion.service";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 

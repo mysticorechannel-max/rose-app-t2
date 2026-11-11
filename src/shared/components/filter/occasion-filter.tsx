@@ -7,7 +7,6 @@ import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 import { useTranslations } from "next-intl";
 
-
 type OccasionFilterProps = {
   value: string | null;
   onChange: (occasionId: string | null) => void;
@@ -21,10 +20,8 @@ const LOCAL_IMAGES: { keyword: string; src: string }[] = [
 ];
 
 function resolveOccasionImage(title: string, apiImage?: string | null) {
-  // 1) صورة الـ API لو موجودة وغير فاضية
   if (apiImage && apiImage.trim() !== "") return apiImage;
 
-  // 2) صورة محلية بالاسم
   const normalized = title.toLowerCase();
   const match = LOCAL_IMAGES.find((item) => normalized.includes(item.keyword));
   return match?.src ?? null;

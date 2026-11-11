@@ -1,14 +1,15 @@
 "use client";
 
 import { RotateCcw } from "lucide-react";
+import { useTranslations } from "next-intl";
+
 import { CategoryFilter } from "./category-filter";
 import { OccasionFilter } from "./occasion-filter";
 import { RatingFilter } from "./rating-filter";
 import { PriceFilter } from "./price-filter";
+
 import { Button } from "@/shared/ui/button";
 import { ProductFilters } from "@/shared/lib/types/product-filter/product-filter";
-import { useTranslations } from "next-intl";
-
 
 type FiltersSidebarProps = {
   filters: ProductFilters;
@@ -17,6 +18,7 @@ type FiltersSidebarProps = {
   onRatingChange: (value: number | null) => void;
   onMinPriceChange: (value: number) => void;
   onMaxPriceChange: (value: number) => void;
+  onPriceReset: () => void;
   onResetAll: () => void;
 };
 
@@ -27,9 +29,11 @@ export function FiltersSidebar({
   onRatingChange,
   onMinPriceChange,
   onMaxPriceChange,
+  onPriceReset,
   onResetAll,
 }: FiltersSidebarProps) {
   const t = useTranslations("filters");
+
   const hasActiveFilters =
     filters.categoryId !== null ||
     filters.occasionId !== null ||
@@ -49,13 +53,17 @@ export function FiltersSidebar({
         onChange={onOccasionChange}
       />
 
-      <RatingFilter value={filters.rating} onChange={onRatingChange} />
+      <RatingFilter
+        value={filters.rating}
+        onChange={onRatingChange}
+      />
 
       <PriceFilter
         minPrice={filters.minPrice}
         maxPrice={filters.maxPrice}
         onMinPriceChange={onMinPriceChange}
         onMaxPriceChange={onMaxPriceChange}
+        onPriceReset={onPriceReset}
       />
 
       <Button

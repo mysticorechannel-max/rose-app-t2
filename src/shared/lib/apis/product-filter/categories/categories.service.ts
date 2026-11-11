@@ -1,6 +1,4 @@
-import { CategoriesResponse } from "../../types/product-filter/categories";
-
-
+import { CategoriesResponse } from "@/shared/lib/types/product-filter/categories";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

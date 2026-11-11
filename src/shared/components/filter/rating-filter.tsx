@@ -62,7 +62,6 @@ export function RatingFilter({ value, onChange }: RatingFilterProps) {
                 </span>
               )}
 
-              {/* start half = x.5, end half = full star */}
               <Button
                 variant="ghost"
                 aria-label={`${star - 0.5} stars`}
