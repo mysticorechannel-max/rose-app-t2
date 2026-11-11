@@ -102,5 +102,55 @@
       "testPushSuccess": "تم إرسال إشعار تجريبي بنجاح",
       "testPushError": "فشل إرسال إشعار تجريبي"
     }
+  },
+  "account": {
+    "title": "إعدادات الحساب",
+    "loading": "جارٍ تحميل بياناتك...",
+    "sidebar": {
+      "label": "التنقل في الحساب",
+      "profile": "الملف الشخصي",
+      "changePassword": "تغيير كلمة المرور",
+      "logout": "تسجيل الخروج",
+      "changePasswordForm": {
+        "success": "تم تغيير كلمة المرور بنجاح",
+        "error": "تعذّر تغيير كلمة المرور"
+      }
+    },
+    "validation": {
+      "required": "هذا الحقل مطلوب",
+      "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
+      "invalidPhone": "أدخل رقم هاتف صحيحاً",
+      "passwordNeedsUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+      "passwordNeedsNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+      "passwordNeedsSpecial": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل"
+    },
+    "profile": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "gender": "النوع",
+      "save": "حفظ التغييرات",
+      "delete": "حذف حسابي",
+      "uploadPhoto": "رفع صورة",
+      "uploadHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحد أقصى 5 ميجابايت.",
+      "genders": {
+        "male": "ذكر",
+        "female": "أنثى"
+      }
+    },
+    "deleteDialog": {
+      "title": "هل أنت متأكد أنك تريد حذف حسابك؟",
+      "description": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+      "cancel": "لا، لن أفعل",
+      "confirm": "نعم، احذف",
+      "close": "إغلاق"
+    },
+    "changePassword": {
+      "oldPassword": "كلمة المرور القديمة",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "submit": "تغيير كلمة المرور"
+    }
   }
 }

@@ -102,5 +102,58 @@
       "testPushSuccess": "Test notification sent successfully",
       "testPushError": "Failed to send test notification"
     }
+  },
+  "account": {
+  "title": "Account Settings",
+  "loading": "Loading your profile...",
+  "sidebar": {
+    "label": "Account navigation",
+    "profile": "Profile",
+    "changePassword": "Change Password",
+    "logout": "Logout"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Enter a valid email address",
+    "invalidPhone": "Enter a valid phone number",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordNeedsUppercase": "Password must include at least one uppercase letter",
+    "passwordNeedsNumber": "Password must include at least one number",
+    "passwordNeedsSpecial": "Password must include at least one special character",
+    "passwordMismatch": "Passwords do not match",
+    "passwordSameAsOld": "New password must be different from the old one"
+  },
+  "profile": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "gender": "Gender",
+    "uploadPhoto": "Upload Photo",
+    "uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+    "avatarInvalidType": "Only .jpg, .png and .gif files are allowed.",
+    "avatarTooLarge": "The photo must be 5MB or smaller.",
+    "save": "Save Changes",
+    "delete": "Delete My Account",
+    "genders": {
+      "male": "Male",
+      "female": "Female"
+    }
+  },
+  "deleteDialog": {
+    "title": "Are you sure you want to delete your account?",
+    "description": "This action is permanent and cannot be undone.",
+    "cancel": "Nope, not doing it",
+    "confirm": "Yes, delete",
+    "close": "Close"
+  },
+  "changePassword": {
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "submit": "Change Password",
+    "success": "Password changed successfully",
+    "error": "Could not change the password"
   }
+}
 }
