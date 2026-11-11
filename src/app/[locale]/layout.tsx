@@ -5,6 +5,7 @@ import { Pinyon_Script, Sarabun, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { AppProviders } from "@/shared/providers/app-providers";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
@@ -61,8 +62,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <Toaster />
+            <AppProviders>
+              {children}
+              <Toaster />
+            </AppProviders>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

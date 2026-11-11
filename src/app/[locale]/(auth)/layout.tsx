@@ -1,8 +1,6 @@
-import QueryProvider from "@/components/providers/query-provider";
 import Image from "next/image";
 import type { ReactNode } from "react";
 import AuthFlourish from "./_components/auth-flourish";
-import { LocaleSwitcher } from "@/components/locale-switcher";
 import AuthLocaleSwitcher from "./_components/auth-locale-switcher";
 
 interface AuthLayoutProps {
@@ -23,13 +21,10 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
             <AuthFlourish position="top" />
           </div>
 
-          {/* Language Switcher */}
-          <div className="absolute right-6 top-6">{/* Language Switcher */}</div>
-
           {/* Form Content */}
           <div className="flex flex-col items-center justify-center mt-10 mb-10">
             <div className="w-full max-w-md">
-              <QueryProvider>{children}</QueryProvider>
+              {children}
             </div>
           </div>
 

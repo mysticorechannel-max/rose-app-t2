@@ -39,8 +39,12 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
         confirmPassword: values.confirmPassword,
       },
       {
-        onSuccess: () => {
-          toast.success(t("resetSuccess"));
+        onSuccess: (result) => {
+          if (result.success) {
+            toast.success(t("resetSuccess"));
+          } else {
+            toast.error(result.message);
+          }
         },
       }
     );
@@ -48,7 +52,7 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
 
   return (
     <div className="w-full max-w-md">
-      <div className="mb-8 border-t border-border-soft">
+      <div className="mb-8 border-b border-border-soft pb-4">
         <h1 className="mb-3 text-2xl font-semibold text-text-plain">{t("resetTitle")}</h1>
         <p>{t("resetDis")}</p>
       </div>
@@ -67,7 +71,7 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
           />
 
           {errors.newPassword && (
-            <p className="text-sm text-red-500">{t(errors.newPassword.message as never)}</p>
+            <p className="text-sm text-text-danger">{t(errors.newPassword.message!)}</p>
           )}
         </div>
 
@@ -84,12 +88,12 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
           />
 
           {errors.confirmPassword && (
-            <p className="text-sm text-red-500">{t(errors.confirmPassword.message as never)}</p>
+            <p className="text-sm text-text-danger">{t(errors.confirmPassword.message!)}</p>
           )}
         </div>
 
         {resetPasswordMutation.isError && (
-          <p className="text-sm text-red-500">{resetPasswordMutation.error.message}</p>
+          <p className="text-sm text-text-danger">{resetPasswordMutation.error.message}</p>
         )}
 
         <Button type="submit" disabled={resetPasswordMutation.isPending} className="w-full">

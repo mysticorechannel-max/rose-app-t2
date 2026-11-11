@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Label } from "@/components/ui/label";
@@ -25,6 +26,7 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
   const isArabic = locale === "ar";
 
   const forgotPasswordMutation = useForgotPassword();
+  const [actionError, setActionError] = useState<string | null>(null);
 
   const {
     register,
@@ -35,14 +37,19 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
   });
 
   const onSubmit = (values: ForgotPasswordFormValues) => {
+    setActionError(null);
     forgotPasswordMutation.mutate(
       {
         email: values.email,
         redirectUrl: `${window.location.origin}/${locale}/forgot-password`,
       },
       {
-        onSuccess: () => {
-          onSuccess(values.email);
+        onSuccess: (result) => {
+          if (result.success) {
+            onSuccess(values.email);
+          } else {
+            setActionError(result.message);
+          }
         },
       }
     );
@@ -63,16 +70,18 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
 
           <Input
             id="email"
-            type="email"
+            type="text"
             placeholder={t("emailPlaceholder")}
             {...register("email")}
           />
 
-          {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+          {errors.email && <p className="text-sm text-text-danger">{t(errors.email.message!)}</p>}
         </div>
 
-        {forgotPasswordMutation.isError && (
-          <p className="text-sm text-red-500">{forgotPasswordMutation.error.message}</p>
+        {(actionError || forgotPasswordMutation.isError) && (
+          <p className="text-sm text-text-danger">
+            {actionError || forgotPasswordMutation.error?.message}{" "}
+          </p>
         )}
 
         <Button type="submit" disabled={forgotPasswordMutation.isPending} className="w-full">

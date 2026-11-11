@@ -110,6 +110,8 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "invalidCredentials": "Invalid username or password.",
+    "usernameRequired": "Username is required.",
+    "passwordRequired": "Password is required.",
     "createAccount": "Don't have an account?",
     "createOneNow": "Create one now"
   }

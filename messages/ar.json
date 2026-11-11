@@ -79,6 +79,8 @@
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
     "invalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة.",
+    "usernameRequired": "اسم المستخدم مطلوب.",
+    "passwordRequired": "كلمة المرور مطلوبة.",
     "createAccount": "ليس لديك حساب؟",
     "createOneNow": "أنشئي حسابًا الآن",
     "DontHaveAccount": "ألا تملك حساباً بعد؟"

@@ -23,7 +23,7 @@ export default function CheckEmailStep({
         <button
           type="button"
           onClick={onBack}
-          className="flex size-7 shrink-0 items-center justify-center rounded-md bg-bg-primary text-white transition hover:bg-bg-primary-saturated"
+          className="flex size-7 shrink-0 items-center justify-center rounded-md bg-bg-primary text-text-inverse transition hover:bg-bg-primary-saturated"
           aria-label={t("back")}
         >
           {isArabic ? (
@@ -43,7 +43,7 @@ export default function CheckEmailStep({
           {t("checkEmailDescription")}
         </p>
 
-        <p className="text-sm font-medium text-blue-600 underline underline-offset-2">
+        <p className="text-sm font-medium text-text-info underline underline-offset-2">
           {email}
         </p>
       </div>

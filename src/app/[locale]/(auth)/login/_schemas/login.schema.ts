@@ -4,11 +4,11 @@ export const loginSchema = z.object({
   username: z
     .string()
     .trim()
-    .min(1, "Username is required"),
+    .min(1, "usernameRequired"),
 
   password: z
     .string()
-    .min(1, "Password is required"),
+    .min(1, "passwordRequired"),
 });
 
 export type LoginFormValues = z.infer<typeof loginSchema>;

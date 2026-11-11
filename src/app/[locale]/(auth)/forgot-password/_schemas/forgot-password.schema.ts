@@ -4,8 +4,8 @@ export const forgotPasswordSchema = z.object({
   email: z
     .string()
     .trim()
-    .min(1, "Email is required")
-    .email("Please enter a valid email"),
+    .min(1, "emailRequired")
+    .email("invalidEmail"),
 });
 
 export type ForgotPasswordFormValues = z.infer<

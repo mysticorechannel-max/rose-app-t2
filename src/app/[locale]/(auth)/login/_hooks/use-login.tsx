@@ -2,12 +2,13 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import type { LoginFormValues } from "../_schemas/login.schema";
 
 export default function useLogin() {
   const locale = useLocale();
+  const t = useTranslations("Login");
 
   return useMutation({
     mutationFn: async (values: LoginFormValues) => {
@@ -19,7 +20,7 @@ export default function useLogin() {
       });
 
       if (!response?.ok || response.error) {
-        throw new Error("Invalid username or password.");
+        throw new Error(t("invalidCredentials"));
       }
 
       return response;

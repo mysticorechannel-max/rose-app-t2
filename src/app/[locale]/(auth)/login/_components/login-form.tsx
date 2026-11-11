@@ -8,6 +8,7 @@ import { Eye, EyeOff } from "lucide-react";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/shared/ui/button";
 
 import useLogin from "../_hooks/use-login";
 import { LoginFormValues, loginSchema } from "../_schemas/login.schema";
@@ -57,7 +58,7 @@ export default function LoginForm() {
             {...register("username")}
           />
 
-          {errors.username && <p className="text-sm text-red-500">{errors.username.message}</p>}
+          {errors.username && <p className="text-sm text-text-danger">{t(errors.username.message!)}</p>}
         </div>
 
         {/* Password */}
@@ -89,28 +90,28 @@ export default function LoginForm() {
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted"
-              aria-label={showPassword ? "Hide password" : "Show password"}
+              aria-label={showPassword ? t("hidePassword") : t("showPassword")}
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
 
-          {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
+          {errors.password && <p className="text-sm text-text-danger">{t(errors.password.message!)}</p>}
         </div>
 
         {/* API Error */}
         {loginMutation.isError && (
-          <p className="text-sm text-red-500">{loginMutation.error.message}</p>
+          <p className="text-sm text-text-danger">{loginMutation.error.message}</p>
         )}
 
         {/* Submit */}
-        <button
+        <Button
           type="submit"
           disabled={loginMutation.isPending}
-          className="flex h-12 w-full items-center justify-center rounded-lg bg-bg-primary text-sm font-semibold text-white transition hover:bg-bg-primary-saturated disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex h-12 w-full items-center justify-center rounded-lg text-sm font-semibold transition hover:bg-bg-primary-saturated disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loginMutation.isPending ? t("loading") : t("submit")}
-        </button>
+        </Button>
       </form>
       <div className="mt-6 border-t border-border-soft pt-4 text-center">
         <p className="text-xs font-medium text-text-plain">
