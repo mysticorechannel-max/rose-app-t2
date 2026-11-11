@@ -274,7 +274,7 @@
 /* ---------- DARK MODE ---------- */
 .dark {
   /* --- BACKGROUND --- */
-  --bg-plain: var(--zinc-700);
+  --bg-plain: var(--zinc-800);
   --bg-subtle: var(--zinc-800);
   --bg-muted: var(--zinc-900);
   --bg-soft: var(--zinc-700);
@@ -591,12 +591,7 @@
   animation-name: marquee-rtl;
 }
 
-/* Pause the loop while the viewer is reading a card. */
-.marquee-track:hover .animate-marquee {
-  animation-play-state: paused;
-}
-
-/* Respect users who prefer reduced motion — stop the scroll entirely. */
+/* Respect users who prefer reduced motion — stop the marquee entirely. */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;

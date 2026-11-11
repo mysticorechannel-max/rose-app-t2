@@ -12,7 +12,7 @@ const TESTIMONIALS = [
     { id: "three", image: "/images/testimonials/customer-3.webp" },
 ] as const;
 
-interface TestimonialItem {
+interface Testimonial {
     id: string;
     image: string;
     name: string;
@@ -25,7 +25,7 @@ export async function TestimonialsSection() {
     const t = await getTranslations("home.testimonials");
 
     // Variables
-    const items: TestimonialItem[] = TESTIMONIALS.map(({ id, image }) => ({
+    const items: Testimonial[] = TESTIMONIALS.map(({ id, image }) => ({
         id,
         image,
         name: t(`items.${id}.name`),
@@ -39,51 +39,42 @@ export async function TestimonialsSection() {
                 <SectionHeading eyebrow={t("eyebrow")} title={t("title")} center />
             </div>
 
-            {/* Full-width band — continuous, infinite marquee (pauses on hover). */}
-            <div className="marquee-track w-full overflow-hidden bg-bg-testimonials-band pb-12 pt-16">
-                <div className="animate-marquee flex w-max gap-6 px-4 sm:px-6">
-                    {/* First set — read by assistive tech. */}
-                    {items.map((item) => (
-                        <TestimonialCard key={item.id} {...item} />
-                    ))}
-                    {/* Duplicated set — hidden from assistive tech, fills the loop seam. */}
-                    {items.map((item) => (
-                        <TestimonialCard key={`${item.id}-clone`} {...item} aria-hidden />
-                    ))}
+            {/* Full-width band — continuous, gentle, infinite marquee (no carousel library) */}
+            <div className="w-full overflow-hidden bg-bg-testimonials-band pb-12 pt-16">
+                <div className="group relative w-full">
+                    {/* Track renders its items twice; the animation shifts -50% so the
+                        loop is seamless. Pauses on hover and under reduced-motion. */}
+                    <ul className="animate-marquee flex w-max items-start gap-6 group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+                        {items.map((item) => (
+                            <li key={item.id} className="w-80 shrink-0">
+                                <TestimonialCard {...item} />
+                            </li>
+                        ))}
+
+                        {/* Duplicated set — hidden from assistive tech to avoid double reading */}
+                        {items.map((item) => (
+                            <li key={`clone-${item.id}`} aria-hidden="true" className="w-80 shrink-0">
+                                <TestimonialCard {...item} />
+                            </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </section>
     );
 }
 
-function TestimonialCard({
-    name,
-    date,
-    quote,
-    image,
-    "aria-hidden": ariaHidden,
-}: TestimonialItem & { "aria-hidden"?: boolean }) {
+function TestimonialCard({ name, date, quote, image }: Omit<Testimonial, "id">) {
     return (
-        <figure
-            aria-hidden={ariaHidden}
-            className="relative mt-12 flex w-80 shrink-0 flex-col items-center gap-3 rounded-3xl bg-bg-testimonials-card px-5 pb-5 pt-14 text-center"
-        >
+        <figure className="relative mt-12 flex w-full flex-col items-center gap-3 rounded-3xl bg-bg-testimonials-card px-5 pb-5 pt-14 text-center">
             {/* Avatar — circular, overlapping the top edge of the card */}
             <div className="absolute -top-12 left-1/2 size-24 -translate-x-1/2 overflow-hidden rounded-full border-4 border-bg-testimonials-card bg-bg-muted">
-                <Image
-                    src={image}
-                    alt={name}
-                    width={96}
-                    height={96}
-                    className="size-full object-cover"
-                />
+                <Image src={image} alt={name} width={96} height={96} className="size-full object-cover" />
             </div>
 
             <figcaption className="text-base font-bold text-text-on-elevated">{name}</figcaption>
             <RatingStars value={5} />
-            <blockquote className="text-base font-medium leading-snug text-text-on-elevated-soft">
-                {quote}
-            </blockquote>
+            <blockquote className="text-base font-medium leading-snug text-text-on-elevated-soft">{quote}</blockquote>
             <p className="text-xs text-text-on-elevated-muted">{date}</p>
         </figure>
     );
