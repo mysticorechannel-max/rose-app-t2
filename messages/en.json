@@ -112,5 +112,95 @@
     "invalidCredentials": "Invalid username or password.",
     "createAccount": "Don't have an account?",
     "createOneNow": "Create one now"
+  },
+  "auth": {
+    "register": {
+      "title": "Become part of our family!",
+      "createAccount": "Create Account",
+      "stepperLabel": "Registration progress",
+      "haveAccount": "Already have an account?",
+      "login": "Login",
+      "needHelp": "Need help?",
+      "contactUs": "Contact us",
+      "actions": { "next": "Next →" },
+      "fields": {
+        "email": "Email",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "username": "Username",
+        "phone": "Phone",
+        "countryCode": "Country code",
+        "gender": "Gender",
+        "genderPlaceholder": "Select gender",
+        "male": "Male",
+        "female": "Female",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "togglePassword": "Show or hide password"
+      },
+      "otp": {
+        "title": "Verify your email",
+        "subtitle": "We have sent a 6-digit code to {email} <edit>Edit</edit>",
+        "sentTo": "We have sent a 6-digit code to",
+        "label": "6-digit verification code",
+        "edit": "Edit",
+        "verify": "Verify Code",
+        "resend": "Send a new code",
+        "resendIn": "Send a new code in {seconds}s"
+      },
+      "profile": {
+        "title": "Tell us more about you",
+        "subtitle": "A few details to get started"
+      },
+      "password": {
+        "title": "Create a strong password",
+        "subtitle": "Choose a secure password to protect your account"
+      },
+      "done": {
+        "title": "Your account is ready!",
+        "description": "Welcome to the family. You can now log in.",
+        "goToLogin": "Go to login"
+      },
+      "validation": {
+        "emailRequired": "Email is required",
+        "emailInvalid": "Enter a valid email address",
+        "otpLength": "Enter the 6-digit code",
+        "otpDigits": "The code must contain digits only",
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required",
+        "usernameMin": "Username must be at least 3 characters",
+        "usernameChars": "Use letters, numbers, dots and underscores only",
+        "phoneInvalid": "Enter a valid phone number",
+        "genderRequired": "Please select a gender",
+        "passwordMin": "Password must be at least 8 characters",
+        "passwordLower": "Include a lowercase letter",
+        "passwordUpper": "Include an uppercase letter",
+        "passwordNumber": "Include a number",
+        "passwordSpecial": "Include a special character",
+        "confirmRequired": "Please confirm your password",
+        "passwordMismatch": "Passwords do not match"
+      },
+      "errors": {
+        "network": "Network error. Check your connection and try again.",
+        "invalidCode": "The code is invalid or has expired.",
+        "emailTaken": "An account with this email or username already exists.",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
+    "LoginPopover": {
+      "login": "Login",
+      "register": "Register",
+      "formPlaceholder": "Login form goes here"
+    },
+    "UserMenu": {
+      "greeting": "Hello {name}",
+      "greetingFallback": "Hello",
+      "openMenu": "Open user menu",
+      "account": "Account",
+      "addresses": "Addresses",
+      "orders": "Orders",
+      "dashboard": "Dashboard",
+      "logout": "Log out"
+    }
   }
 }

@@ -3,6 +3,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ModeToggle } from "@/components/ui/toggle-group";
+import { LoginPopover } from "./(auth)/_components/login-popover";
+import LoginForm from "./(auth)/login/_components/login-form";
+import { UserMenu } from "./(auth)/_components/user-menu";
 
 
 
@@ -20,6 +23,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
         className="absolute inset-x-0 top-0 -z-10 h-80 bg-primary/10 blur-3xl"
       />
       <section className="w-full max-w-3xl rounded-3xl border border-border bg-card/90 p-8 shadow-xl shadow-primary/5 backdrop-blur sm:p-12">
+                 <LoginPopover loginForm={<LoginForm />} />
+                  <UserMenu name={'mohamed'} />
+
         <div className="mb-12 flex flex-wrap items-center justify-between gap-4">
           <span className="text-sm font-semibold tracking-wide text-primary">{t("appName")}</span>
           <LocaleSwitcher />

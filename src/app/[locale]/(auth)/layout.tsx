@@ -41,7 +41,6 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
 
         {/* Gift Image */}
         <section className="relative hidden min-h-screen lg:flex lg:items-center lg:justify-center">
-          <div className="relative h-screen w-full">
             <Image
               src="/images/auth/Cover.png"
               alt="Gift boxes"
@@ -50,7 +49,6 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
               sizes="50vw"
               className="object-cover object-center"
             />
-          </div>
         </section>
       </div>
     </main>

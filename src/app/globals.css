@@ -380,6 +380,9 @@
   --font-sans: var(--font-sarabun);
   --font-english: var(--font-sarabun);
   --font-arabic: var(--font-tajawal);
+  --font-script: var(--font-great-vibes), cursive;
+    --font-script: var(--font-great-vibes), var(--font-aref-ruqaa), cursive;
+
 
   /* radius — preserved */
   --radius-sm: calc(var(--radius) - 4px);
@@ -510,6 +513,6 @@
     @apply min-h-svh bg-background text-foreground antialiased;
   }
   .font-script {
-  font-family: var(--font-pinyon-script);
-}
+    font-family: var(--font-pinyon-script);
+  }
 }

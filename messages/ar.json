@@ -115,5 +115,95 @@
     "createAccount": "ليس لديك حساب؟",
     "createOneNow": "أنشئي حسابًا الآن",
     "DontHaveAccount": "ألا تملك حساباً بعد؟"
+  },
+  "auth": {
+    "register": {
+      "title": "كن جزءًا من عائلتنا!",
+      "createAccount": "إنشاء حساب",
+      "stepperLabel": "تقدّم التسجيل",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "login": "تسجيل الدخول",
+      "needHelp": "تحتاج مساعدة؟",
+      "contactUs": "تواصل معنا",
+      "actions": { "next": "التالي←" },
+      "fields": {
+        "email": "البريد الإلكتروني",
+        "firstName": "الاسم الأول",
+        "lastName": "اسم العائلة",
+        "username": "اسم المستخدم",
+        "phone": "الهاتف",
+        "countryCode": "رمز الدولة",
+        "gender": "الجنس",
+        "genderPlaceholder": "اختر الجنس",
+        "male": "ذكر",
+        "female": "أنثى",
+        "password": "كلمة المرور",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "togglePassword": "إظهار أو إخفاء كلمة المرور"
+      },
+      "otp": {
+        "title": "أدخل رمز التحقق",
+        "subtitle": "أرسلنا رمزًا من 6 أرقام إلى {email} <edit>تعديل</edit>",
+        "sentTo": "أرسلنا رمزًا من 6 أرقام إلى",
+        "label": "رمز التحقق المكوّن من 6 أرقام",
+        "edit": "تعديل",
+        "verify": "تأكيد الرمز",
+        "resend": "إرسال رمز جديد",
+        "resendIn": "إرسال رمز جديد بعد {seconds} ث"
+      },
+      "profile": {
+        "title": "حدثنا أكثر عنك",
+        "subtitle": "بعض التفاصيل للبدء"
+      },
+      "password": {
+        "title": "أنشئ كلمة مرور قوية",
+        "subtitle": "اختر كلمة مرور آمنة لحماية حسابك"
+      },
+      "done": {
+        "title": "حسابك جاهز!",
+        "description": "أهلًا بك في عائلتنا. يمكنك الآن تسجيل الدخول.",
+        "goToLogin": "الذهاب إلى تسجيل الدخول"
+      },
+      "validation": {
+        "emailRequired": "البريد الإلكتروني مطلوب",
+        "emailInvalid": "أدخل بريدًا إلكترونيًا صحيحًا",
+        "otpLength": "أدخل الرمز المكوّن من 6 أرقام",
+        "otpDigits": "يجب أن يحتوي الرمز على أرقام فقط",
+        "firstNameRequired": "الاسم الأول مطلوب",
+        "lastNameRequired": "اسم العائلة مطلوب",
+        "usernameMin": "يجب ألا يقل اسم المستخدم عن 3 أحرف",
+        "usernameChars": "استخدم الحروف والأرقام والنقطة والشرطة السفلية فقط",
+        "phoneInvalid": "أدخل رقم هاتف صحيحًا",
+        "genderRequired": "يرجى اختيار الجنس",
+        "passwordMin": "يجب ألا تقل كلمة المرور عن 8 أحرف",
+        "passwordLower": "أضف حرفًا صغيرًا",
+        "passwordUpper": "أضف حرفًا كبيرًا",
+        "passwordNumber": "أضف رقمًا",
+        "passwordSpecial": "أضف رمزًا خاصًا",
+        "confirmRequired": "يرجى تأكيد كلمة المرور",
+        "passwordMismatch": "كلمتا المرور غير متطابقتين"
+      },
+      "errors": {
+        "network": "خطأ في الشبكة. تحقق من اتصالك وحاول مرة أخرى.",
+        "invalidCode": "الرمز غير صحيح أو منتهي الصلاحية.",
+        "emailTaken": "يوجد حساب بهذا البريد الإلكتروني أو اسم المستخدم.",
+        "generic": "حدث خطأ ما. حاول مرة أخرى."
+      }
+    },
+    "LoginPopover": {
+      "login": "تسجيل الدخول",
+      "register": "إنشاء حساب",
+      "formPlaceholder": "نموذج تسجيل الدخول هنا"
+    },
+    "UserMenu": {
+      "greeting": "مرحبًا {name}",
+      "greetingFallback": "مرحبًا",
+      "openMenu": "افتح قائمة المستخدم",
+      "account": "الحساب",
+      "addresses": "العناوين",
+      "orders": "الطلبات",
+      "dashboard": "لوحة التحكم",
+      "logout": "تسجيل الخروج"
+    }
   }
 }
