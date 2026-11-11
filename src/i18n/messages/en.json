@@ -102,5 +102,33 @@
       "testPushSuccess": "Test notification sent successfully",
       "testPushError": "Failed to send test notification"
     }
+  },
+  "filters": {
+    "category": {
+      "title": "Category",
+      "loading": "Loading categories...",
+      "error": "Failed to load categories.",
+      "reset": "Reset",
+      "loadingMore": "Loading..."
+    },
+    "occasion": {
+      "title": "Occasion",
+      "loading": "Loading occasions...",
+      "error": "Failed to load occasions.",
+      "reset": "Reset",
+      "loadingMore": "Loading..."
+    },
+    "rating": {
+      "title": "Rating",
+      "reset": "Reset"
+    },
+    "price": {
+      "title": "Price",
+      "from": "from",
+      "to": "to",
+      "reset": "Reset",
+      "error": "From price must be less than To price."
+    },
+    "resetAll": "Reset All"
   }
 }

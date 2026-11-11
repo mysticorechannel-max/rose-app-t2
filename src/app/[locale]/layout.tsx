@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+
 import { Sarabun, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 
@@ -11,6 +11,7 @@ import { AppProviders } from "../../shared/providers/app-providers";
 
 import { Footer, Header } from "@/shared/components";
 import "../globals.css";
+import { setRequestLocale } from "next-intl/server";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -49,22 +50,24 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const direction = locale === "ar" ? "rtl" : "ltr";
   const fontClass = locale === "ar" ? "font-arabic" : "font-english";
 
-  return (
-    <html
-      className={`${sarabun.variable} ${tajawal.variable}`}
-      dir={direction}
-      lang={locale}
-      suppressHydrationWarning
-    >
-      <body className={fontClass}>
-        <NextIntlClientProvider>
-          <AppProviders>
-            <Header />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </AppProviders>
-        </NextIntlClientProvider>
-      </body>
-    </html>
-  );
+
+return (
+  <html
+    className={`${sarabun.variable} ${tajawal.variable}`}
+    dir={direction}
+    lang={locale}
+    suppressHydrationWarning
+  >
+    <body className={fontClass}>
+      <NextIntlClientProvider>
+        <AppProviders>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </AppProviders>
+      </NextIntlClientProvider>
+    </body>
+  </html>
+);
+  
 }
