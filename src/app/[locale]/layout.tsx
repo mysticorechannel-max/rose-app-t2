@@ -30,6 +30,8 @@ const tajawal = Tajawal({
 // This ensures proper rendering of mixed-language content
 
 export const metadata: Metadata = {
+  title: "Rose App",
+  description: "Rose App team foundation",
   icons: {
     icon: FAVICON,
   },

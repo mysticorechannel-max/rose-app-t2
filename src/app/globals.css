@@ -136,18 +136,38 @@
   --bg-default: var(--zinc-500);
   --bg-inverse: var(--zinc-800);
   --bg-elevated: #cccccc;
+
+  --bg-testimonials-band: var(--maroon-50);
+  --bg-testimonials-card: var(--white);
+  --bg-companies-card: var(--maroon-50);
+  --bg-heading-band: var(--maroon-50);
   --bg-overlay: color-mix(in srgb, var(--black) 50%, transparent);
 
   --bg-primary: var(--maroon-800);
   --bg-primary-saturated: var(--maroon-700);
+  --bg-primary-strong: var(--maroon-600);
   --bg-primary-faint: var(--maroon-100);
   --bg-primary-fade: var(--maroon-50);
+
+  /* Fixed maroon — same in light & dark (carousel arrow, cart button, HOT badge) */
+  --bg-primary-fixed: var(--maroon-500);
+  --bg-primary-fixed-fade: var(--maroon-50);
+  --text-primary-fixed: var(--maroon-800);
+
+  /* Fixed neutral — always dark text on white card surface (testimonials, etc.) */
+  --text-on-elevated: var(--zinc-800);
+  --text-on-elevated-soft: var(--zinc-500);
+  --text-on-elevated-muted: var(--zinc-400);
+
+  /* Fixed heading underline — same color in light & dark */
+  --bg-heading-underline: var(--soft-pink-500);
 
   --bg-info: var(--blue-600);
   --bg-info-faint: var(--blue-100);
   --bg-info-fade: var(--blue-50);
 
   --bg-secondary: var(--soft-pink-400);
+  --bg-secondary-saturated: var(--soft-pink-600);
   --bg-secondary-faint: var(--soft-pink-100);
   --bg-secondary-fade: var(--soft-pink-50);
 
@@ -173,6 +193,7 @@
   --text-inverse: var(--white);
 
   --text-primary: var(--maroon-800);
+  --text-primary-strong: var(--maroon-700);
   --text-primary-faint: var(--maroon-100);
   --text-primary-fade: var(--maroon-50);
 
@@ -181,6 +202,7 @@
   --text-info-fade: var(--blue-50);
 
   --text-secondary: var(--soft-pink-400);
+  --text-secondary-strong: var(--soft-pink-500);
   --text-secondary-faint: var(--soft-pink-100);
   --text-secondary-fade: var(--soft-pink-50);
 
@@ -252,17 +274,23 @@
 /* ---------- DARK MODE ---------- */
 .dark {
   /* --- BACKGROUND --- */
-  --bg-plain: var(--zinc-700);
+  --bg-plain: var(--zinc-800);
   --bg-subtle: var(--zinc-800);
   --bg-muted: var(--zinc-900);
   --bg-soft: var(--zinc-700);
   --bg-default: var(--zinc-600);
   --bg-inverse: var(--zinc-50);
   --bg-elevated: color-mix(in srgb, var(--black) 20%, transparent);
+
+  --bg-testimonials-band: var(--zinc-700);
+  --bg-testimonials-card: var(--white);
+  --bg-companies-card: var(--zinc-700);
+  --bg-heading-band: var(--zinc-700);
   --bg-overlay: color-mix(in srgb, var(--black) 50%, transparent);
 
   --bg-primary: var(--soft-pink-300);
   --bg-primary-saturated: var(--soft-pink-200);
+  --bg-primary-strong: var(--soft-pink-400);
   --bg-primary-faint: color-mix(in srgb, var(--soft-pink-300) 75%, transparent);
   --bg-primary-fade: color-mix(in srgb, var(--soft-pink-300) 25%, transparent);
 
@@ -271,6 +299,7 @@
   --bg-info-fade: color-mix(in srgb, var(--blue-500) 25%, transparent);
 
   --bg-secondary: var(--maroon-600);
+  --bg-secondary-saturated: var(--maroon-500);
   --bg-secondary-faint: color-mix(in srgb, var(--maroon-600) 50%, transparent);
   --bg-secondary-fade: color-mix(in srgb, var(--maroon-600) 25%, transparent);
 
@@ -296,6 +325,7 @@
   --text-inverse: var(--zinc-800);
 
   --text-primary: var(--soft-pink-300);
+  --text-primary-strong: var(--soft-pink-200);
   --text-primary-faint: color-mix(in srgb, var(--soft-pink-300) 75%, transparent);
   --text-primary-fade: color-mix(in srgb, var(--soft-pink-300) 25%, transparent);
 
@@ -304,6 +334,7 @@
   --text-info-fade: color-mix(in srgb, var(--blue-500) 25%, transparent);
 
   --text-secondary: var(--maroon-600);
+  --text-secondary-strong: var(--maroon-500);
   --text-secondary-faint: color-mix(in srgb, var(--maroon-600) 50%, transparent);
   --text-secondary-fade: color-mix(in srgb, var(--maroon-600) 25%, transparent);
 
@@ -376,7 +407,7 @@
    LAYER 3 — TAILWIND @theme inline
    ============================================================ */
 @theme inline {
-   /* fonts — preserved */
+  /* fonts — preserved */
   --font-sans: var(--font-sarabun);
   --font-english: var(--font-sarabun);
   --font-arabic: var(--font-tajawal);
@@ -415,15 +446,28 @@
   --color-bg-default: var(--bg-default);
   --color-bg-inverse: var(--bg-inverse);
   --color-bg-elevated: var(--bg-elevated);
+  --color-bg-testimonials-band: var(--bg-testimonials-band);
+  --color-bg-testimonials-card: var(--bg-testimonials-card);
+  --color-bg-companies-card: var(--bg-companies-card);
+  --color-bg-heading-band: var(--bg-heading-band);
   --color-bg-overlay: var(--bg-overlay);
   --color-bg-primary: var(--bg-primary);
   --color-bg-primary-saturated: var(--bg-primary-saturated);
+  --color-bg-primary-strong: var(--bg-primary-strong);
   --color-bg-primary-faint: var(--bg-primary-faint);
   --color-bg-primary-fade: var(--bg-primary-fade);
+  --color-bg-primary-fixed: var(--bg-primary-fixed);
+  --color-bg-primary-fixed-fade: var(--bg-primary-fixed-fade);
+  --color-text-primary-fixed: var(--text-primary-fixed);
+  --color-text-on-elevated: var(--text-on-elevated);
+  --color-text-on-elevated-soft: var(--text-on-elevated-soft);
+  --color-text-on-elevated-muted: var(--text-on-elevated-muted);
+  --color-bg-heading-underline: var(--bg-heading-underline);
   --color-bg-info: var(--bg-info);
   --color-bg-info-faint: var(--bg-info-faint);
   --color-bg-info-fade: var(--bg-info-fade);
   --color-bg-secondary: var(--bg-secondary);
+  --color-bg-secondary-saturated: var(--bg-secondary-saturated);
   --color-bg-secondary-faint: var(--bg-secondary-faint);
   --color-bg-secondary-fade: var(--bg-secondary-fade);
   --color-bg-success: var(--bg-success);
@@ -445,12 +489,14 @@
   --color-text-default: var(--text-default);
   --color-text-inverse: var(--text-inverse);
   --color-text-primary: var(--text-primary);
+  --color-text-primary-strong: var(--text-primary-strong);
   --color-text-primary-faint: var(--text-primary-faint);
   --color-text-primary-fade: var(--text-primary-fade);
   --color-text-info: var(--text-info);
   --color-text-info-faint: var(--text-info-faint);
   --color-text-info-fade: var(--text-info-fade);
   --color-text-secondary: var(--text-secondary);
+  --color-text-secondary-strong: var(--text-secondary-strong);
   --color-text-secondary-faint: var(--text-secondary-faint);
   --color-text-secondary-fade: var(--text-secondary-fade);
   --color-text-success: var(--text-success);
@@ -509,4 +555,64 @@
   body {
     @apply min-h-svh bg-background text-foreground antialiased;
   }
+}
+
+/* ============================================================
+   HOME — TESTIMONIALS MARQUEE
+   Continuous, gentle, infinite scroll (no carousel library).
+   Track renders its items twice; -50% lands on the seam so the
+   loop is seamless. Direction flips automatically under [dir="rtl"].
+   ============================================================ */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+[dir="rtl"] .animate-marquee {
+  animation-name: marquee-rtl;
+}
+
+/* Respect users who prefer reduced motion — stop the marquee entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   HOME — PRODUCT CARD HOVER
+   Plain-CSS hover so the overlay does not depend on Tailwind's
+   group-hover resolution. `.product-cover` wraps the image; the
+   `.product-cover-overlay` fades in when the cover is hovered.
+   ============================================================ */
+.product-cover-overlay {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.product-cover:hover .product-cover-overlay {
+  opacity: 1;
+}
+
+.product-cover:hover .product-cover-img {
+  transform: scale(1.05);
 }
