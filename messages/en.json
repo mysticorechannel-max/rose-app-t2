@@ -1,0 +1,118 @@
+{
+  "common": {
+    "appName": "Rose App",
+    "welcome": "A thoughtful foundation for what comes next.",
+    "description": "Next.js, semantic design tokens, themes, and internationalization are ready for the team.",
+    "theme": {
+      "label": "Theme",
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "system": "System Mode"
+    },
+    "locale": {
+      "label": "Language",
+      "en": "English",
+      "ar": "Arabic"
+    }
+  },
+  "toast": {
+    "info": "Informative message",
+    "success": "Successful operation",
+    "error": "Unsuccessful operation",
+    "buttonLabels": {
+      "discover": "Discover",
+      "login": "Login",
+      "subscribe": "Subscribe →",
+      "imBuying": "I'm buying",
+      "shopNow": "Shop now →",
+      "next": "Next →",
+      "continue": "Continue",
+      "verifyCode": "Verify code"
+    }
+  },
+  "input": {
+    "search": {
+      "placeholder": "Search...",
+      "clear": "Clear search"
+    },
+    "number": {
+      "increase": "Increase value",
+      "decrease": "Decrease value"
+    },
+    "file": {
+      "upload": "Upload file",
+      "noFile": "No file chosen",
+      "reviewImages": "Review current image(s)"
+    },
+    "phone": {
+      "placeholder": "Phone number",
+      "countryLabel": "Country dial code",
+      "selectCountry": "Select country",
+      "countries": {
+        "EG": "Egypt",
+        "SA": "Saudi Arabia",
+        "AE": "United Arab Emirates",
+        "US": "United States",
+        "GB": "United Kingdom"
+      }
+    },
+    "otp": {
+      "label": "One-time password",
+      "digitLabel": "Digit {current} of {total}"
+    },
+    "password": {
+      "show": "Show password",
+      "hide": "Hide password"
+    }
+  },
+  "ForgotPassword": {
+    "title": "Forgot Password?",
+    "description": "Worry not, we’ll send you instructions to help you reset it.",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "loading": "Sending...",
+    "next": "Next",
+    "back": "Back",
+    "checkEmailTitle": "Check Your Email",
+    "checkEmailDescription": "We've sent a password reset link to:",
+    "checkEmailInstructions": "Please check your inbox and click the link to reset your password.",
+    "checkEmailReminder": "If you don't see the email, check your spam or junk folder.",
+    "needHelp": "Need help?",
+    "contactUs": "Contact Us",
+    "resetTitle": "Create a new password",
+    "resetDis": "Set a strong password to secure your account.",
+    "newPassword": "Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your new password",
+    "resetButton": "Reset Password",
+    "resetLoading": "Resetting...",
+    "resetSuccess": "Your password has been successfully reset.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters long.",
+    "confirmPasswordRequired": "Please confirm your password.",
+    "passwordsMismatch": "Passwords do not match.",
+    "emailRequired": "Email address is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "createAccount": "Don't have an account?",
+    "createOneNow": "Create one now"
+  },
+  "Login": {
+    "title": "Welcome Back",
+    "description": "Please enter your credentials to sign in.",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot password?",
+    "submit": "Login",
+    "loading": "Logging in...",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "invalidCredentials": "Invalid username or password.",
+    "usernameRequired": "Username is required.",
+    "passwordRequired": "Password is required.",
+    "createAccount": "Don't have an account?",
+    "createOneNow": "Create one now"
+  }
+}
