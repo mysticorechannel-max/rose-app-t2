@@ -69,7 +69,7 @@ defaultValues: { currentPassword: "", newPassword: "", confirmPassword: "" },  }
       />
 
       <div className="flex justify-end pt-6">
-        <Button type="submit" loading={isSubmitting} className="min-w-52">
+        <Button type="submit" loading={isPending} className="min-w-52">
           {t("changePassword.submit")}
         </Button>
       </div>

@@ -12,9 +12,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { profileSchema, type ProfileFields } from "../lib/schemes/profile.schema";
 import { AvatarUpload } from "./avatar-upload";
 import { DeleteAccountDialog } from "./delete-account-dialog";
-import { useGetProfileQuery } from "../lib/apis/mutations/use-get-profile";
 import { useUpdateProfileMutation } from "../lib/apis/mutations/use-update-profile";
 import { useDeleteAccountMutation } from "../lib/apis/mutations/use-delete-account";
+import { useGetProfileQuery } from "../lib/apis/queries/use-get-profile";
 export function ProfileForm() {
   // Translation
   const t = useTranslations("account");
