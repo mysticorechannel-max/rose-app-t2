@@ -37,6 +37,8 @@ const pinyonScript = Pinyon_Script({
 });
 
 export const metadata: Metadata = {
+  title: "Rose App",
+  description: "Rose App team foundation",
   icons: {
     icon: FAVICON,
   },
