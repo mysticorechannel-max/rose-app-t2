@@ -1,21 +1,28 @@
-
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
 
 import { FiltersSidebar } from "@/shared/components/filter/filter-sidebar";
 import type { ProductFilters } from "@/shared/lib/types/product-filter/product-filter";
 
 const DEFAULT_MIN_PRICE = 0;
 const DEFAULT_MAX_PRICE = 1_000_000;
+const PRICE_DEBOUNCE_MS = 300;
+const FILTER_KEYS = [
+  "categoryId",
+  "occasionId",
+  "rating",
+  "minPrice",
+  "maxPrice",
+] as const;
 
 export function ProductsFilters() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Read current filters from the URL
   const filters: ProductFilters = {
     categoryId: searchParams.get("categoryId"),
     occasionId: searchParams.get("occasionId"),
@@ -30,68 +37,67 @@ export function ProductsFilters() {
       : DEFAULT_MAX_PRICE,
   };
 
-  // Update URL parameters without adding a history entry for every change
-  const pendingFiltersRef = useRef<Partial<ProductFilters> | null>(null);
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingRef = useRef<Partial<ProductFilters>>({});
 
-  const updateFilters = useCallback((newFilters: Partial<ProductFilters>) => {
-    // Clear previous timer
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
-
-    // Store pending filters
-    pendingFiltersRef.current = newFilters;
-
-    // Debounce the URL update
-    debounceTimerRef.current = setTimeout(() => {
-      if (!pendingFiltersRef.current) return;
-
-      const params = new URLSearchParams(searchParams.toString());
-
-      Object.entries(pendingFiltersRef.current).forEach(([key, value]) => {
-        if (value === null || value === undefined) {
-          params.delete(key);
-          return;
-        }
-
-        if (
-          (key === "minPrice" && value === DEFAULT_MIN_PRICE) ||
-          (key === "maxPrice" && value === DEFAULT_MAX_PRICE)
-        ) {
-          params.delete(key);
-          return;
-        }
-
-        params.set(key, String(value));
-      });
-
-      const queryString = params.toString();
-      router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
-        scroll: false,
-      });
-
-      pendingFiltersRef.current = null;
-    }, 300); // 300ms debounce
-  }, [searchParams, pathname, router]);
-
-  // Cleanup timer on unmount
-  useEffect(() => {
-    return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
-    };
+  const clearPending = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = null;
+    pendingRef.current = {};
   }, []);
 
-  function handleResetAll() {
-    router.replace(pathname, { scroll: false });
-  }
+  const flush = useCallback(() => {
+    const changes = pendingRef.current;
+    pendingRef.current = {};
+    timerRef.current = null;
 
-  function handlePriceReset() {
-    updateFilters({
-      minPrice: DEFAULT_MIN_PRICE,
-      maxPrice: DEFAULT_MAX_PRICE,
+    const params = new URLSearchParams(window.location.search);
+
+    for (const [key, value] of Object.entries(changes)) {
+      const isDefault =
+        (key === "minPrice" && value === DEFAULT_MIN_PRICE) ||
+        (key === "maxPrice" && value === DEFAULT_MAX_PRICE);
+
+      if (value === null || value === undefined || isDefault) {
+        params.delete(key);
+      } else {
+        params.set(key, String(value));
+      }
+    }
+
+    const queryString = params.toString();
+    router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
+      scroll: false,
+    });
+  }, [pathname, router]);
+
+  const updateFilters = useCallback(
+    (changes: Partial<ProductFilters>, debounce = false) => {
+      pendingRef.current = { ...pendingRef.current, ...changes };
+
+      if (timerRef.current) clearTimeout(timerRef.current);
+
+      if (!debounce) {
+        flush();
+        return;
+      }
+
+      timerRef.current = setTimeout(flush, PRICE_DEBOUNCE_MS);
+    },
+    [flush],
+  );
+
+  useEffect(() => clearPending, [clearPending]);
+
+  function handleResetAll() {
+    clearPending();
+
+    const params = new URLSearchParams(window.location.search);
+    FILTER_KEYS.forEach((key) => params.delete(key));
+
+    const queryString = params.toString();
+    router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
+      scroll: false,
     });
   }
 
@@ -101,9 +107,7 @@ export function ProductsFilters() {
       onCategoryChange={(value) => updateFilters({ categoryId: value })}
       onOccasionChange={(value) => updateFilters({ occasionId: value })}
       onRatingChange={(value) => updateFilters({ rating: value })}
-      onMinPriceChange={(value) => updateFilters({ minPrice: value })}
-      onMaxPriceChange={(value) => updateFilters({ maxPrice: value })}
-      onPriceReset={handlePriceReset}
+      onPriceChange={(range) => updateFilters(range, true)}
       onResetAll={handleResetAll}
     />
   );

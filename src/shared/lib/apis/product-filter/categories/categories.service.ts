@@ -1,7 +1,5 @@
 import { CategoriesResponse } from "@/shared/lib/types/product-filter/categories";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 type GetCategoriesParams = {
   page?: number;
   limit?: number;
@@ -23,7 +21,7 @@ export async function getCategories({
   }
 
   const response = await fetch(
-    `${API_URL}/api/categories?${params.toString()}`,
+    `/api/categories?${params.toString()}`,
     { cache: "no-store" }
   );
 

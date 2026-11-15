@@ -11,7 +11,7 @@ export type Category = {
     products: number;
   };
 };
-
+export type PriceRange = { minPrice: number; maxPrice: number };
 export type CategoriesResponse = {
   status: boolean;
   code: number;

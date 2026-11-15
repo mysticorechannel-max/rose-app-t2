@@ -1,7 +1,5 @@
 import { OccasionsResponse } from "@/shared/lib/types/product-filter/ossasion";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 type GetOccasionsParams = {
   page?: number;
   limit?: number;
@@ -23,7 +21,7 @@ export async function getOccasions({
   }
 
   const response = await fetch(
-    `${API_URL}/api/occasions?${params.toString()}`,
+    `/api/occasions?${params.toString()}`,
     { cache: "no-store" }
   );
 

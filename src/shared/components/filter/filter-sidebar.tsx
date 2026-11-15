@@ -9,16 +9,18 @@ import { RatingFilter } from "./rating-filter";
 import { PriceFilter } from "./price-filter";
 
 import { Button } from "@/shared/ui/button";
-import { ProductFilters } from "@/shared/lib/types/product-filter/product-filter";
+import type {
+
+  ProductFilters,
+} from "@/shared/lib/types/product-filter/product-filter";
+import { PriceRange } from "@/shared/lib/types/product-filter/categories";
 
 type FiltersSidebarProps = {
   filters: ProductFilters;
   onCategoryChange: (value: string | null) => void;
   onOccasionChange: (value: string | null) => void;
   onRatingChange: (value: number | null) => void;
-  onMinPriceChange: (value: number) => void;
-  onMaxPriceChange: (value: number) => void;
-  onPriceReset: () => void;
+  onPriceChange: (range: PriceRange) => void;
   onResetAll: () => void;
 };
 
@@ -27,9 +29,7 @@ export function FiltersSidebar({
   onCategoryChange,
   onOccasionChange,
   onRatingChange,
-  onMinPriceChange,
-  onMaxPriceChange,
-  onPriceReset,
+  onPriceChange,
   onResetAll,
 }: FiltersSidebarProps) {
   const t = useTranslations("filters");
@@ -43,27 +43,16 @@ export function FiltersSidebar({
 
   return (
     <aside className="w-full space-y-4">
-      <CategoryFilter
-        value={filters.categoryId}
-        onChange={onCategoryChange}
-      />
+      <CategoryFilter value={filters.categoryId} onChange={onCategoryChange} />
 
-      <OccasionFilter
-        value={filters.occasionId}
-        onChange={onOccasionChange}
-      />
+      <OccasionFilter value={filters.occasionId} onChange={onOccasionChange} />
 
-      <RatingFilter
-        value={filters.rating}
-        onChange={onRatingChange}
-      />
+      <RatingFilter value={filters.rating} onChange={onRatingChange} />
 
       <PriceFilter
         minPrice={filters.minPrice}
         maxPrice={filters.maxPrice}
-        onMinPriceChange={onMinPriceChange}
-        onMaxPriceChange={onMaxPriceChange}
-        onPriceReset={onPriceReset}
+        onPriceChange={onPriceChange}
       />
 
       <Button

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { Tag, X } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/shared/ui/button";
 import { useCategories } from "@/shared/hooks/product-filter/use-categories";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";
@@ -83,7 +84,6 @@ export function CategoryFilter({ value, onChange }: CategoryFilterProps) {
       <div ref={scrollRef} className="max-h-60 space-y-2 overflow-y-auto">
         {categories.map((category) => {
           const isSelected = value === category.id;
-          const image = (category as { image?: string | null }).image;
 
           return (
             <Button
@@ -93,20 +93,28 @@ export function CategoryFilter({ value, onChange }: CategoryFilterProps) {
               className={cn(
                 "h-7 w-full justify-start gap-0 overflow-hidden rounded-md p-0 font-normal",
                 isSelected
-                  ? "bg-bg-primary-faint text-text-inverse hover:bg-bg-primary-faint"
+                  ? "bg-bg-primary-fade text-text-primary hover:bg-bg-primary-fade"
                   : "bg-bg-soft text-text-plain hover:bg-bg-default"
               )}
             >
               <span
                 className={cn(
                   "flex h-full w-9 shrink-0 items-center justify-center",
-                  isSelected ? "bg-bg-primary" : "bg-bg-default"
+                  isSelected
+                    ? "bg-bg-primary text-text-inverse"
+                    : "bg-bg-default text-text-plain"
                 )}
               >
-                {image ? (
-                  <img src={image} alt="" className="size-4 object-contain" />
+                {category.image ? (
+                  <Image
+                    src={category.image}
+                    alt=""
+                    width={16}
+                    height={16}
+                    className="size-4 object-contain"
+                  />
                 ) : (
-                  <Tag className="text-white" />
+                  <Tag />
                 )}
               </span>
 

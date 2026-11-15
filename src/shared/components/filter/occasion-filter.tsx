@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { X } from "lucide-react";
+import Image from "next/image";
 import { useOccasions } from "@/shared/hooks/product-filter/use-ossasion";
 import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";
@@ -11,21 +12,6 @@ type OccasionFilterProps = {
   value: string | null;
   onChange: (occasionId: string | null) => void;
 };
-
-const LOCAL_IMAGES: { keyword: string; src: string }[] = [
-  { keyword: "wedding", src: "/occasions/img/wedding.png" },
-  { keyword: "apology", src: "/occasions/img/apology.png" },
-  { keyword: "graduation", src: "/occasions/img/graduation.png" },
-  { keyword: "father", src: "/occasions/img/father.png" },
-];
-
-function resolveOccasionImage(title: string, apiImage?: string | null) {
-  if (apiImage && apiImage.trim() !== "") return apiImage;
-
-  const normalized = title.toLowerCase();
-  const match = LOCAL_IMAGES.find((item) => normalized.includes(item.keyword));
-  return match?.src ?? null;
-}
 
 export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
   const t = useTranslations("filters.occasion");
@@ -94,7 +80,6 @@ export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
       <div className="grid grid-cols-2 gap-3">
         {occasions.map((occasion) => {
           const isSelected = value === occasion.id;
-          const imageSrc = resolveOccasionImage(occasion.title, occasion.image);
 
           return (
             <Button
@@ -102,26 +87,27 @@ export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
               variant="ghost"
               onClick={() => onChange(isSelected ? null : occasion.id)}
               className={cn(
-                "relative h-[128px] w-full overflow-hidden rounded-xl p-0 bg-gradient-to-br from-bg-muted to-border-plain hover:opacity-90",
-                isSelected && "ring-2 ring-primary"
+                "relative aspect-[4/3] h-auto w-full overflow-hidden rounded-xl p-0",
+                isSelected
+                  ? "shadow-lg shadow-bg-primary/50"
+                  : "shadow-sm hover:shadow-none"
               )}
             >
-              {imageSrc && (
-                <img
-                  src={imageSrc}
-                  alt={occasion.title}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
+              {occasion.image && (
+                <Image
+                  src={occasion.image}
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
               )}
 
-              <span className="absolute inset-0 bg-black/40" />
+              <span className="absolute inset-0 bg-bg-overlay" />
 
               <span
                 className={cn(
-                  "absolute inset-0 flex items-center justify-center whitespace-normal px-2 text-center text-base font-normal text-white",
+                  "absolute inset-0 flex items-center justify-center whitespace-normal px-2 text-center text-base font-normal text-text-inverse dark:text-text-plain",
                   isSelected && "font-semibold"
                 )}
               >

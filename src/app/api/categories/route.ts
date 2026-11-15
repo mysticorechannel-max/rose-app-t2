@@ -1,4 +1,3 @@
-
 import "server-only";
 
 import { NextRequest, NextResponse } from "next/server";
@@ -34,10 +33,10 @@ export async function GET(request: NextRequest) {
 
     const data = await response.json();
 
-    return NextResponse.json(data, {
-      status: response.status,
-    });
-  } catch {
+    return NextResponse.json(data, { status: response.status });
+  } catch (error) {
+    console.error("categories proxy error:", error);
+
     return NextResponse.json(
       { message: "Failed to fetch categories" },
       { status: 500 }

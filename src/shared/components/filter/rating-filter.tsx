@@ -4,7 +4,6 @@ import { Button } from "@/shared/ui/button";
 import { Star, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-
 type RatingFilterProps = {
   value: number | null;
   onChange: (rating: number | null) => void;
@@ -39,7 +38,7 @@ export function RatingFilter({ value, onChange }: RatingFilterProps) {
         )}
       </div>
 
-      <div className="flex items-center gap-1" role="group" aria-label="Rating" dir="rtl">
+      <div className="flex items-center gap-1" role="group" aria-label={t("title")}>
         {stars.map((star) => {
           const current = value ?? 0;
           const isFull = star <= current;
@@ -63,14 +62,16 @@ export function RatingFilter({ value, onChange }: RatingFilterProps) {
               )}
 
               <Button
+                type="button"
                 variant="ghost"
-                aria-label={`${star - 0.5} stars`}
+                aria-label={t("starLabel", { count: star - 0.5 })}
                 onClick={() => select(star - 0.5)}
                 className={`${hitZoneClass} start-0`}
               />
               <Button
+                type="button"
                 variant="ghost"
-                aria-label={`${star} stars`}
+                aria-label={t("starLabel", { count: star })}
                 onClick={() => select(star)}
                 className={`${hitZoneClass} end-0`}
               />

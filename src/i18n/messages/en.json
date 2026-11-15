@@ -120,7 +120,8 @@
     },
     "rating": {
       "title": "Rating",
-      "reset": "Reset"
+      "reset": "Reset",
+      "starLabel": "{count} stars"
     },
     "price": {
       "title": "Price",
@@ -129,6 +130,7 @@
       "reset": "Reset",
       "error": "From price must be less than To price."
     },
-    "resetAll": "Reset All"
+    "resetAll": "Reset All",
+    "starLabel": "{count, plural, one {# star} other {# stars}}"
   }
 }
