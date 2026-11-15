@@ -61,9 +61,7 @@ export function AvatarUpload() {
       </div>
 
       <div className="space-y-1">
-        <h2 className="text-lg font-medium text-text-plain">
-          {t("uploadPhoto")}
-        </h2>
+        <h2 className="text-lg font-medium text-text-plain">{t("uploadPhoto")}</h2>
         <p className="text-sm text-text-soft">{t("uploadHint")}</p>
       </div>
     </div>

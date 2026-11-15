@@ -63,11 +63,11 @@ export function ProfileForm() {
       ...(values.phone ? { phone: values.phone } : {}),
     });
   }
-const { mutate: deleteAccount } = useDeleteAccountMutation();
+  const { mutate: deleteAccount } = useDeleteAccountMutation();
 
   function handleDeleteAccount(): void {
-  deleteAccount(undefined, { onSuccess: () => router.replace("/") });
-}
+    deleteAccount(undefined, { onSuccess: () => router.replace("/") });
+  }
 
   if (isPending) {
     return (

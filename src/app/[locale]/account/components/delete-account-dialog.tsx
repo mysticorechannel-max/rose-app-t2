@@ -54,9 +54,7 @@ export function DeleteAccountDialog({ onConfirm }: DeleteAccountDialogProps) {
               <Trash2 className="size-7 text-text-plain" aria-hidden="true" />
             </div>
           </div>
-          <DialogTitle className="text-xl">
-            {t("deleteDialog.title")}
-          </DialogTitle>
+          <DialogTitle className="text-xl">{t("deleteDialog.title")}</DialogTitle>
           <DialogDescription className="text-text-danger">
             {t("deleteDialog.description")}
           </DialogDescription>
@@ -68,12 +66,7 @@ export function DeleteAccountDialog({ onConfirm }: DeleteAccountDialogProps) {
               {t("deleteDialog.cancel")}
             </Button>
           </DialogClose>
-          <Button
-            type="button"
-            variant="destructive"
-            className="w-full"
-            onClick={handleConfirm}
-          >
+          <Button type="button" variant="destructive" className="w-full" onClick={handleConfirm}>
             {t("deleteDialog.confirm")}
           </Button>
         </DialogFooter>

@@ -31,9 +31,7 @@ export function AccountSidebar() {
               aria-current={active ? "page" : undefined}
               className={cn(
                 "flex h-12 items-center gap-3 rounded-lg px-4 text-sm",
-                active
-                  ? "bg-bg-inverse text-text-inverse"
-                  : "text-text-plain hover:bg-bg-muted"
+                active ? "bg-bg-inverse text-text-inverse" : "text-text-plain hover:bg-bg-muted"
               )}
             >
               <Icon className="size-5 shrink-0" aria-hidden="true" />

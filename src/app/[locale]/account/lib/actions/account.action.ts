@@ -22,9 +22,7 @@ function toMessage(data: ApiError | null, fallback: string): string {
   return fieldMessages[0] ?? data?.message ?? fallback;
 }
 
-export async function changePasswordAction(
-  body: ChangePasswordBody
-): Promise<ActionResult> {
+export async function changePasswordAction(body: ChangePasswordBody): Promise<ActionResult> {
   const baseUrl = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
   if (!baseUrl) return { ok: false, message: "API URL is not configured." };
 
@@ -50,9 +48,7 @@ export async function changePasswordAction(
 
   return { ok: true };
 }
-export type ProfileResult =
-  | { ok: true; user: UserProfile }
-  | { ok: false; message: string };
+export type ProfileResult = { ok: true; user: UserProfile } | { ok: false; message: string };
 
 export async function getProfileAction(): Promise<ProfileResult> {
   const baseUrl = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
@@ -78,8 +74,7 @@ export async function getProfileAction(): Promise<ProfileResult> {
   return { ok: true, user: data.payload.user };
 }
 
-export async function updateProfileAction(body: UpdateProfileBody
-): Promise<ProfileResult> {
+export async function updateProfileAction(body: UpdateProfileBody): Promise<ProfileResult> {
   const baseUrl = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL;
   if (!baseUrl) return { ok: false, message: "API URL is not configured." };
 
