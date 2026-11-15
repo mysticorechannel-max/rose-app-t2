@@ -6,13 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLocale, useTranslations } from "next-intl";
 import { Eye, EyeOff } from "lucide-react";
 
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/shared/ui/button";
 
 import useLogin from "../_hooks/use-login";
 import { LoginFormValues, loginSchema } from "../_schemas/login.schema";
 import Link from "next/link";
+import { Label } from "@/shared/ui/label";
+import { Input } from "@/shared/ui/input";
 
 export default function LoginForm() {
   const t = useTranslations("Login");
@@ -64,7 +65,7 @@ export default function LoginForm() {
         {/* Password */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <Label htmlFor="password" className="text-sm font-medium text-text-primary">
+            <Label htmlFor="password">
               {t("password")}
             </Label>
 

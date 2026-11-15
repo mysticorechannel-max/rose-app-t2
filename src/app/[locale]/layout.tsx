@@ -4,12 +4,15 @@ import { setRequestLocale } from "next-intl/server";
 import { Pinyon_Script, Sarabun, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { AppProviders } from "@/shared/providers/app-providers";
+import { FAVICON } from "@/../public/assets";
 import { routing } from "@/i18n/routing";
 
-import "../globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import { AppProviders } from "../../shared/providers/app-providers";
+
+import { Footer, Header } from "@/shared/components";
+import "../../../globals.css";
+import { Toaster } from "@/shared/ui/sonner";
+import { ThemeProvider } from "@/shared/providers/theme-provider";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -22,6 +25,11 @@ const tajawal = Tajawal({
   weight: ["400", "500", "700"],
   variable: "--font-tajawal",
 });
+
+// Font stack configuration:
+// - English pages: Poppins (primary) → Cairo (fallback for Arabic text)
+// - Arabic pages: Cairo (primary) → Poppins (fallback for Latin text)
+// This ensures proper rendering of mixed-language content
 const pinyonScript = Pinyon_Script({
   subsets: ["latin"],
   weight: "400",
@@ -29,8 +37,9 @@ const pinyonScript = Pinyon_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Rose App",
-  description: "Rose App team foundation",
+  icons: {
+    icon: FAVICON,
+  },
 };
 
 export function generateStaticParams() {
@@ -63,8 +72,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             disableTransitionOnChange
           >
             <AppProviders>
+              <Header/>
               {children}
+              <Footer/>
               <Toaster />
+              
             </AppProviders>
           </ThemeProvider>
         </NextIntlClientProvider>
