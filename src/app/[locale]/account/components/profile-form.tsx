@@ -7,26 +7,39 @@ import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shared/ui/select";
 
-import { profileSchema, type ProfileFields } from "../lib/schemes/profile.schema";
+import { useDeleteAccountMutation } from "../lib/apis/mutations/use-delete-account";
+import { useUpdateProfileMutation } from "../lib/apis/mutations/use-update-profile";
+import { useGetProfileQuery } from "../lib/apis/queries/use-get-profile";
+import {
+  profileSchema,
+  type ProfileFields,
+} from "../lib/schemes/profile.schema";
 import { AvatarUpload } from "./avatar-upload";
 import { DeleteAccountDialog } from "./delete-account-dialog";
-import { useUpdateProfileMutation } from "../lib/apis/mutations/use-update-profile";
-import { useDeleteAccountMutation } from "../lib/apis/mutations/use-delete-account";
-import { useGetProfileQuery } from "../lib/apis/queries/use-get-profile";
+
 export function ProfileForm() {
   // Translation
   const t = useTranslations("account");
   const tSelect = useTranslations("select");
 
+  // Navigation
   const router = useRouter();
 
-  // Queries
+  // Query
   const { data: user, isPending, error } = useGetProfileQuery();
 
   // Mutation
-  const { mutate, isPending: isSaving } = useUpdateProfileMutation();
+  const { mutate: updateProfile, isPending: isSaving } =
+    useUpdateProfileMutation();
+  const { mutate: deleteAccount } = useDeleteAccountMutation();
 
   // Form & validation
   const {
@@ -57,13 +70,12 @@ export function ProfileForm() {
   }
 
   function onSubmit(values: ProfileFields): void {
-    mutate({
+    updateProfile({
       firstName: values.firstName,
       lastName: values.lastName,
       ...(values.phone ? { phone: values.phone } : {}),
     });
   }
-  const { mutate: deleteAccount } = useDeleteAccountMutation();
 
   function handleDeleteAccount(): void {
     deleteAccount(undefined, { onSuccess: () => router.replace("/") });
@@ -102,7 +114,6 @@ export function ProfileForm() {
         />
       </div>
 
-      {/* Read-only: the PATCH endpoint does not accept email */}
       <Input label={t("profile.email")} value={user.email} readOnly disabled />
 
       <Controller
@@ -139,7 +150,6 @@ export function ProfileForm() {
       <div className="flex items-center justify-between pt-6">
         <DeleteAccountDialog onConfirm={handleDeleteAccount} />
         <Button type="submit" loading={isSaving} className="min-w-52">
-          {" "}
           {t("profile.save")}
         </Button>
       </div>
