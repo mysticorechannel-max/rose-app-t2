@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Sarabun, Tajawal } from "next/font/google";
+import { Pinyon_Script, Sarabun, Tajawal } from "next/font/google";
 import { notFound } from "next/navigation";
 
 import { FAVICON } from "@/../public/assets";
@@ -9,8 +9,7 @@ import { routing } from "@/i18n/routing";
 
 import { AppProviders } from "../../shared/providers/app-providers";
 
-import { Footer, Header } from "@/shared/components";
-import "../globals.css";
+import "../../../globals.css";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -28,6 +27,11 @@ const tajawal = Tajawal({
 // - English pages: Poppins (primary) → Cairo (fallback for Arabic text)
 // - Arabic pages: Cairo (primary) → Poppins (fallback for Latin text)
 // This ensures proper rendering of mixed-language content
+const pinyonScript = Pinyon_Script({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-pinyon-script",
+});
 
 export const metadata: Metadata = {
   title: "Rose App",
@@ -53,7 +57,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
 
   return (
     <html
-      className={`${sarabun.variable} ${tajawal.variable}`}
+      className={`${sarabun.variable} ${tajawal.variable} ${pinyonScript.variable}`}
       dir={direction}
       lang={locale}
       suppressHydrationWarning
@@ -61,9 +65,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       <body className={fontClass}>
         <NextIntlClientProvider>
           <AppProviders>
-            <Header />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
+            {children}
           </AppProviders>
         </NextIntlClientProvider>
       </body>
