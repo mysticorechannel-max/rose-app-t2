@@ -5,14 +5,12 @@ import type { ForgotPasswordRequest } from "../types/forgot-password";
 
 export async function forgotPasswordAction(
   values: ForgotPasswordRequest,
-): Promise<{ success: boolean; message: string }> {
+): Promise<{ success: true } | { success: false; errorKey: "requestFailed" }> {
   try {
-    const response = await forgotPasswordApi(values);
-    return { success: true, message: response.message };
+    await forgotPasswordApi(values);
+    return { success: true };
   } catch (error) {
-    return {
-      success: false,
-      message: error instanceof Error ? error.message : "Something went wrong",
-    };
+    console.error("Forgot password request failed:", error);
+    return { success: false, errorKey: "requestFailed" };
   }
 }

@@ -1,13 +1,8 @@
 import type { LoginRequest, LoginResponse } from "../types/login";
-
-const API_URL = process.env.API_URL;
+import { AUTH_ENDPOINTS, getAuthApiUrl } from "./auth.endpoint";
 
 export async function loginApi(credentials: LoginRequest): Promise<LoginResponse> {
-  if (!API_URL) {
-    throw new Error("API_URL is not configured");
-  }
-
-  const response = await fetch(`${API_URL}/auth/login`, {
+  const response = await fetch(getAuthApiUrl(AUTH_ENDPOINTS.LOGIN), {
     method: "POST",
     headers: {
       Accept: "application/json",

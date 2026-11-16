@@ -3,6 +3,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Button } from "@/shared/ui/button";
 
 interface CheckEmailStepProps {
   email: string;
@@ -61,12 +62,12 @@ export default function CheckEmailStep({
       <div className="pt-4 text-center">
         <p className="text-xs font-medium text-text-plain">
           {t("needHelp")}{" "}
-          <button
+          <Button
             type="button"
             className="font-bold text-bg-primary hover:underline"
           >
             {t("contactUs")}
-          </button>
+          </Button>
         </p>
       </div>
     </div>

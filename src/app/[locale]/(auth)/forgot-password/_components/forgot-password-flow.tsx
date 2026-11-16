@@ -9,9 +9,11 @@ import CheckEmailStep from "./_steps/check-email-step";
 
 
 export default function ForgotPasswordFlow() {
+  // Navigation
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
+  // State
   const [step, setStep] = useState<1 | 2>(1);
   const [submittedEmail, setSubmittedEmail] = useState("");
 

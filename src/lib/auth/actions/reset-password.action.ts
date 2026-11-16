@@ -5,14 +5,12 @@ import type { ResetPasswordRequest } from "../types/reset-password";
 
 export async function resetPasswordAction(
   values: ResetPasswordRequest,
-): Promise<{ success: boolean; message: string }> {
+): Promise<{ success: true } | { success: false; errorKey: "requestFailed" }> {
   try {
-    const response = await resetPasswordApi(values);
-    return { success: true, message: response.message };
+    await resetPasswordApi(values);
+    return { success: true };
   } catch (error) {
-    return {
-      success: false,
-      message: error instanceof Error ? error.message : "Something went wrong",
-    };
+    console.error("Reset password request failed:", error);
+    return { success: false, errorKey: "requestFailed" };
   }
 }

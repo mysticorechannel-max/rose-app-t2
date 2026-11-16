@@ -2,17 +2,12 @@ import type {
   ForgotPasswordRequest,
   ForgotPasswordResponse,
 } from "../types/forgot-password";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { AUTH_ENDPOINTS, getAuthApiUrl } from "./auth.endpoint";
 
 export async function forgotPasswordApi(
   values: ForgotPasswordRequest,
 ): Promise<ForgotPasswordResponse> {
-  if (!API_URL) {
-    throw new Error("API_URL is not configured");
-  }
-
-  const response = await fetch(`${API_URL}/auth/forgot-password`, {
+  const response = await fetch(getAuthApiUrl(AUTH_ENDPOINTS.FORGOT_PASSWORD), {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -24,7 +19,7 @@ export async function forgotPasswordApi(
 
   const data = await response.json();
 
-  if (!response.ok) {
+  if (!response.ok || !data.status) {
     throw new Error(data.message || "Something went wrong");
   }
 

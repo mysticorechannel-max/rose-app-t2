@@ -1,27 +1,24 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLocale, useTranslations } from "next-intl";
-import { Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
 
-
+import AuthTitle from "../../_components/auth-title";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/shared/ui/button";
-
-import useLogin from "../_hooks/use-login";
-import { LoginFormValues, loginSchema } from "../_schemas/login.schema";
-import Link from "next/link";
-import { Label } from "@/shared/ui/label";
 import { Input } from "@/shared/ui/input";
+import useLogin from "../_hooks/use-login";
+import { type LoginFormValues, loginSchema } from "../_schemas/login.schema";
 
 export default function LoginForm() {
+  // Translation
   const t = useTranslations("Login");
-  const [showPassword, setShowPassword] = useState(false);
 
+  // Hooks
   const loginMutation = useLogin();
-  const locale = useLocale();
 
+  // Form
   const {
     register,
     handleSubmit,
@@ -34,6 +31,7 @@ export default function LoginForm() {
     },
   });
 
+  // Functions
   const onSubmit = (values: LoginFormValues) => {
     loginMutation.mutate(values);
   };
@@ -41,68 +39,44 @@ export default function LoginForm() {
   return (
     <div className="w-full max-w-md">
       <div className="mb-8 border-b border-border-soft pb-4">
-        <h1 className="mb-3 text-2xl font-semibold text-text-plain text-center">{t("title")}</h1>
+        <AuthTitle>{t("title")}</AuthTitle>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Username */}
-        <div className="space-y-2">
-          <Label htmlFor="username" className="block text-sm font-medium text-text-primary">
-            {t("username")}
-          </Label>
-
-          <Input
-            id="username"
-            type="text"
-            placeholder={t("usernamePlaceholder")}
-            autoComplete="username"
-            {...register("username")}
-          />
-
-          {errors.username && <p className="text-sm text-text-danger">{t(errors.username.message!)}</p>}
-        </div>
+        <Input
+          id="username"
+          type="text"
+          label={t("username")}
+          error={errors.username ? t(errors.username.message!) : undefined}
+          placeholder={t("usernamePlaceholder")}
+          autoComplete="username"
+          {...register("username")}
+        />
 
         {/* Password */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <Label htmlFor="password">
-              {t("password")}
-            </Label>
+        <div className="relative">
+          <Input
+            id="password"
+            type="password"
+            label={t("password")}
+            error={errors.password ? t(errors.password.message!) : undefined}
+            placeholder={t("passwordPlaceholder")}
+            autoComplete="current-password"
+            {...register("password")}
+          />
 
-            <Link
-              href={`/${locale}/forgot-password`}
-              className="text-sm font-medium text-bg-primary hover:underline"
-            >
-              {t("forgotPassword")}
-            </Link>
-          </div>
-
-          <div className="relative">
-            <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              placeholder={t("passwordPlaceholder")}
-              autoComplete="current-password"
-              className="pr-10"
-              {...register("password")}
-            />
-
-            <button
-              type="button"
-              onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted"
-              aria-label={showPassword ? t("hidePassword") : t("showPassword")}
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
-          </div>
-
-          {errors.password && <p className="text-sm text-text-danger">{t(errors.password.message!)}</p>}
+          <Link
+            href="/forgot-password"
+            className="absolute end-0 top-0 text-sm font-medium text-bg-primary hover:underline"
+          >
+            {t("forgotPassword")}
+          </Link>
         </div>
 
         {/* API Error */}
         {loginMutation.isError && (
-          <p className="text-sm text-text-danger">{loginMutation.error.message}</p>
+          <p className="text-sm text-text-danger">{t("invalidCredentials")}</p>
         )}
 
         {/* Submit */}
@@ -116,10 +90,10 @@ export default function LoginForm() {
       </form>
       <div className="mt-6 border-t border-border-soft pt-4 text-center">
         <p className="text-xs font-medium text-text-plain">
-          {t("createAccount")}{" "}
-          <button type="button" className="font-bold text-bg-primary hover:underline">
+          {t("createAccount")} {" "}
+          <Link href="/register" className="font-bold text-bg-primary hover:underline">
             {t("createOneNow")}
-          </button>
+          </Link>
         </p>
       </div>
     </div>

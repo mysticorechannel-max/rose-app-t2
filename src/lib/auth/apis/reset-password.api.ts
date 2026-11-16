@@ -2,17 +2,12 @@ import type {
   ResetPasswordRequest,
   ResetPasswordResponse,
 } from "../types/reset-password";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import { AUTH_ENDPOINTS, getAuthApiUrl } from "./auth.endpoint";
 
 export async function resetPasswordApi(
   values: ResetPasswordRequest,
 ): Promise<ResetPasswordResponse> {
-  if (!API_URL) {
-    throw new Error("API_URL is not configured");
-  }
-
-  const response = await fetch(`${API_URL}/auth/reset-password`, {
+  const response = await fetch(getAuthApiUrl(AUTH_ENDPOINTS.RESET_PASSWORD), {
     method: "POST",
     headers: {
       Accept: "application/json",

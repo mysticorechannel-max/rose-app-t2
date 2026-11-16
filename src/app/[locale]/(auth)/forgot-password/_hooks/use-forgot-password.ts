@@ -5,6 +5,12 @@ import type { ForgotPasswordRequest } from "../../../../../lib/auth/types/forgot
 
 export default function useForgotPassword() {
   return useMutation({
-    mutationFn: (values: ForgotPasswordRequest) => forgotPasswordAction(values),
+    mutationFn: async (values: ForgotPasswordRequest) => {
+      try {
+        return await forgotPasswordAction(values);
+      } catch {
+        return { success: false as const, errorKey: "requestFailed" as const };
+      }
+    },
   });
 }

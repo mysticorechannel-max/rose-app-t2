@@ -3,31 +3,36 @@
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "@/i18n/navigation";
 
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+
 
 import useForgotPassword from "../../_hooks/use-forgot-password";
+import AuthTitle from "../../../_components/auth-title";
 import {
   forgotPasswordSchema,
   type ForgotPasswordFormValues,
 } from "../../_schemas/forgot-password.schema";
-import { Button } from "@/components/ui/button";
+import { Label } from "@/shared/ui/label";
+import { Input } from "@/shared/ui/input";
+import { Button } from "@/shared/ui/button";
 
 interface RequestResetStepProps {
   onSuccess: (email: string) => void;
 }
 
 export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
+  // Translation
   const t = useTranslations("ForgotPassword");
+
+  // Navigation
   const locale = useLocale();
-  const isArabic = locale === "ar";
 
+  // Hooks
   const forgotPasswordMutation = useForgotPassword();
-  const [actionError, setActionError] = useState<string | null>(null);
 
+  // Form
   const {
     register,
     handleSubmit,
@@ -36,8 +41,11 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
     resolver: zodResolver(forgotPasswordSchema),
   });
 
+  // Variables
+  const isArabic = locale === "ar";
+
+  // Functions
   const onSubmit = (values: ForgotPasswordFormValues) => {
-    setActionError(null);
     forgotPasswordMutation.mutate(
       {
         email: values.email,
@@ -47,8 +55,6 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
         onSuccess: (result) => {
           if (result.success) {
             onSuccess(values.email);
-          } else {
-            setActionError(result.message);
           }
         },
       }
@@ -58,7 +64,7 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
   return (
     <div className="w-full max-w-md">
       <div className="mb-8 border-b border-border-soft pb-4">
-        <h1 className="mb-3 text-2xl font-semibold text-text-plain">{t("title")}</h1>
+        <AuthTitle>{t("title")}</AuthTitle>
         <p className="text-base font-normal text-text-plain">{t("description")}</p>
       </div>
 
@@ -78,10 +84,8 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
           {errors.email && <p className="text-sm text-text-danger">{t(errors.email.message!)}</p>}
         </div>
 
-        {(actionError || forgotPasswordMutation.isError) && (
-          <p className="text-sm text-text-danger">
-            {actionError || forgotPasswordMutation.error?.message}{" "}
-          </p>
+        {forgotPasswordMutation.data?.success === false && (
+          <p className="text-sm text-text-danger">{t(forgotPasswordMutation.data.errorKey)}</p>
         )}
 
         <Button type="submit" disabled={forgotPasswordMutation.isPending} className="w-full">
@@ -94,9 +98,9 @@ export default function RequestResetStep({ onSuccess }: RequestResetStepProps) {
       <div className="mt-6 border-t border-border-soft pt-4 text-center">
         <p className="text-xs font-medium text-text-plain">
           {t("createAccount")}{" "}
-          <button type="button" className="font-bold text-bg-primary hover:underline">
+          <Link href="/register" className="font-bold text-bg-primary hover:underline">
             {t("createOneNow")}
-          </button>
+          </Link>
         </p>
       </div>
     </div>

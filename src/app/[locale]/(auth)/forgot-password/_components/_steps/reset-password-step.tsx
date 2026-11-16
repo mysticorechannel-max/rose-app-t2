@@ -4,25 +4,31 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import AuthTitle from "../../../_components/auth-title";
 
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+
 
 import useResetPassword from "../../_hooks/use-reset-password";
 import {
   resetPasswordSchema,
   type ResetPasswordFormValues,
 } from "../../_schemas/reset-password.schema";
-import { Button } from "@/components/ui/button";
+import { Label } from "@/shared/ui/label";
+import { Input } from "@/shared/ui/input";
+import { Button } from "@/shared/ui/button";
 
 interface ResetPasswordStepProps {
   token: string;
 }
 
 export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
+  // Translation
   const t = useTranslations("ForgotPassword");
+
+  // Hooks
   const resetPasswordMutation = useResetPassword();
 
+  // Form
   const {
     register,
     handleSubmit,
@@ -31,6 +37,7 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
     resolver: zodResolver(resetPasswordSchema),
   });
 
+  // Functions
   const onSubmit = (values: ResetPasswordFormValues) => {
     resetPasswordMutation.mutate(
       {
@@ -43,7 +50,7 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
           if (result.success) {
             toast.success(t("resetSuccess"));
           } else {
-            toast.error(result.message);
+            toast.error(t(result.errorKey));
           }
         },
       }
@@ -53,7 +60,7 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
   return (
     <div className="w-full max-w-md">
       <div className="mb-8 border-b border-border-soft pb-4">
-        <h1 className="mb-3 text-2xl font-semibold text-text-plain">{t("resetTitle")}</h1>
+        <AuthTitle>{t("resetTitle")}</AuthTitle>
         <p>{t("resetDis")}</p>
       </div>
 
@@ -91,10 +98,6 @@ export default function ResetPasswordStep({ token }: ResetPasswordStepProps) {
             <p className="text-sm text-text-danger">{t(errors.confirmPassword.message!)}</p>
           )}
         </div>
-
-        {resetPasswordMutation.isError && (
-          <p className="text-sm text-text-danger">{resetPasswordMutation.error.message}</p>
-        )}
 
         <Button type="submit" disabled={resetPasswordMutation.isPending} className="w-full">
           {resetPasswordMutation.isPending ? t("resetLoading") : t("resetButton")}

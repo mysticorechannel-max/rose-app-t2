@@ -9,10 +9,7 @@ import { routing } from "@/i18n/routing";
 
 import { AppProviders } from "../../shared/providers/app-providers";
 
-import { Footer, Header } from "@/shared/components";
 import "../../../globals.css";
-import { Toaster } from "@/shared/ui/sonner";
-import { ThemeProvider } from "@/shared/providers/theme-provider";
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -67,20 +64,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     >
       <body className={fontClass}>
         <NextIntlClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <AppProviders>
-              <Header/>
-              {children}
-              <Footer/>
-              <Toaster />
-              
-            </AppProviders>
-          </ThemeProvider>
+          <AppProviders>
+            {children}
+          </AppProviders>
         </NextIntlClientProvider>
       </body>
     </html>
