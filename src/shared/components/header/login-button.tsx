@@ -14,7 +14,7 @@ export function LoginButton() {
     <Button
       variant="ghost"
       className="gap-2 hover:bg-transparent"
-      onClick={() => router.push("/auth/login")}
+      onClick={() => router.push("/login")}
     >
       <User className="h-5 w-5" />
       <span className="hidden sm:inline text-base font-normal">{t("login")}</span>

@@ -68,7 +68,7 @@ export function PushNotificationToggle() {
 
       {/* Toggle button */}
       <Button
-        variant={isSubscribed ? "destructive" : "default"}
+        variant={isSubscribed ? "destructive" : "primary"}
         size="sm"
         onClick={handleToggle}
         disabled={isLoading || status === "permission-denied" || status === "not-configured"}

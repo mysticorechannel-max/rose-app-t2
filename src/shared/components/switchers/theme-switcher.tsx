@@ -39,7 +39,7 @@ export function ThemeSwitcher() {
           className="h-9 px-3"
           onClick={() => setTheme(value)}
           type="button"
-          variant={isMounted && theme === value ? "default" : "ghost"}
+          variant={isMounted && theme === value ? "primary" : "ghost"}
         >
           <Icon aria-hidden="true" className="size-4" />
           <span className="hidden sm:inline">{t(value)}</span>
