@@ -1,9 +1,8 @@
 "use server";
 
-import { cookies } from "next/headers";
-
+import { getToken as getJwt } from "next-auth/jwt";
+import { cookies, headers } from "next/headers";
 import { ACCOUNT_ENDPOINTS } from "../apis/account.endpoint";
-import { AUTH_COOKIE_NAME } from "../constants/account.constant";
 import type {
   ActionResult,
   ApiError,
@@ -19,9 +18,13 @@ export type ProfileResult =
 
 type FetchResult<T> = { ok: true; data: T } | { ok: false; message: string };
 
-// Token source. Switch this one function to NextAuth once PR #16 is merged.
+// Token source: the API token stored inside the NextAuth JWT (see src/auth.ts).
 async function getToken(): Promise<string | undefined> {
-  return (await cookies()).get(AUTH_COOKIE_NAME)?.value;
+  const jwt = await getJwt({
+    req: { headers: await headers(), cookies: await cookies() } as never,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+  return jwt?.accessToken;
 }
 
 async function readJson(response: Response): Promise<unknown> {
@@ -92,8 +95,5 @@ export async function deleteAccountAction(): Promise<ActionResult> {
   const result = await authorizedFetch<undefined>(ACCOUNT_ENDPOINTS.DELETE_ACCOUNT, {
     method: "DELETE",
   });
-  if (!result.ok) return result;
-
-  (await cookies()).delete(AUTH_COOKIE_NAME); 
-  return { ok: true };
+  return result.ok ? { ok: true } : result;
 }

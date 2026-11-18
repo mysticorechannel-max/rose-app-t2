@@ -1,9 +1,9 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import { signOut } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
 import { Controller, useForm } from "react-hook-form";
-import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
@@ -30,8 +30,7 @@ export function ProfileForm() {
   const t = useTranslations("account");
   const tSelect = useTranslations("select");
 
-  // Navigation
-  const router = useRouter();
+  const locale = useLocale();
 
   // Query
   const { data: user, isPending, error } = useGetProfileQuery();
@@ -39,7 +38,8 @@ export function ProfileForm() {
   // Mutation
   const { mutate: updateProfile, isPending: isSaving } =
     useUpdateProfileMutation();
-  const { mutate: deleteAccount } = useDeleteAccountMutation();
+  const { mutate: deleteAccount, isPending: isDeleting } =
+    useDeleteAccountMutation();
 
   // Form & validation
   const {
@@ -77,8 +77,13 @@ export function ProfileForm() {
     });
   }
 
-  function handleDeleteAccount(): void {
-    deleteAccount(undefined, { onSuccess: () => router.replace("/") });
+  function handleDeleteAccount(closeDialog: () => void): void {
+    deleteAccount(undefined, {
+      onSuccess: () => {
+        closeDialog();
+        signOut({ callbackUrl: `/${locale}` });
+      },
+    });
   }
 
   if (isPending) {
@@ -148,7 +153,10 @@ export function ProfileForm() {
       </div>
 
       <div className="flex items-center justify-between pt-6">
-        <DeleteAccountDialog onConfirm={handleDeleteAccount} />
+        <DeleteAccountDialog
+          isPending={isDeleting}
+          onConfirm={handleDeleteAccount}
+        />
         <Button type="submit" loading={isSaving} className="min-w-52">
           {t("profile.save")}
         </Button>

@@ -17,10 +17,11 @@ import {
 } from "@/shared/ui/dialog";
 
 type DeleteAccountDialogProps = {
-  onConfirm: () => void;
+  isPending: boolean;
+  onConfirm: (closeDialog: () => void) => void;
 };
 
-export function DeleteAccountDialog({ onConfirm }: DeleteAccountDialogProps) {
+export function DeleteAccountDialog({ isPending, onConfirm }: DeleteAccountDialogProps) {
   // Translation
   const t = useTranslations("account");
 
@@ -28,13 +29,22 @@ export function DeleteAccountDialog({ onConfirm }: DeleteAccountDialogProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
   // Functions
-  function handleConfirm(): void {
-    onConfirm();
+  function closeDialog(): void {
     setIsOpen(false);
   }
 
+  function handleOpenChange(open: boolean): void {
+    // Keep the dialog open while the account is being deleted.
+    if (isPending) return;
+    setIsOpen(open);
+  }
+
+  function handleConfirm(): void {
+    onConfirm(closeDialog);
+  }
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button type="button" variant="ghost" className="text-text-danger">
           {t("profile.delete")}
@@ -62,11 +72,17 @@ export function DeleteAccountDialog({ onConfirm }: DeleteAccountDialogProps) {
 
         <DialogFooter className="mt-4 gap-3 sm:grid sm:grid-cols-2 sm:space-x-0">
           <DialogClose asChild>
-            <Button type="button" variant="subtle" className="w-full">
+            <Button type="button" variant="subtle" className="w-full" disabled={isPending}>
               {t("deleteDialog.cancel")}
             </Button>
           </DialogClose>
-          <Button type="button" variant="destructive" className="w-full" onClick={handleConfirm}>
+          <Button
+            type="button"
+            variant="destructive"
+            className="w-full"
+            loading={isPending}
+            onClick={handleConfirm}
+          >
             {t("deleteDialog.confirm")}
           </Button>
         </DialogFooter>

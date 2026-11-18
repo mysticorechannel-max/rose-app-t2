@@ -1,7 +1,8 @@
 "use client";
 
 import { LockKeyhole, LogOut, UserRoundPen } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { signOut } from "next-auth/react";
+import { useLocale, useTranslations } from "next-intl";
 
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";
@@ -16,7 +17,12 @@ const links = [
 
 export function AccountSidebar() {
   const t = useTranslations("account.sidebar");
+  const locale = useLocale();
   const pathname = usePathname();
+
+  function handleLogout(): void {
+    signOut({ callbackUrl: `/${locale}` });
+  }
 
   return (
     <aside className="flex h-full flex-col justify-between rounded-2xl border border-border-muted bg-bg-subtle p-4">
@@ -43,6 +49,7 @@ export function AccountSidebar() {
 
       <button
         type="button"
+        onClick={handleLogout}
         className="flex h-12 items-center gap-3 rounded-lg bg-bg-muted px-4 text-sm text-text-danger"
       >
         <LogOut className="size-5 shrink-0" aria-hidden="true" />
