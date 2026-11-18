@@ -263,5 +263,60 @@
     "createOneNow": "أنشئي حسابًا الآن",
     "requestFailed": "تعذّر إكمال طلبك. يُرجى المحاولة مرة أخرى.",
     "DontHaveAccount": "ألا تملك حساباً بعد؟"
+  },
+  "account": {
+    "title": "إعدادات الحساب",
+    "loading": "جارٍ تحميل بياناتك...",
+    "sidebar": {
+      "label": "التنقل في الحساب",
+      "profile": "الملف الشخصي",
+      "changePassword": "تغيير كلمة المرور",
+      "logout": "تسجيل الخروج"
+    },
+    "validation": {
+      "required": "هذا الحقل مطلوب",
+      "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
+      "invalidPhone": "أدخل رقم هاتف صحيحاً",
+      "passwordTooShort": "يجب ألا تقل كلمة المرور عن 8 أحرف",
+      "passwordNeedsUppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+      "passwordNeedsNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+      "passwordNeedsSpecial": "يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل",
+      "passwordMismatch": "كلمتا المرور غير متطابقتين",
+      "passwordSameAsOld": "يجب أن تختلف كلمة المرور الجديدة عن القديمة"
+    },
+    "profile": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "gender": "النوع",
+      "uploadPhoto": "رفع صورة",
+      "uploadHint": "يمكنك رفع صورة بصيغة .jpg أو .png أو .gif بحد أقصى 5 ميجابايت.",
+      "avatarInvalidType": "يُسمح فقط بملفات .jpg و .png و .gif.",
+      "avatarTooLarge": "يجب ألا يتجاوز حجم الصورة 5 ميجابايت.",
+      "save": "حفظ التغييرات",
+      "saveSuccess": "تم تحديث الملف الشخصي بنجاح",
+      "saveError": "تعذّر تحديث الملف الشخصي",
+      "delete": "حذف حسابي",
+      "genders": {
+        "male": "ذكر",
+        "female": "أنثى"
+      }
+    },
+    "deleteDialog": {
+      "title": "هل أنت متأكد أنك تريد حذف حسابك؟",
+      "description": "هذا الإجراء نهائي ولا يمكن التراجع عنه.",
+      "cancel": "لا، لن أفعل",
+      "confirm": "نعم، احذف",
+      "close": "إغلاق"
+    },
+    "changePassword": {
+      "oldPassword": "كلمة المرور القديمة",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "submit": "تغيير كلمة المرور",
+      "success": "تم تغيير كلمة المرور بنجاح",
+      "error": "تعذّر تغيير كلمة المرور"
+    }
   }
 }
