@@ -1,7 +1,14 @@
+import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 
 import { routing } from "./i18n/routing";
 
-export default createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
 
-export const config = { matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)" };
+export function proxy(request: NextRequest) {
+  return intlMiddleware(request);
+}
+
+export const config = {
+  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+};
