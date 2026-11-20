@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
+<<<<<<< HEAD
+
+import { Sarabun, Tajawal } from "next/font/google";
+=======
 import { setRequestLocale } from "next-intl/server";
 import { Pinyon_Script, Sarabun, Tajawal } from "next/font/google";
+>>>>>>> origin/sprint/2-auth-home-products
 import { notFound } from "next/navigation";
 
 import { FAVICON } from "@/../public/assets";
@@ -9,7 +14,13 @@ import { routing } from "@/i18n/routing";
 
 import { AppProviders } from "../../shared/providers/app-providers";
 
+<<<<<<< HEAD
+import { Footer, Header } from "@/shared/components";
+import "../globals.css";
+import { setRequestLocale } from "next-intl/server";
+=======
 import "../../../globals.css";
+>>>>>>> origin/sprint/2-auth-home-products
 
 const sarabun = Sarabun({
   subsets: ["latin"],
@@ -65,10 +76,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       <body className={fontClass}>
         <NextIntlClientProvider>
           <AppProviders>
-            {children}
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
           </AppProviders>
         </NextIntlClientProvider>
       </body>
     </html>
   );
+}
 }

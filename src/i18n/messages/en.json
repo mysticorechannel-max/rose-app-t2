@@ -161,6 +161,36 @@
       "testPushError": "Failed to send test notification"
     }
   },
+  "filters": {
+    "category": {
+      "title": "Category",
+      "loading": "Loading categories...",
+      "error": "Failed to load categories.",
+      "reset": "Reset",
+      "loadingMore": "Loading..."
+    },
+    "occasion": {
+      "title": "Occasion",
+      "loading": "Loading occasions...",
+      "error": "Failed to load occasions.",
+      "reset": "Reset",
+      "loadingMore": "Loading..."
+    },
+    "rating": {
+      "title": "Rating",
+      "reset": "Reset",
+      "starLabel": "{count} stars"
+    },
+    "price": {
+      "title": "Price",
+      "from": "from",
+      "to": "to",
+      "reset": "Reset",
+      "error": "From price must be less than To price."
+    },
+    "resetAll": "Reset All",
+    "starLabel": "{count, plural, one {# star} other {# stars}}"
+  },
   "toast": {
     "info": "Informative message",
     "success": "Successful operation",
@@ -213,7 +243,7 @@
   },
   "ForgotPassword": {
     "title": "Forgot Password?",
-    "description": "Worry not, we’ll send you instructions to help you reset it.",
+    "description": "Worry not, we'll send you instructions to help you reset it.",
     "email": "Email Address",
     "emailPlaceholder": "Enter your email address",
     "loading": "Sending...",
