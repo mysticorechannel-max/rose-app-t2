@@ -51,4 +51,17 @@ export interface ChangePasswordBody {
   confirmPassword: string;
 }
 
-export type ActionResult = { ok: true } | { ok: false; message: string };
+export type ActionErrorCode =
+  | "notConfigured"
+  | "unauthenticated"
+  | "network"
+  | "badRequest"
+  | "unknown";
+
+export type ActionResult = { ok: true } | { ok: false; code: ActionErrorCode };
+
+export type ProfileResult =
+  | { ok: true; user: UserProfile }
+  | { ok: false; code: ActionErrorCode };
+
+export type FetchResult<T> = { ok: true; data: T } | { ok: false; code: ActionErrorCode };

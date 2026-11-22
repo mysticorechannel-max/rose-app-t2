@@ -22,19 +22,15 @@ type DeleteAccountDialogProps = {
 };
 
 export function DeleteAccountDialog({ isPending, onConfirm }: DeleteAccountDialogProps) {
-  // Translation
   const t = useTranslations("account");
 
-  // State
   const [isOpen, setIsOpen] = React.useState(false);
 
-  // Functions
   function closeDialog(): void {
     setIsOpen(false);
   }
 
   function handleOpenChange(open: boolean): void {
-    // Keep the dialog open while the account is being deleted.
     if (isPending) return;
     setIsOpen(open);
   }
@@ -52,7 +48,6 @@ export function DeleteAccountDialog({ isPending, onConfirm }: DeleteAccountDialo
       </DialogTrigger>
 
       <DialogContent className="max-w-xl p-8 sm:rounded-2xl [&>button:last-child]:hidden">
-        {/* Own close button: RTL-aware (end-4) and translated */}
         <DialogClose className="absolute end-4 top-4 rounded-sm text-text-muted opacity-70 outline-hidden transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ring">
           <X className="size-5" aria-hidden="true" />
           <span className="sr-only">{t("deleteDialog.close")}</span>

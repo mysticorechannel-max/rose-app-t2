@@ -264,7 +264,6 @@
   },
   "account": {
     "title": "Account Settings",
-    "loading": "Loading your profile...",
     "sidebar": {
       "label": "Account navigation",
       "profile": "Profile",
@@ -294,7 +293,6 @@
       "avatarTooLarge": "The photo must be 5MB or smaller.",
       "save": "Save Changes",
       "saveSuccess": "Profile updated successfully",
-      "saveError": "Could not update your profile",
       "delete": "Delete My Account",
       "genders": {
         "male": "Male",
@@ -313,8 +311,14 @@
       "newPassword": "New Password",
       "confirmPassword": "Confirm New Password",
       "submit": "Change Password",
-      "success": "Password changed successfully",
-      "error": "Could not change the password"
+      "success": "Password changed successfully"
+    },
+    "errors": {
+      "notConfigured": "The service is not available right now. Please try again later.",
+      "unauthenticated": "Your session has expired. Please log in again.",
+      "network": "Could not reach the server. Check your connection and try again.",
+      "badRequest": "The request was rejected. Please check your input and try again.",
+      "unknown": "Something went wrong. Please try again."
     }
   }
 }

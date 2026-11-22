@@ -17,23 +17,24 @@ import {
 
 import { useDeleteAccountMutation } from "../lib/apis/mutations/use-delete-account";
 import { useUpdateProfileMutation } from "../lib/apis/mutations/use-update-profile";
-import { useGetProfileQuery } from "../lib/apis/queries/use-get-profile";
 import {
   profileSchema,
   type ProfileFields,
 } from "../lib/schemes/profile.schema";
+import type { UserProfile } from "../lib/types/account";
 import { AvatarUpload } from "./avatar-upload";
 import { DeleteAccountDialog } from "./delete-account-dialog";
 
-export function ProfileForm() {
+type ProfileFormProps = {
+  user: UserProfile;
+};
+
+export function ProfileForm({ user }: ProfileFormProps) {
   // Translation
   const t = useTranslations("account");
   const tSelect = useTranslations("select");
 
   const locale = useLocale();
-
-  // Query
-  const { data: user, isPending, error } = useGetProfileQuery();
 
   // Mutation
   const { mutate: updateProfile, isPending: isSaving } =
@@ -54,13 +55,11 @@ export function ProfileForm() {
       lastName: "",
       phone: "",
     },
-    values: user
-      ? {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          phone: user.phone ?? "",
-        }
-      : undefined,
+    values: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phone: user.phone ?? "",
+    },
     resetOptions: { keepDirtyValues: true },
   });
 
@@ -84,22 +83,6 @@ export function ProfileForm() {
         signOut({ callbackUrl: `/${locale}` });
       },
     });
-  }
-
-  if (isPending) {
-    return (
-      <p role="status" className="text-sm text-text-soft">
-        {t("loading")}
-      </p>
-    );
-  }
-
-  if (error) {
-    return (
-      <p role="alert" className="text-sm text-text-danger">
-        {error.message}
-      </p>
-    );
   }
 
   return (
