@@ -9,6 +9,7 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { cn } from "../lib/utils/tailwindcn.utils"
 
 
@@ -125,10 +126,16 @@ const PaginationLast = (props: React.ComponentProps<typeof PaginationLink>) => (
 )
 PaginationLast.displayName = "PaginationLast"
 
+type PaginationEllipsisProps = {
+  /** Screen-reader text for the ellipsis */
+  label?: string
+} & React.ComponentProps<"span">
+
 const PaginationEllipsis = ({
   className,
+  label = "More pages",
   ...props
-}: React.ComponentProps<"span">) => (
+}: PaginationEllipsisProps) => (
   <span
     aria-hidden
     className={cn(
@@ -138,7 +145,7 @@ const PaginationEllipsis = ({
     {...props}
   >
     …
-    <span className="sr-only">More pages</span>
+    <span className="sr-only">{label}</span>
   </span>
 )
 PaginationEllipsis.displayName = "PaginationEllipsis"
@@ -197,28 +204,42 @@ function PaginationControls({
   defaultLimit = DEFAULT_LIMIT,
   className,
 }: PaginationControlsProps) {
+  // Translation
+  const t = useTranslations("pagination")
+
   // Navigation
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
   // Variables
-  const limit = toPositiveInt(searchParams.get("limit"), defaultLimit)
+  const rawPage = searchParams.get("page")
+  const rawLimit = searchParams.get("limit")
+  const limit = toPositiveInt(rawLimit, defaultLimit)
   const totalPages = Math.max(1, Math.ceil(Math.max(0, totalItems) / limit))
-  const requestedPage = toPositiveInt(searchParams.get("page"), FIRST_PAGE)
+  const requestedPage = toPositiveInt(rawPage, FIRST_PAGE)
   const page = Math.min(requestedPage, totalPages)
   const isFirstPage = page === FIRST_PAGE
   const isLastPage = page === totalPages
   const pageItems = getPageItems(page, totalPages)
+  // A missing param is valid; only a present one that differs needs fixing
   const isUrlValid =
-    searchParams.get("page") === String(page) &&
-    searchParams.get("limit") === String(limit)
+    (rawPage === null || rawPage === String(page)) &&
+    (rawLimit === null || rawLimit === String(limit))
 
   // Functions
   const buildUrl = (targetPage: number) => {
     const params = new URLSearchParams(searchParams.toString())
     params.set("page", String(targetPage))
     params.set("limit", String(limit))
+    return `${pathname}?${params.toString()}`
+  }
+
+  // Rewrites only the params already in the URL, so missing ones stay missing
+  const buildSanitizedUrl = () => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (rawPage !== null) params.set("page", String(page))
+    if (rawLimit !== null) params.set("limit", String(limit))
     return `${pathname}?${params.toString()}`
   }
 
@@ -235,19 +256,20 @@ function PaginationControls({
   // Effects
   // replace (not push) so fixing a bad URL doesn't add a history entry
   React.useEffect(() => {
-    if (!isUrlValid) router.replace(buildUrl(page))
+    if (!isUrlValid) router.replace(buildSanitizedUrl())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isUrlValid, page])
+  }, [isUrlValid, page, limit])
 
   // Nothing to paginate for an empty dataset or a single page
   if (totalItems <= 0 || totalPages <= 1) return null
 
   return (
-    <Pagination className={className}>
+    <Pagination className={className} aria-label={t("label")}>
       <PaginationContent>
         <PaginationItem>
           <PaginationFirst
             href="#"
+            aria-label={t("first")}
             disabled={isFirstPage}
             onClick={createClickHandler(FIRST_PAGE)}
           />
@@ -255,6 +277,7 @@ function PaginationControls({
         <PaginationItem>
           <PaginationPrevious
             href="#"
+            aria-label={t("previous")}
             disabled={isFirstPage}
             onClick={createClickHandler(page - 1)}
           />
@@ -263,14 +286,14 @@ function PaginationControls({
         {pageItems.map((item, index) =>
           item === "ellipsis" ? (
             <PaginationItem key={`ellipsis-${index}`}>
-              <PaginationEllipsis />
+              <PaginationEllipsis label={t("morePages")} />
             </PaginationItem>
           ) : (
             <PaginationItem key={item}>
               <PaginationLink
                 href="#"
                 isActive={item === page}
-                aria-label={`Go to page ${item}`}
+                aria-label={t("page", { page: item })}
                 onClick={createClickHandler(item)}
               >
                 {item}
@@ -282,6 +305,7 @@ function PaginationControls({
         <PaginationItem>
           <PaginationNext
             href="#"
+            aria-label={t("next")}
             disabled={isLastPage}
             onClick={createClickHandler(page + 1)}
           />
@@ -289,6 +313,7 @@ function PaginationControls({
         <PaginationItem>
           <PaginationLast
             href="#"
+            aria-label={t("last")}
             disabled={isLastPage}
             onClick={createClickHandler(totalPages)}
           />

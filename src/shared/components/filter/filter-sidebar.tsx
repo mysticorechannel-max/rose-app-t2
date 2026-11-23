@@ -9,10 +9,7 @@ import { RatingFilter } from "./rating-filter";
 import { PriceFilter } from "./price-filter";
 
 import { Button } from "@/shared/ui/button";
-import type {
-
-  ProductFilters,
-} from "@/shared/lib/types/product-filter/product-filter";
+import type { ProductFilters } from "@/shared/lib/types/product-filter/product-filter";
 import { PriceRange } from "@/shared/lib/types/product-filter/categories";
 
 type FiltersSidebarProps = {
@@ -59,9 +56,9 @@ export function FiltersSidebar({
         variant="ghost"
         onClick={onResetAll}
         disabled={!hasActiveFilters}
-        className="h-12 w-full bg-bg-soft text-base text-text-primary hover:bg-bg-default"
+        className="h-10.25 w-full cursor-pointer gap-2.5 rounded-md bg-bg-primary-fade px-4 py-2.5 text-sm font-medium text-text-primary hover:bg-bg-primary-faint disabled:cursor-not-allowed"
       >
-        <RotateCcw />
+        <RotateCcw className="size-4" aria-hidden="true" />
         {t("resetAll")}
       </Button>
     </aside>

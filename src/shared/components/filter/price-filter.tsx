@@ -1,11 +1,11 @@
 "use client";
 
-import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
-import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
+
+import { FilterSectionHeader } from "./filter-section-header";
 
 type PriceRange = { minPrice: number; maxPrice: number };
 
@@ -20,11 +20,7 @@ function toDisplay(value: number, defaultValue: number) {
   return value === defaultValue ? "" : String(value);
 }
 
-export function PriceFilter({
-  minPrice,
-  maxPrice,
-  onPriceChange,
-}: PriceFilterProps) {
+export function PriceFilter({ minPrice, maxPrice, onPriceChange }: PriceFilterProps) {
   const t = useTranslations("filters.price");
 
   const [from, setFrom] = useState(toDisplay(minPrice, DEFAULT_MIN_PRICE));
@@ -33,10 +29,7 @@ export function PriceFilter({
   const lastSentRef = useRef<PriceRange>({ minPrice, maxPrice });
 
   useEffect(() => {
-    if (
-      minPrice !== lastSentRef.current.minPrice ||
-      maxPrice !== lastSentRef.current.maxPrice
-    ) {
+    if (minPrice !== lastSentRef.current.minPrice || maxPrice !== lastSentRef.current.maxPrice) {
       setFrom(toDisplay(minPrice, DEFAULT_MIN_PRICE));
       setTo(toDisplay(maxPrice, DEFAULT_MAX_PRICE));
       lastSentRef.current = { minPrice, maxPrice };
@@ -50,8 +43,6 @@ export function PriceFilter({
   const isMaxInvalid = parsedMax < 0 || Number.isNaN(parsedMax);
   const isRangeInvalid = !isMinInvalid && !isMaxInvalid && parsedMin >= parsedMax;
   const isInvalid = isMinInvalid || isMaxInvalid || isRangeInvalid;
-
-  const isPriceChanged = from !== "" || to !== "";
 
   function handleChange(nextFrom: string, nextTo: string) {
     setFrom(nextFrom);
@@ -79,26 +70,12 @@ export function PriceFilter({
   }
 
   return (
-    <section className="space-y-3">
-      <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-text-plain">{t("title")}</h3>
+    <section className="space-y-3 border-b border-border-subtle pb-4">
+      <FilterSectionHeader title={t("title")} resetLabel={t("reset")} onReset={handleReset} />
 
-        {isPriceChanged && (
-          <Button
-            type="button"
-            variant="ghost"
-            onClick={handleReset}
-            className="text-text-danger"
-          >
-            <X size={18} />
-            {t("reset")}
-          </Button>
-        )}
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label htmlFor="min-price" className="block text-base text-text-plain">
+      <div className="grid grid-cols-2 gap-2.5">
+        <div className="space-y-1">
+          <label htmlFor="min-price" className="block text-sm text-text-plain">
             {t("from")}
           </label>
           <Input
@@ -112,8 +89,8 @@ export function PriceFilter({
           />
         </div>
 
-        <div className="space-y-2">
-          <label htmlFor="max-price" className="block text-base text-text-plain">
+        <div className="space-y-1">
+          <label htmlFor="max-price" className="block text-sm text-text-plain">
             {t("to")}
           </label>
           <Input
@@ -121,6 +98,7 @@ export function PriceFilter({
             type="number"
             min={0}
             value={to}
+            placeholder={String(DEFAULT_MAX_PRICE)}
             aria-invalid={isMaxInvalid || isRangeInvalid}
             onChange={(event) => handleChange(from, event.target.value)}
           />

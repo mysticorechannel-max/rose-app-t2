@@ -78,6 +78,16 @@ export async function fetchMostPopularProducts(
     return withNewFlag(payload.data);
 }
 
+// Products page: one page of products filtered by the URL query
+export async function fetchProductsPage(
+    query: Record<string, QueryValue>
+): Promise<PaginatedPayload<Product>> {
+    const url = buildUrl("/products", query);
+    const payload = await fetchJson<PaginatedPayload<Product>>(url);
+
+    return { data: withNewFlag(payload.data), metadata: payload.metadata };
+}
+
 export async function fetchOccasions(limit = 4): Promise<Occasion[]> {
     const url = buildUrl("/occasions", { limit });
     const payload = await fetchJson<PaginatedPayload<Occasion>>(url);

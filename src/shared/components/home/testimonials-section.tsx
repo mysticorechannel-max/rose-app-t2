@@ -12,6 +12,10 @@ const TESTIMONIALS = [
     { id: "three", image: "/images/testimonials/customer-3.webp" },
 ] as const;
 
+// Two identical groups for the -50% loop; each repeats the set so it fills ultra-wide screens.
+const GROUPS = [0, 1] as const;
+const REPEATS = [0, 1, 2] as const;
+
 interface Testimonial {
     id: string;
     image: string;
@@ -42,21 +46,23 @@ export async function TestimonialsSection() {
             {/* Full-width band — continuous, gentle, infinite marquee (no carousel library) */}
             <div className="w-full overflow-hidden bg-bg-testimonials-band pb-12 pt-16">
                 <div className="group relative w-full">
-                    {/* Track renders its items twice; the animation shifts -50% so the
-                        loop is seamless. Pauses on hover and under reduced-motion. */}
-                    <ul className="animate-marquee flex w-max items-start gap-6 group-hover:[animation-play-state:paused] motion-reduce:animate-none">
-                        {items.map((item) => (
-                            <li key={item.id} className="w-80 shrink-0">
-                                <TestimonialCard {...item} />
-                            </li>
-                        ))}
-
-                        {/* Duplicated set — hidden from assistive tech to avoid double reading */}
-                        {items.map((item) => (
-                            <li key={`clone-${item.id}`} aria-hidden="true" className="w-80 shrink-0">
-                                <TestimonialCard {...item} />
-                            </li>
-                        ))}
+                    {/* Track = two identical groups; the animation shifts -50% (one full group)
+                        so the loop is seamless. Spacing lives inside each item (not a flex gap)
+                        so a group's width is exact. Pauses on hover and under reduced-motion. */}
+                    <ul className="animate-marquee flex w-max items-start group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+                        {GROUPS.map((group) =>
+                            REPEATS.map((repeat) =>
+                                items.map((item) => (
+                                    <li
+                                        key={`${group}-${repeat}-${item.id}`}
+                                        aria-hidden={group === 0 && repeat === 0 ? undefined : true}
+                                        className="w-72 shrink-0 px-3 sm:w-80"
+                                    >
+                                        <TestimonialCard {...item} />
+                                    </li>
+                                )),
+                            ),
+                        )}
                     </ul>
                 </div>
             </div>

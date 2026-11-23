@@ -1,8 +1,10 @@
 "use client";
 
 import { Button } from "@/shared/ui/button";
-import { Star, X } from "lucide-react";
+import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+import { FilterSectionHeader } from "./filter-section-header";
 
 type RatingFilterProps = {
   value: number | null;
@@ -10,7 +12,7 @@ type RatingFilterProps = {
 };
 
 const hitZoneClass =
-  "absolute inset-y-0 h-auto w-1/2 rounded-none p-0 hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0";
+  "absolute inset-y-0 h-auto w-1/2 cursor-pointer rounded-none p-0 hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0";
 
 export function RatingFilter({ value, onChange }: RatingFilterProps) {
   const t = useTranslations("filters.rating");
@@ -21,24 +23,14 @@ export function RatingFilter({ value, onChange }: RatingFilterProps) {
   }
 
   return (
-    <section className="space-y-3 border-b border-border-plain pb-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-text-plain">{t("title")}</h3>
+    <section className="space-y-3 border-b border-border-subtle pb-4">
+      <FilterSectionHeader
+        title={t("title")}
+        resetLabel={t("reset")}
+        onReset={() => onChange(null)}
+      />
 
-        {value !== null && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => onChange(null)}
-            className="h-auto gap-1 px-1 py-0.5 text-sm font-normal text-text-danger hover:bg-transparent hover:opacity-80"
-          >
-            <X size={14} />
-            {t("reset")}
-          </Button>
-        )}
-      </div>
-
-      <div className="flex items-center gap-1" role="group" aria-label={t("title")}>
+      <div className="flex items-center gap-1.5" role="group" aria-label={t("title")}>
         {stars.map((star) => {
           const current = value ?? 0;
           const isFull = star <= current;
@@ -48,11 +40,7 @@ export function RatingFilter({ value, onChange }: RatingFilterProps) {
             <span key={star} className="relative inline-flex">
               <Star
                 size={24}
-                className={
-                  isFull
-                    ? "fill-current text-text-warning"
-                    : "text-text-warning"
-                }
+                className={isFull ? "fill-current text-text-warning" : "text-text-warning"}
               />
 
               {isHalf && (

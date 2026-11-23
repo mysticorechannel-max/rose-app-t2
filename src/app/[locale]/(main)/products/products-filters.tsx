@@ -10,13 +10,7 @@ import type { ProductFilters } from "@/shared/lib/types/product-filter/product-f
 const DEFAULT_MIN_PRICE = 0;
 const DEFAULT_MAX_PRICE = 1_000_000;
 const PRICE_DEBOUNCE_MS = 300;
-const FILTER_KEYS = [
-  "categoryId",
-  "occasionId",
-  "rating",
-  "minPrice",
-  "maxPrice",
-] as const;
+const FILTER_KEYS = ["categoryId", "occasionId", "rating", "minPrice", "maxPrice"] as const;
 
 export function ProductsFilters() {
   const router = useRouter();
@@ -26,9 +20,7 @@ export function ProductsFilters() {
   const filters: ProductFilters = {
     categoryId: searchParams.get("categoryId"),
     occasionId: searchParams.get("occasionId"),
-    rating: searchParams.has("rating")
-      ? Number(searchParams.get("rating"))
-      : null,
+    rating: searchParams.has("rating") ? Number(searchParams.get("rating")) : null,
     minPrice: searchParams.has("minPrice")
       ? Number(searchParams.get("minPrice"))
       : DEFAULT_MIN_PRICE,
@@ -65,6 +57,8 @@ export function ProductsFilters() {
       }
     }
 
+    params.delete("page");
+
     const queryString = params.toString();
     router.replace(queryString ? `${pathname}?${queryString}` : pathname, {
       scroll: false,
@@ -84,7 +78,7 @@ export function ProductsFilters() {
 
       timerRef.current = setTimeout(flush, PRICE_DEBOUNCE_MS);
     },
-    [flush],
+    [flush]
   );
 
   useEffect(() => clearPending, [clearPending]);
@@ -94,6 +88,7 @@ export function ProductsFilters() {
 
     const params = new URLSearchParams(window.location.search);
     FILTER_KEYS.forEach((key) => params.delete(key));
+    params.delete("page");
 
     const queryString = params.toString();
     router.replace(queryString ? `${pathname}?${queryString}` : pathname, {

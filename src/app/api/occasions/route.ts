@@ -2,7 +2,8 @@ import "server-only";
 
 import { NextRequest, NextResponse } from "next/server";
 
-const API_URL = process.env.API_URL;
+// Accept API_URL with or without a trailing "/api"
+const API_URL = process.env.API_URL?.replace(/\/+$/, "").replace(/\/api$/, "");
 
 export async function GET(request: NextRequest) {
   try {

@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { Tag, X } from "lucide-react";
+import { Tag } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/shared/ui/button";
+import { FilterSectionHeader } from "./filter-section-header";
 import { useCategories } from "@/shared/hooks/product-filter/use-categories";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 import { useTranslations } from "next-intl";
@@ -18,14 +19,8 @@ export function CategoryFilter({ value, onChange }: CategoryFilterProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  const {
-    data,
-    isLoading,
-    isError,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useCategories();
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useCategories();
 
   useEffect(() => {
     const target = observerTarget.current;
@@ -64,24 +59,14 @@ export function CategoryFilter({ value, onChange }: CategoryFilterProps) {
   }
 
   return (
-    <section className="space-y-3 border-b border-border-plain pb-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-text-plain">{t("title")}</h3>
+    <section className="space-y-3 border-b border-border-subtle pb-4">
+      <FilterSectionHeader
+        title={t("title")}
+        resetLabel={t("reset")}
+        onReset={() => onChange(null)}
+      />
 
-        {value && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => onChange(null)}
-            className="h-auto gap-1 px-1 py-0.5 text-sm font-normal text-text-danger hover:bg-transparent hover:opacity-80"
-          >
-            <X size={14} />
-            {t("reset")}
-          </Button>
-        )}
-      </div>
-
-      <div ref={scrollRef} className="max-h-60 space-y-2 overflow-y-auto">
+      <div ref={scrollRef} className="h-49.75 space-y-1 overflow-y-auto">
         {categories.map((category) => {
           const isSelected = value === category.id;
 
@@ -91,18 +76,16 @@ export function CategoryFilter({ value, onChange }: CategoryFilterProps) {
               variant="ghost"
               onClick={() => onChange(isSelected ? null : category.id)}
               className={cn(
-                "h-7 w-full justify-start gap-0 overflow-hidden rounded-md p-0 font-normal",
+                "h-7 w-full cursor-pointer justify-start gap-2.5 overflow-hidden rounded-xs p-0 pe-2.5 text-sm font-normal",
                 isSelected
                   ? "bg-bg-primary-fade text-text-primary hover:bg-bg-primary-fade"
-                  : "bg-bg-soft text-text-plain hover:bg-bg-default"
+                  : "bg-bg-soft text-text-plain hover:bg-bg-primary-fade"
               )}
             >
               <span
                 className={cn(
-                  "flex h-full w-9 shrink-0 items-center justify-center",
-                  isSelected
-                    ? "bg-bg-primary text-text-inverse"
-                    : "bg-bg-default text-text-plain"
+                  "flex h-full w-9 shrink-0 items-center justify-center text-text-inverse",
+                  isSelected ? "bg-bg-primary-strong" : "bg-bg-default"
                 )}
               >
                 {category.image ? (
@@ -114,22 +97,17 @@ export function CategoryFilter({ value, onChange }: CategoryFilterProps) {
                     className="size-4 object-contain"
                   />
                 ) : (
-                  <Tag />
+                  <Tag className="size-4" aria-hidden="true" />
                 )}
               </span>
 
-              <span className="min-w-0 flex-1 truncate px-3 text-start">
-                {category.title}
-              </span>
+              <span className="min-w-0 flex-1 truncate text-start">{category.title}</span>
             </Button>
           );
         })}
 
         {hasNextPage && (
-          <div
-            ref={observerTarget}
-            className="py-1 text-center text-xs text-text-muted"
-          >
+          <div ref={observerTarget} className="py-1 text-center text-xs text-text-muted">
             {isFetchingNextPage ? t("loadingMore") : ""}
           </div>
         )}

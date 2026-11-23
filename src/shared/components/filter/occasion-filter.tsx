@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
-import { X } from "lucide-react";
 import Image from "next/image";
 import { useOccasions } from "@/shared/hooks/product-filter/use-ossasion";
+import { FilterSectionHeader } from "./filter-section-header";
 import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 import { useTranslations } from "next-intl";
@@ -17,14 +17,8 @@ export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
   const t = useTranslations("filters.occasion");
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  const {
-    data,
-    isLoading,
-    isError,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useOccasions();
+  const { data, isLoading, isError, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useOccasions();
 
   const occasions = useMemo(() => {
     return data?.pages.flatMap((page) => page.payload.data) ?? [];
@@ -60,24 +54,14 @@ export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
   }
 
   return (
-    <section className="space-y-3 border-b border-border-plain pb-4">
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-text-plain">{t("title")}</h3>
+    <section className="space-y-3 border-b border-border-subtle pb-4">
+      <FilterSectionHeader
+        title={t("title")}
+        resetLabel={t("reset")}
+        onReset={() => onChange(null)}
+      />
 
-        {value && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => onChange(null)}
-            className="h-auto gap-1 px-1 py-0.5 text-sm font-normal text-text-danger hover:bg-transparent hover:opacity-80"
-          >
-            <X size={14} />
-            {t("reset")}
-          </Button>
-        )}
-      </div>
-
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-2.5">
         {occasions.map((occasion) => {
           const isSelected = value === occasion.id;
 
@@ -87,10 +71,8 @@ export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
               variant="ghost"
               onClick={() => onChange(isSelected ? null : occasion.id)}
               className={cn(
-                "relative aspect-[4/3] h-auto w-full overflow-hidden rounded-xl p-0",
-                isSelected
-                  ? "shadow-lg shadow-bg-primary/50"
-                  : "shadow-sm hover:shadow-none"
+                "relative h-18.5 w-full cursor-pointer overflow-hidden rounded-sm p-0 transition-shadow",
+                isSelected ? "ring-2 ring-bg-primary ring-offset-1" : "hover:shadow-md"
               )}
             >
               {occasion.image && (
@@ -103,7 +85,15 @@ export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
                 />
               )}
 
-              <span className="absolute inset-0 bg-bg-overlay" />
+              {/* No image from the API: brand gradient instead of a flat grey box */}
+              <span
+                className={cn(
+                  "absolute inset-0",
+                  occasion.image
+                    ? "bg-bg-overlay"
+                    : "bg-linear-to-br from-bg-primary-fixed to-bg-primary-strong"
+                )}
+              />
 
               <span
                 className={cn(
@@ -119,10 +109,7 @@ export function OccasionFilter({ value, onChange }: OccasionFilterProps) {
       </div>
 
       {hasNextPage && (
-        <div
-          ref={observerTarget}
-          className="py-2 text-center text-sm text-text-muted"
-        >
+        <div ref={observerTarget} className="py-2 text-center text-sm text-text-muted">
           {isFetchingNextPage ? t("loadingMore") : ""}
         </div>
       )}

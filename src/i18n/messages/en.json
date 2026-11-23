@@ -350,5 +350,26 @@
       "badRequest": "The request was rejected. Please check your input and try again.",
       "unknown": "Something went wrong. Please try again."
     }
+  },
+  "products": {
+    "metaTitle": "Products",
+    "empty": "No products match your filters.",
+    "loadError": "We couldn't load products.",
+    "retry": "Try again"
+  },
+  "cart": {
+    "added": "Added to cart",
+    "addError": "Couldn't add to cart. Please try again.",
+    "sessionExpired": "Your session has expired. Please log in again.",
+    "storageError": "Your browser blocked saving the cart."
+  },
+  "pagination": {
+    "label": "Pagination",
+    "first": "Go to first page",
+    "previous": "Go to previous page",
+    "next": "Go to next page",
+    "last": "Go to last page",
+    "page": "Go to page {page}",
+    "morePages": "More pages"
   }
 }
