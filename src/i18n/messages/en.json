@@ -4,6 +4,13 @@
       "new": "NEW",
       "hot": "HOT",
       "outOfStock": "OUT OF STOCK",
+      "inStock": "In stock",
+      "description": "Description",
+      "ratingCount": "Number of ratings: {count}",
+      "ratingValue": "Rating: {rating}/5",
+      "ratingCountDisplay": "({count, plural, one {# rating} other {# ratings}})",
+      "stockQuantity": "{count} left in stock",
+      "selectImage": "Select image {number}",
       "addToCart": "Add to cart",
       "addToFavorite": "Add to favorite",
       "preview": "Quick view",
@@ -26,6 +33,9 @@
       "title": "Most Popular",
       "viewMore": "View More",
       "empty": "No products available for this category yet."
+    },
+    "relatedProducts": {
+      "title": "Related Products"
     },
     "gallery": {
       "eyebrow": "GALLERY",

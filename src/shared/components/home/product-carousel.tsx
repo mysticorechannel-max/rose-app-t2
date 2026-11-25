@@ -11,9 +11,13 @@ import { ProductCard } from "./product-card";
 
 interface ProductCarouselProps {
     products: Product[];
+    linkToProductDetails?: boolean;
 }
 
-export function ProductCarousel({ products }: ProductCarouselProps) {
+export function ProductCarousel({
+    products,
+    linkToProductDetails = false,
+}: ProductCarouselProps) {
     // Translation
     const t = useTranslations("home.carousel");
 
@@ -49,7 +53,13 @@ export function ProductCarousel({ products }: ProductCarouselProps) {
                         key={product.id}
                         className="w-[82%] shrink-0 snap-start sm:w-[calc((100%-1rem)/2)] lg:w-[calc((100%-2rem)/3)]"
                     >
-                        <ProductCard product={product} isNew={product.isNew} />
+                        <ProductCard
+                            product={product}
+                            isNew={product.isNew}
+                            detailsHref={
+                                linkToProductDetails ? `/product/${product.id}` : undefined
+                            }
+                        />
                     </div>
                 ))}
             </div>

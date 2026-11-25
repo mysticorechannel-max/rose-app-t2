@@ -4,6 +4,13 @@
       "new": "جديد",
       "hot": "الأكثر رواجًا",
       "outOfStock": "نفد المخزون",
+      "inStock": "متوفر في المخزون",
+      "description": "الوصف",
+      "ratingCount": "عدد التقييمات: {count}",
+      "ratingValue": "التقييم: {rating}/5",
+      "ratingCountDisplay": "({count} تقييم)",
+      "stockQuantity": "متبقي {count} في المخزون",
+      "selectImage": "اختيار الصورة {number}",
       "addToCart": "أضف إلى السلة",
       "addToFavorite": "أضف إلى المفضلة",
       "preview": "عرض سريع",
@@ -26,6 +33,9 @@
       "title": "الأكثر شهرة",
       "viewMore": "عرض المزيد",
       "empty": "لا توجد منتجات متاحة لهذه الفئة بعد."
+    },
+    "relatedProducts": {
+      "title": "منتجات ذات صلة"
     },
     "gallery": {
       "eyebrow": "المعرض",

@@ -7,7 +7,9 @@ export interface ProductPricing {
 }
 
 // Prices arrive as strings; discounts as PERCENT or FIXED off the base price.
-export function getProductPricing(product: Product): ProductPricing {
+export function getProductPricing(
+    product: Pick<Product, "price" | "discountValue" | "discountType">
+): ProductPricing {
     const original = Number(product.price) || 0;
     const value = Number(product.discountValue) || 0;
 
@@ -23,7 +25,7 @@ export function getProductPricing(product: Product): ProductPricing {
     return { current: Math.max(current, 0), original, hasDiscount: true };
 }
 
-export function isOutOfStock(product: Product): boolean {
+export function isOutOfStock(product: Pick<Product, "stock">): boolean {
     return product.stock <= 0;
 }
 

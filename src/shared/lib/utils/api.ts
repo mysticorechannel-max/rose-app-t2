@@ -1,17 +1,32 @@
 import "server-only";
 
-import { isNewProduct } from "@/shared/lib/utils/product";
+import { isNewProduct, parseGallery } from "@/shared/lib/utils/product";
 import type {
     ApiResponse,
     Occasion,
     PaginatedPayload,
     Product,
+    ProductDetails,
 } from "@/types/product";
 
 // Server-only API host. Never exposed to the browser.
 const API_BASE_URL = process.env.API_URL;
 
 type QueryValue = string | number | undefined;
+type ProductListItem = Omit<Product, "cover"> & { cover: string | null };
+
+const RELATED_PRODUCTS_LIMIT = 12;
+const RELATED_PRODUCTS_FALLBACK_COVER = "/assets/images/logo.png";
+
+export class ApiRequestError extends Error {
+    constructor(
+        public readonly status: number,
+        url: string
+    ) {
+        super(`Request failed (${status}) for ${url}`);
+        this.name = "ApiRequestError";
+    }
+}
 
 function buildUrl(path: string, query: Record<string, QueryValue> = {}) {
     if (!API_BASE_URL) {
@@ -34,7 +49,7 @@ async function fetchJson<T>(url: string): Promise<T> {
     });
 
     if (!response.ok) {
-        throw new Error(`Request failed (${response.status}) for ${url}`);
+        throw new ApiRequestError(response.status, url);
     }
 
     const body = (await response.json()) as ApiResponse<T>;
@@ -61,6 +76,56 @@ export async function fetchBestSellingProducts(limit = 10): Promise<Product[]> {
     const payload = await fetchJson<PaginatedPayload<Product>>(url);
 
     return withNewFlag(payload.data);
+}
+
+export async function fetchProductById(id: string): Promise<ProductDetails> {
+    const productId = id.trim();
+
+    if (!productId) {
+        throw new Error("Product ID is required");
+    }
+
+    const url = buildUrl(`/products/${encodeURIComponent(productId)}`);
+    const payload = await fetchJson<{ product: ProductDetails }>(url);
+
+    return payload.product;
+}
+
+export async function fetchRelatedProducts({
+    productId,
+    categoryId,
+    subCategoryId,
+}: {
+    productId: string;
+    categoryId: string;
+    subCategoryId: string | null;
+}): Promise<Product[]> {
+    const currentProductId = productId.trim();
+    const categoryFilterId = subCategoryId?.trim() || categoryId.trim();
+
+    if (!currentProductId || !categoryFilterId) return [];
+
+    const categoryFilter = subCategoryId?.trim()
+        ? { subCategoryId: categoryFilterId }
+        : { categoryId: categoryFilterId };
+    const url = buildUrl("/products", {
+        page: 1,
+        limit: RELATED_PRODUCTS_LIMIT + 1,
+        ...categoryFilter,
+    });
+    const payload = await fetchJson<PaginatedPayload<ProductListItem>>(url);
+    const relatedProducts = payload.data
+        .filter((product) => product.id !== currentProductId)
+        .slice(0, RELATED_PRODUCTS_LIMIT)
+        .map((product): Product => ({
+            ...product,
+            cover:
+                product.cover ||
+                parseGallery(product.gallery)[0] ||
+                RELATED_PRODUCTS_FALLBACK_COVER,
+        }));
+
+    return withNewFlag(relatedProducts);
 }
 
 export async function fetchMostPopularProducts(
