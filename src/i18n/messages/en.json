@@ -350,5 +350,25 @@
       "badRequest": "The request was rejected. Please check your input and try again.",
       "unknown": "Something went wrong. Please try again."
     }
+  },
+  "reviews": {
+    "title": "Product Reviews",
+    "generalRating": "General rating:",
+    "ratingsCount": "{count, plural, one {(# rating)} other {(# ratings)}}",
+    "empty": "No reviews yet. Be the first to share your opinion.",
+    "loadError": "We couldn't load the reviews. Please try again later.",
+    "loading": "Loading reviews...",
+    "yourRating": "Your rating:",
+    "titleLabel": "Title",
+    "titlePlaceholder": "Enter review title",
+    "reviewLabel": "Review",
+    "reviewPlaceholder": "What do you think of this product?",
+    "submit": "Add Review",
+    "addSuccess": "Your review was added",
+    "loginToReview": "Please login to be able to review the product",
+    "validation": {
+      "required": "This field is required",
+      "ratingRequired": "Please choose a rating"
+    }
   }
 }
