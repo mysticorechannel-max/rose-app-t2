@@ -1,0 +1,27 @@
+/node_modules
+/.next
+/out
+.env*
+!.env.example
+*.tsbuildinfo
+next-env.d.ts
+
+# Terminal-output files committed accidentally during project setup (17 files)
+all-log.txt
+delete-git.txt
+delete-main.txt
+empty-commit-result.txt
+git-empty-commit.txt
+git-init.txt
+git-log-final.txt
+git-push-empty-main.txt
+git-push-force-main.txt
+git-push-new-main.txt
+main-empty.txt
+main-log.txt
+orphan-result.txt
+push-main-empty.txt
+reset-check.txt
+rm-cached.txt
+status-after-unstage.txt
+unstage-result.txt

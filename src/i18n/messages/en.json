@@ -1,0 +1,364 @@
+{
+  "home": {
+    "product": {
+      "new": "NEW",
+      "hot": "HOT",
+      "outOfStock": "OUT OF STOCK",
+      "inStock": "In stock",
+      "description": "Description",
+      "ratingCount": "Number of ratings: {count}",
+      "ratingValue": "Rating: {rating}/5",
+      "ratingCountDisplay": "({count, plural, one {# rating} other {# ratings}})",
+      "stockQuantity": "{count} left in stock",
+      "selectImage": "Select image {number}",
+      "addToCart": "Add to cart",
+      "addToFavorite": "Add to favorite",
+      "preview": "Quick view",
+      "currency": "EGP"
+    },
+    "carousel": {
+      "previous": "Previous products",
+      "next": "Next products"
+    },
+    "bestSelling": {
+      "eyebrow": "BEST SELLING",
+      "word1": "Check Out",
+      "word2": "What Everyone's",
+      "word3": "Buying",
+      "word4": "Right Now",
+      "description": "Not sure what to choose? Start with our best sellers, these are the gifts our customers keep coming back for. Whether you're celebrating a birthday, anniversary or wedding, our top picks are guaranteed to leave a lasting impression.",
+      "cta": "Explore gifts"
+    },
+    "mostPopular": {
+      "title": "Most Popular",
+      "viewMore": "View More",
+      "empty": "No products available for this category yet."
+    },
+    "relatedProducts": {
+      "title": "Related Products"
+    },
+    "gallery": {
+      "eyebrow": "GALLERY",
+      "title": "Check Out our Wonderful Gallery",
+      "imageAlt": "Gift boxes, rings, and flower arrangements"
+    },
+    "testimonials": {
+      "eyebrow": "TESTIMONIALS",
+      "title": "Real Words from Happy Customers",
+      "items": {
+        "one": {
+          "name": "Sara Ahmed",
+          "date": "January 12, 2025",
+          "quote": "The bouquet arrived fresh and exactly as pictured. It made my mom's day truly special."
+        },
+        "two": {
+          "name": "Omar Khaled",
+          "date": "January 12, 2025",
+          "quote": "Fast delivery and beautiful packaging. I'll definitely order again for every occasion."
+        },
+        "three": {
+          "name": "Layla Hassan",
+          "date": "January 12, 2025",
+          "quote": "Stunning arrangement and great service. The flowers lasted well over a week."
+        }
+      }
+    },
+    "companies": {
+      "title": "Trusted by over <highlight>4.5k+</highlight> companies"
+    }
+  },
+  "common": {
+    "appName": "Rose App",
+    "welcome": "A thoughtful foundation for what comes next.",
+    "description": "Next.js, semantic design tokens, themes, and internationalization are ready for the team.",
+    "theme": {
+      "label": "Theme",
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "system": "System Mode"
+    },
+    "locale": {
+      "label": "Language",
+      "en": "English",
+      "ar": "Arabic"
+    }
+  },
+  "select": {
+    "placeholder": "Select an option",
+    "search": "Search...",
+    "noOptions": "No options found",
+    "loading": "Loading options...",
+    "error": "Failed to load options"
+  },
+  "header": {
+    "logoAlt": "Rose App Logo",
+    "searchPlaceholder": "What awesome gift are you looking for?",
+    "login": "Login",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "notifications": "Notifications",
+    "nav": {
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About"
+    }
+  },
+  "footer": {
+    "logoAlt": "Rose App Logo",
+    "appName": "Rose E-Commerce App",
+    "discover": {
+      "title": "Discover our website",
+      "home": "Home",
+      "products": "Products",
+      "categories": "Categories",
+      "occasions": "Occasions",
+      "contact": "Contact",
+      "about": "About",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "faqs": "FAQs"
+    },
+    "newsletter": {
+      "title": "Get <highlight>20%</highlight> Off Discount Coupon",
+      "subtitle": "by subscribing to our newsletter",
+      "placeholder": "Enter Your Email",
+      "subscription": "Subscribe",
+      "subscribeSuccess": "Successfully subscribed to newsletter",
+      "subscribeError": "Failed to subscribe. Please try again.",
+      "invalidEmail": "Please enter a valid email address",
+      "emailRequired": "Email is required"
+    },
+    "copyright": "All rights reserved | {year}"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "emptyState": "No notifications to display.",
+    "loading": "Loading notifications...",
+    "clearAll": "Clear all notifications",
+    "clearAllSuccess": "All notifications cleared successfully",
+    "clearAllError": "Failed to clear all notifications",
+    "markAllAsRead": "Mark all as read",
+    "markAllAsReadSuccess": "All notifications marked as read",
+    "markAsRead": "Mark as read",
+    "delete": "Delete notification",
+    "markAsReadSuccess": "Notification marked as read",
+    "markAsReadError": "Failed to mark notification as read",
+    "deleteSuccess": "Notification deleted",
+    "deleteError": "Failed to delete notification",
+    "push": {
+      "title": "Push Notifications",
+      "enable": "Enable",
+      "disable": "Disable",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "loading": "Loading...",
+      "subscribeSuccess": "Push notifications enabled successfully",
+      "subscribeError": "Failed to enable push notifications",
+      "unsubscribeSuccess": "Push notifications disabled successfully",
+      "unsubscribeError": "Failed to disable push notifications",
+      "permissionDenied": "Notification permission denied",
+      "permissionDeniedMessage": "You must change browser settings to allow notifications",
+      "permissionRequired": "Permission is required for notifications",
+      "unsupported": "Push notifications are not supported in this browser",
+      "unsupportedMessage": "Your browser doesn't support push notifications",
+      "notConfigured": "Push notifications are not configured on the server",
+      "notConfiguredMessage": "Server configuration pending",
+      "errorMessage": "An error occurred. Please try again",
+      "testPushSuccess": "Test notification sent successfully",
+      "testPushError": "Failed to send test notification"
+    }
+  },
+  "filters": {
+    "category": {
+      "title": "Category",
+      "loading": "Loading categories...",
+      "error": "Failed to load categories.",
+      "reset": "Reset",
+      "loadingMore": "Loading..."
+    },
+    "occasion": {
+      "title": "Occasion",
+      "loading": "Loading occasions...",
+      "error": "Failed to load occasions.",
+      "reset": "Reset",
+      "loadingMore": "Loading..."
+    },
+    "rating": {
+      "title": "Rating",
+      "reset": "Reset",
+      "starLabel": "{count} stars"
+    },
+    "price": {
+      "title": "Price",
+      "from": "from",
+      "to": "to",
+      "reset": "Reset",
+      "error": "From price must be less than To price."
+    },
+    "resetAll": "Reset All",
+    "starLabel": "{count, plural, one {# star} other {# stars}}"
+  },
+  "toast": {
+    "info": "Informative message",
+    "success": "Successful operation",
+    "error": "Unsuccessful operation",
+    "buttonLabels": {
+      "discover": "Discover",
+      "login": "Login",
+      "subscribe": "Subscribe →",
+      "imBuying": "I'm buying",
+      "shopNow": "Shop now →",
+      "next": "Next →",
+      "continue": "Continue",
+      "verifyCode": "Verify code"
+    }
+  },
+  "input": {
+    "search": {
+      "placeholder": "Search...",
+      "clear": "Clear search"
+    },
+    "number": {
+      "increase": "Increase value",
+      "decrease": "Decrease value"
+    },
+    "file": {
+      "upload": "Upload file",
+      "noFile": "No file chosen",
+      "reviewImages": "Review current image(s)"
+    },
+    "phone": {
+      "placeholder": "Phone number",
+      "countryLabel": "Country dial code",
+      "selectCountry": "Select country",
+      "countries": {
+        "EG": "Egypt",
+        "SA": "Saudi Arabia",
+        "AE": "United Arab Emirates",
+        "US": "United States",
+        "GB": "United Kingdom"
+      }
+    },
+    "otp": {
+      "label": "One-time password",
+      "digitLabel": "Digit {current} of {total}"
+    },
+    "password": {
+      "show": "Show password",
+      "hide": "Hide password"
+    }
+  },
+  "ForgotPassword": {
+    "title": "Forgot Password?",
+    "description": "Worry not, we'll send you instructions to help you reset it.",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "loading": "Sending...",
+    "next": "Next",
+    "back": "Back",
+    "checkEmailTitle": "Check Your Email",
+    "checkEmailDescription": "We've sent a password reset link to:",
+    "checkEmailInstructions": "Please check your inbox and click the link to reset your password.",
+    "checkEmailReminder": "If you don't see the email, check your spam or junk folder.",
+    "needHelp": "Need help?",
+    "contactUs": "Contact Us",
+    "resetTitle": "Create a new password",
+    "resetDis": "Set a strong password to secure your account.",
+    "newPassword": "Password",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm your new password",
+    "resetButton": "Reset Password",
+    "resetLoading": "Resetting...",
+    "resetSuccess": "Your password has been successfully reset.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters long.",
+    "confirmPasswordRequired": "Please confirm your password.",
+    "passwordsMismatch": "Passwords do not match.",
+    "emailRequired": "Email address is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "createAccount": "Don't have an account?",
+    "createOneNow": "Create one now",
+    "requestFailed": "We couldn't complete your request. Please try again."
+  },
+  "Login": {
+    "title": "Welcome Back",
+    "description": "Please enter your credentials to sign in.",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "Forgot password?",
+    "submit": "Login",
+    "loading": "Logging in...",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "invalidCredentials": "Invalid username or password.",
+    "usernameRequired": "Username is required.",
+    "passwordRequired": "Password is required.",
+    "createAccount": "Don't have an account?",
+    "createOneNow": "Create one now"
+  },
+  "account": {
+    "title": "Account Settings",
+    "sidebar": {
+      "label": "Account navigation",
+      "profile": "Profile",
+      "changePassword": "Change Password",
+      "logout": "Logout"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidEmail": "Enter a valid email address",
+      "invalidPhone": "Enter a valid phone number",
+      "passwordTooShort": "Password must be at least 8 characters",
+      "passwordNeedsUppercase": "Password must include at least one uppercase letter",
+      "passwordNeedsNumber": "Password must include at least one number",
+      "passwordNeedsSpecial": "Password must include at least one special character",
+      "passwordMismatch": "Passwords do not match",
+      "passwordSameAsOld": "New password must be different from the old one"
+    },
+    "profile": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "gender": "Gender",
+      "uploadPhoto": "Upload Photo",
+      "uploadHint": "You can upload a .jpg, .png, or .gif photo with max size of 5MB.",
+      "avatarInvalidType": "Only .jpg, .png and .gif files are allowed.",
+      "avatarTooLarge": "The photo must be 5MB or smaller.",
+      "save": "Save Changes",
+      "saveSuccess": "Profile updated successfully",
+      "delete": "Delete My Account",
+      "genders": {
+        "male": "Male",
+        "female": "Female"
+      }
+    },
+    "deleteDialog": {
+      "title": "Are you sure you want to delete your account?",
+      "description": "This action is permanent and cannot be undone.",
+      "cancel": "Nope, not doing it",
+      "confirm": "Yes, delete",
+      "close": "Close"
+    },
+    "changePassword": {
+      "oldPassword": "Old Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "submit": "Change Password",
+      "success": "Password changed successfully"
+    },
+    "errors": {
+      "notConfigured": "The service is not available right now. Please try again later.",
+      "unauthenticated": "Your session has expired. Please log in again.",
+      "network": "Could not reach the server. Check your connection and try again.",
+      "badRequest": "The request was rejected. Please check your input and try again.",
+      "unknown": "Something went wrong. Please try again."
+    }
+  }
+}
