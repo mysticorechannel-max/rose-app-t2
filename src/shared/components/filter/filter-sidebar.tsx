@@ -1,0 +1,66 @@
+"use client";
+
+import { RotateCcw } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+import { CategoryFilter } from "./category-filter";
+import { OccasionFilter } from "./occasion-filter";
+import { RatingFilter } from "./rating-filter";
+import { PriceFilter } from "./price-filter";
+
+import { Button } from "@/shared/ui/button";
+import type { ProductFilters } from "@/shared/lib/types/product-filter/product-filter";
+import { PriceRange } from "@/shared/lib/types/product-filter/categories";
+
+type FiltersSidebarProps = {
+  filters: ProductFilters;
+  onCategoryChange: (value: string | null) => void;
+  onOccasionChange: (value: string | null) => void;
+  onRatingChange: (value: number | null) => void;
+  onPriceChange: (range: PriceRange) => void;
+  onResetAll: () => void;
+};
+
+export function FiltersSidebar({
+  filters,
+  onCategoryChange,
+  onOccasionChange,
+  onRatingChange,
+  onPriceChange,
+  onResetAll,
+}: FiltersSidebarProps) {
+  const t = useTranslations("filters");
+
+  const hasActiveFilters =
+    filters.categoryId !== null ||
+    filters.occasionId !== null ||
+    filters.rating !== null ||
+    filters.minPrice !== 0 ||
+    filters.maxPrice !== 1_000_000;
+
+  return (
+    <aside className="w-full space-y-4">
+      <CategoryFilter value={filters.categoryId} onChange={onCategoryChange} />
+
+      <OccasionFilter value={filters.occasionId} onChange={onOccasionChange} />
+
+      <RatingFilter value={filters.rating} onChange={onRatingChange} />
+
+      <PriceFilter
+        minPrice={filters.minPrice}
+        maxPrice={filters.maxPrice}
+        onPriceChange={onPriceChange}
+      />
+
+      <Button
+        variant="ghost"
+        onClick={onResetAll}
+        disabled={!hasActiveFilters}
+        className="h-10.25 w-full cursor-pointer gap-2.5 rounded-md bg-bg-primary-fade px-4 py-2.5 text-sm font-medium text-text-primary hover:bg-bg-primary-faint disabled:cursor-not-allowed"
+      >
+        <RotateCcw className="size-4" aria-hidden="true" />
+        {t("resetAll")}
+      </Button>
+    </aside>
+  );
+}
