@@ -33,7 +33,7 @@ function buildUrl(path: string, query: Record<string, QueryValue> = {}) {
         throw new Error("API_URL environment variable is not set");
     }
 
-    const url = new URL(`${API_BASE_URL}${path}`);
+    const url = new URL(`${API_BASE_URL}/api${path}`);
 
     for (const [key, value] of Object.entries(query)) {
         if (value !== undefined && value !== "") url.searchParams.set(key, String(value));
