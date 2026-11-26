@@ -3,7 +3,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
-<<<<<<< HEAD
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
@@ -23,17 +22,3 @@ const nextConfig: NextConfig = {
 };
 
 export default withNextIntl(nextConfig);
-=======
-export default withNextIntl({
-    reactStrictMode: true,
-    images: {
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "rose-app.elevate-bootcamp.cloud",
-                pathname: "/**",
-            },
-        ],
-    },
-});
->>>>>>> origin/sprint/2-auth-home-products

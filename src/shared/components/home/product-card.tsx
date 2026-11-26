@@ -2,6 +2,7 @@ import { ShoppingCart } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
+import { Link } from "@/i18n/navigation";
 import { getProductPricing, isOutOfStock } from "@/shared/lib/utils/product";
 import { cn } from "@/shared/lib/utils/tailwindcn.utils";
 import type { Product } from "@/types/product";
@@ -11,11 +12,12 @@ import { RatingStars } from "./rating-stars";
 interface ProductCardProps {
     product: Product;
     isNew?: boolean;
+    detailsHref?: string;
 }
 
 const HOT_ORDER_THRESHOLD = 20;
 
-export function ProductCard({ product, isNew = false }: ProductCardProps) {
+export function ProductCard({ product, isNew = false, detailsHref }: ProductCardProps) {
     // Translation
     const t = useTranslations("home.product");
 
@@ -76,7 +78,13 @@ export function ProductCard({ product, isNew = false }: ProductCardProps) {
             {/* Info row */}
             <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-lg font-semibold text-text-primary-strong">{product.title}</h3>
+                    <h3 className="truncate text-lg font-semibold text-text-primary-strong">
+                        {detailsHref ? (
+                            <Link href={detailsHref}>{product.title}</Link>
+                        ) : (
+                            product.title
+                        )}
+                    </h3>
                     <RatingStars value={product.rating} className="mt-1" />
                     <p className="mt-1 flex items-center gap-2 text-sm">
                         <span className="font-semibold text-text-primary-strong">

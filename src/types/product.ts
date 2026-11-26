@@ -49,6 +49,10 @@ export interface Product {
     isNew?: boolean;
 }
 
+export type ProductDetails = Omit<Product, "createdAt" | "updatedAt" | "isNew"> & {
+    reviews: unknown;
+};
+
 export interface PaginationMetadata {
     page: number;
     limit: number;
