@@ -1,3 +1,7 @@
+import { Suspense } from "react";
+
+import { ProductReviews } from "@/app/[locale]/reviews/components/product-reviews";
+import { ReviewsSkeleton } from "@/app/[locale]/reviews/components/reviews-skeleton";
 import { SectionHeading } from "@/shared/components/section-heading";
 import { ProductCarousel } from "@/shared/components/home/product-carousel";
 import type { Product, ProductDetails } from "@/types/product";
@@ -21,6 +25,16 @@ export default function ProductDetailsView({
       <div className="grid grid-cols-2 items-stretch gap-12">
         <ProductImageGallery product={product} />
         <ProductInformation product={product} />
+      </div>
+
+      <div className="mt-16">
+        <Suspense fallback={<ReviewsSkeleton />}>
+          <ProductReviews
+            productId={product.id}
+            rating={product.rating}
+            ratings={product.ratings}
+          />
+        </Suspense>
       </div>
 
       {relatedProducts.length > 0 && (
