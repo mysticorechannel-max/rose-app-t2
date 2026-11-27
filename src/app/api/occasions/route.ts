@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
   try {
     if (!API_URL) {
       return NextResponse.json(
-        { message: "API_URL is not configured" },
+        { status: false, code: 500, message: "API_URL is not configured" },
         { status: 500 }
       );
     }
@@ -33,12 +33,17 @@ export async function GET(request: NextRequest) {
 
     const data = await response.json();
 
-    return NextResponse.json(data, { status: response.status });
+    // Return the data array wrapped in ApiResponse format
+    return NextResponse.json({
+      status: true,
+      code: 200,
+      payload: data.payload?.data || data.data || [],
+    });
   } catch (error) {
     console.error("occasions proxy error:", error);
 
     return NextResponse.json(
-      { message: "Failed to fetch occasions" },
+      { status: false, code: 500, message: "Failed to fetch occasions" },
       { status: 500 }
     );
   }

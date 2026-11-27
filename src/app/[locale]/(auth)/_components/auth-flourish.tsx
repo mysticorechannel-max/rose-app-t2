@@ -17,7 +17,7 @@ export default function AuthFlourish({
         alt=""
         width={280}
         height={45}
-        className={`h-auto ${isBottom ? "rotate-180" : ""} dark:hidden`}
+        className={`${isBottom ? "rotate-180" : ""} dark:hidden`}
       />
 
       {/* Dark Theme */}
@@ -26,7 +26,7 @@ export default function AuthFlourish({
         alt=""
         width={280}
         height={45}
-        className={`hidden h-auto ${isBottom ? "rotate-180" : ""} dark:block`}
+        className={`hidden ${isBottom ? "rotate-180" : ""} dark:block`}
       />
     </div>
   );
