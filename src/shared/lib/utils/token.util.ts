@@ -22,6 +22,24 @@ function getCookie(name: string): string | null {
 }
 
 /**
+ * Get NextAuth session token from cookies
+ * NextAuth stores session in cookies with different names based on environment
+ */
+function getNextAuthToken(): string | null {
+  if (typeof document === "undefined") return null;
+
+  // Try development cookie name first
+  let token = getCookie("next-auth.session-token");
+
+  // Try production cookie name if development one not found
+  if (!token) {
+    token = getCookie("__Secure-next-auth.session-token");
+  }
+
+  return token;
+}
+
+/**
  * Set a cookie with optional expiration
  */
 function setCookie(name: string, value: string, days?: number): void {
@@ -48,20 +66,28 @@ function deleteCookie(name: string): void {
 }
 
 /**
- * Get auth token from cookies
+ * Get auth token from NextAuth session or fallback to custom cookie
  * Falls back to dev token in development if none exists
  */
 export function getAuthToken(): string | null {
   if (typeof window === "undefined") return null;
 
-  const token = getCookie(TOKEN_KEY);
+  // Try NextAuth session token first
+  const token = getNextAuthToken();
 
-  // If no token exists in cookies, use dev token in development
-  if (!token && process.env.NODE_ENV === "development") {
+  if (token) return token;
+
+  // Fallback to custom auth_token cookie
+  const customToken = getCookie(TOKEN_KEY);
+
+  if (customToken) return customToken;
+
+  // If no token exists, use dev token in development
+  if (process.env.NODE_ENV === "development") {
     return DEFAULT_DEV_TOKEN;
   }
 
-  return token;
+  return null;
 }
 
 /**

@@ -8,17 +8,13 @@ import type {
     Product,
 } from "@/types/product";
 
-// Server-only API host. Never exposed to the browser.
-const API_BASE_URL = process.env.API_URL;
+// Use internal API routes instead of direct backend calls
+const API_BASE_URL = "";
 
 type QueryValue = string | number | undefined;
 
 function buildUrl(path: string, query: Record<string, QueryValue> = {}) {
-    if (!API_BASE_URL) {
-        throw new Error("API_URL environment variable is not set");
-    }
-
-    const url = new URL(`${API_BASE_URL}${path}`);
+    const url = new URL(`/api${path}`, "http://localhost:3000");
 
     for (const [key, value] of Object.entries(query)) {
         if (value !== undefined && value !== "") url.searchParams.set(key, String(value));
@@ -53,34 +49,19 @@ function withNewFlag(products: Product[]): Product[] {
 }
 
 export async function fetchBestSellingProducts(limit = 10): Promise<Product[]> {
-    const url = buildUrl("/products", {
-        sortBy: "bestSelling",
-        sortOrder: "desc",
-        limit,
-    });
-    const payload = await fetchJson<PaginatedPayload<Product>>(url);
-
-    return withNewFlag(payload.data);
+    const url = buildUrl("/best-selling", { limit });
+    return await fetchJson<Product[]>(url);
 }
 
 export async function fetchMostPopularProducts(
     occasionId?: string,
     limit = 12
 ): Promise<Product[]> {
-    const url = buildUrl("/products", {
-        sortBy: "mostPopular",
-        sortOrder: "desc",
-        occasionId,
-        limit,
-    });
-    const payload = await fetchJson<PaginatedPayload<Product>>(url);
-
-    return withNewFlag(payload.data);
+    const url = buildUrl("/most-popular", { occasionId, limit });
+    return await fetchJson<Product[]>(url);
 }
 
 export async function fetchOccasions(limit = 4): Promise<Occasion[]> {
     const url = buildUrl("/occasions", { limit });
-    const payload = await fetchJson<PaginatedPayload<Occasion>>(url);
-
-    return payload.data;
+    return await fetchJson<Occasion[]>(url);
 }

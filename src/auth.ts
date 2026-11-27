@@ -66,11 +66,12 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
 
-    async session({ session, token }) {
-      session.user.role = token.role;
-      session.user.username = token.username;
+async session({ session, token }) {
+  session.user.role = token.role;
+  session.user.username = token.username;
+  session.accessToken = token.accessToken;
 
-      return session;
-    },
+  return session;
+},
   },
 };

@@ -292,6 +292,7 @@
     "createAccount": "Don't have an account?",
     "createOneNow": "Create one now"
   },
+<<<<<<< Updated upstream
   "account": {
     "title": "Account Settings",
     "sidebar": {
@@ -350,5 +351,30 @@
       "badRequest": "The request was rejected. Please check your input and try again.",
       "unknown": "Something went wrong. Please try again."
     }
+=======
+  "wishlist": {
+    "title": "Wishlist",
+    "itemsCount": "{count, plural, one {# item} other {# items}}",
+    "clear": "Clear Wishlist",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "ratings": "{count} ratings",
+    "currency": "EGP",
+    "remove": "Remove from wishlist",
+    "addToCart": "Add to Cart",
+    "exploreSimilar": "Explore Similar Products",
+    "continueShopping": "Continue Shopping",
+    "clearConfirm": "Are you sure you want to clear your Wishlist?",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "empty": "Your wishlist is empty",
+    "emptyDescription": "Explore our collection and add your favorite items to your wishlist.",
+    "error": "Failed to load wishlist. Please try again.",
+    "retry": "Try Again",
+    "addedToCart": "Added to cart successfully",
+    "needLogin": "Sign in to view your wishlist",
+    "needLoginDescription": "Save your favorite items by logging in to your account.",
+    "loginCta": "Sign In"
+>>>>>>> Stashed changes
   }
 }
